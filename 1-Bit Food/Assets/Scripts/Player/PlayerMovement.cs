@@ -7,6 +7,9 @@ public class PlayerMovement : MonoBehaviour {
     private InputActions actions;
 
     public float walkSpeed = 5;
+    public float sprintSpeed = 8;
+
+    private bool isSprinting = false;
 
     private void Awake() {
         actions = new InputActions();
@@ -16,12 +19,16 @@ public class PlayerMovement : MonoBehaviour {
         actions.Gameplay.Enable();
 
         actions.Gameplay.Movement.performed += MoveCharacter;
-        actions.Gameplay.Movement.canceled += StopCharacter;
+        actions.Gameplay.Movement.canceled += context => StopMovement();
+        actions.Gameplay.Sprint.performed += context => isSprinting = true;
+        actions.Gameplay.Sprint.canceled  += context => isSprinting = false;
     }
 
     private void OnDisable() {
         actions.Gameplay.Movement.performed -= MoveCharacter;
-        actions.Gameplay.Movement.canceled -= StopCharacter;
+        actions.Gameplay.Movement.canceled -= context => StopMovement();
+        actions.Gameplay.Sprint.performed -= context => isSprinting = true;
+        actions.Gameplay.Sprint.canceled  -= context => isSprinting = false;
 
         StopMovement();
 
@@ -30,24 +37,20 @@ public class PlayerMovement : MonoBehaviour {
 
     private void MoveCharacter(InputAction.CallbackContext context)
     {
-        Vector2 moveInput = context.ReadValue<Vector2>();
+        // reads player input into a vector2
+        Vector2 moveInput = context.ReadValue<Vector2>().normalized;
+
+        // checks if player is sprinting
+        float speedToUse = isSprinting ? sprintSpeed : walkSpeed;
+
+        rb.velocity = moveInput * speedToUse;
+
         anim.SetBool("Moving", true);
-
-        Vector3 moveDirection = new Vector3(moveInput.x, moveInput.y, 0).normalized;
-
-        float speedToUse = walkSpeed;
-
-        rb.velocity = moveDirection * speedToUse;
     }
 
     private void StopMovement()
     {
         rb.velocity = Vector3.zero;
         anim.SetBool("Moving", false);
-    }
-
-    private void StopCharacter(InputAction.CallbackContext context)
-    {
-        StopMovement();
     }
 }

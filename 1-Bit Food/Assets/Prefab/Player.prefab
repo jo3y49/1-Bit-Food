@@ -118,11 +118,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterAnimation: {fileID: 6525304494865002230}
-  maxHealth: 0
-  health: 0
-  attack: 0
-  defense: 0
-  accuracy: 0
+  maxHealth: 10
+  health: 10
+  attack: 5
+  defense: 5
+  accuracy: 1
   evasion: 0
   hitTarget: 0
   attackClip: {fileID: 0}
