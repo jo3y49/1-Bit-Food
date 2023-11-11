@@ -8,15 +8,14 @@ public class PlayerBattle : CharacterBattle {
     protected override void Start() {
         base.Start();
 
-        CharacterName = "Leoh";
+        CharacterName = "Food Fighter Guy";
 
-        attackKeys.Add("physical");
-        attackKeys.Add("ranged");
-        attackKeys.Add("heal");
+        attackKeys.Add("cake");
 
-        attackActions.Add(AttackList.GetInstance().GetAction(attackKeys[0]));
-        attackActions.Add(AttackList.GetInstance().GetAction(attackKeys[1]));
-        attackActions.Add(AttackList.GetInstance().GetAction(attackKeys[2]));
+        attackActions = FillAttackList(attackKeys);
+
+        attackActionUses.Add(10);
+        
     }
 
     public override void PrepareCombat()

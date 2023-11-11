@@ -30,55 +30,39 @@ public class AttackList
     {
         actionList = new Dictionary<string, AttackAction>()
         {
-            {"physical", new AttackAction("Physical", Physical)},
-            {"ranged", new AttackAction("Ranged", Ranged)},
-            {"heal", new AttackAction("Heal", Heal)},
-            {"throw", new AttackAction("Throw", Throw)},
+            {"steal", new AttackAction("Steal", Steal)},
+            {"cake", new AttackAction("Cake", Cake)},
+            // {"pie", new AttackAction("Pie", Pie)},
+            
         };
     }
 
     public bool EmptyAction(CharacterBattle self, CharacterBattle target)
     {
         Debug.Log("This action is null");
-        string attackName = "null";
-        float accuracy = 0;
-        float damageMultiplier = 0;
-
-        return AttackAction.DoAttack(self, target, attackName, accuracy, damageMultiplier);
-    }
-
-    public bool Physical(CharacterBattle self, CharacterBattle target)
-    {
-        string attackName = GetAction("physical").Name;
-        float accuracy = 1f;
-        float damageMultiplier = 1f;
         
-        return AttackAction.DoAttack(self, target, attackName, accuracy, damageMultiplier);
+        string attackName = "null";
+        float damageMultiplier = 0;
+        float accuracy = 0;
+
+        return AttackAction.DoAttack(self, target, attackName, damageMultiplier, accuracy);
     }
 
-    public bool Ranged(CharacterBattle self, CharacterBattle target)
-    {
-        string attackName = GetAction("ranged").Name;
-        float accuracy = 1f;
-        float damageMultiplier = 1f;
+    // player attacks
 
-        return AttackAction.DoAttack(self, target, attackName, accuracy, damageMultiplier);
+    public bool Cake(CharacterBattle self, CharacterBattle target)
+    {
+        string attackName = "Cake";
+
+        return AttackAction.DoAttack(self, target, attackName);
     }
 
-    public bool Heal(CharacterBattle self, CharacterBattle target)
+    // enemy attacks
+
+    public bool Steal(CharacterBattle self, CharacterBattle target)
     {
-        string attackName = GetAction("heal").Name;
-        float healMultiplier = 1f;
+        string attackName = "Steal";
 
-        return AttackAction.DoHeal(self, attackName, healMultiplier);
-    }
-
-    public bool Throw(CharacterBattle self, CharacterBattle target)
-    {
-        string attackName = GetAction("throw").Name;
-        float accuracy = 1f;
-        float damageMultiplier = 1f;
-
-        return AttackAction.DoAttack(self, target, attackName, accuracy, damageMultiplier);
+        return AttackAction.DoAttack(self, target, attackName);
     }
 }

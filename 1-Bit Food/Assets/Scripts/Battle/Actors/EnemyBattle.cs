@@ -12,7 +12,15 @@ public class EnemyBattle : CharacterBattle {
         base.Start();
 
         player = GameObject.FindGameObjectWithTag("Player");
-        // worldManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WorldManager>();
+        worldManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WorldManager>();
+
+        CharacterName = "Thief Guy";
+
+        attackKeys.Add("steal");
+
+        attackActions = FillAttackList(attackKeys);
+
+        attackActionUses.Add(10);
     }
 
     // public override void PrepareCombat()
@@ -36,4 +44,14 @@ public class EnemyBattle : CharacterBattle {
     {
         gameObject.SetActive(false);
     }
+
+    protected virtual void OnTriggerEnter2D(Collider2D other) 
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            worldManager.EncounterEnemy(gameObject);
+        }
+    }
+
+    public virtual AttackAction PickEnemyAttack() { return GetAction(0); }
 }

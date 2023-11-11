@@ -13,7 +13,7 @@ public class AttackAction
         Action = action;
     }
 
-    public static bool DoAttack(CharacterBattle self, CharacterBattle target, string attackName, float accuracy, float damageMultiplier)
+    public static bool DoAttack(CharacterBattle self, CharacterBattle target, string attackName, float damageMultiplier = 1, float accuracy = 1)
     {
         self.AttackTrigger(attackName);
 
@@ -33,11 +33,11 @@ public class AttackAction
         return self.hitTarget;
     }
 
-    private static void HitTarget(CharacterBattle self, CharacterBattle target, float d)
+    private static void HitTarget(CharacterBattle self, CharacterBattle target, float damageMultiplier)
     {
         target.SetAnimationTrigger("Attacked");
 
-        int damage = (int)(self.attack * d - target.defense);
+        int damage = (int)(self.attack * damageMultiplier - target.defense);
         if (damage < 0) damage = 0;
 
         target.Attacked(damage);

@@ -6,21 +6,15 @@ using UnityEngine.SceneManagement;
 public abstract class WorldManager : MonoBehaviour {
     [SerializeField] protected GameObject battleUI;
     // [SerializeField] protected DialogManager dialogManager;
-    protected GameManager gameManager;
     protected GameObject player;
     protected PlayerBattle playerBattle;
     protected PlayerMovement playerMovement;
     protected List<EnemyBattle> enemies = new();
 
     protected virtual void Start() {
-        GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
-        gameManager = gameController.GetComponent<GameManager>();
-
-        int currentScene = SceneManager.GetActiveScene().buildIndex;
-        gameManager.SetCurrentScene(currentScene);
 
         player = GameObject.FindGameObjectWithTag("Player");
-        gameManager.SetPlayer(player);
+        GameManager.instance.SetPlayer(player);
         playerBattle = player.GetComponent<PlayerBattle>();
         playerMovement = player.GetComponent<PlayerMovement>();
     }
@@ -28,6 +22,12 @@ public abstract class WorldManager : MonoBehaviour {
     public virtual List<EnemyBattle> GetBattleEnemies() 
     {
         return enemies;
+    }
+
+    public virtual void EncounterEnemy(GameObject enemy)
+    {
+        enemies.Add(enemy.GetComponent<EnemyBattle>());
+        StartBattle();
     }
 
     public virtual void WinBattle(){}

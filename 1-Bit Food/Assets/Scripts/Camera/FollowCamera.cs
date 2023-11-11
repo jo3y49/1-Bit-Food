@@ -21,7 +21,6 @@ public class FollowCamera : MonoBehaviour
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        Debug.Log(target);
     }
 
     private void FixedUpdate()
@@ -39,7 +38,5 @@ public class FollowCamera : MonoBehaviour
         //     Mathf.Clamp(targetPosition.z, minValues.z, maxValues.z));
         Vector2 smoothPosition = Vector2.Lerp((Vector2)transform.position, targetPosition, smoothFactor * Time.fixedDeltaTime);
         transform.position = new Vector3(smoothPosition.x, smoothPosition.y, transform.position.z);
-
-        Debug.Log(transform.position+ " "+targetPosition);
     }
 }

@@ -19,9 +19,24 @@ public abstract class CharacterBattle : MonoBehaviour {
 
     protected List<AttackAction> attackActions = new();
 
+    protected List<int> attackActionUses = new();
+
     protected virtual void Start() {
         health = maxHealth;
         audioSource = GetComponent<AudioSource>();
+    }
+
+    protected static List<AttackAction> FillAttackList(List<string> keys)
+    {
+        List<AttackAction> attackActions = new();
+        AttackList attackList = AttackList.GetInstance();
+
+        foreach (string k in keys)
+        {
+            attackActions.Add(attackList.GetAction(k));
+        }
+
+        return attackActions;
     }
 
     public virtual void Kill(){}
@@ -35,6 +50,25 @@ public abstract class CharacterBattle : MonoBehaviour {
         if (i < attackActions.Count) return attackActions[i];
 
         else return attackActions[0];
+    }
+
+    public virtual int GetActionUses(int i)
+    {
+        if (i < attackActionUses.Count && i < attackActions.Count) return attackActionUses[i];
+
+        else return 0;
+    }
+
+    public virtual int GetActionUses(AttackAction attackAction)
+    {
+        int i = attackActions.FindIndex(item => item == attackAction);
+
+        return GetActionUses(i);
+    }
+
+    public virtual bool CanUseAction(AttackAction attackAction)
+    {
+        return GetActionUses(attackAction) > 0;
     }
 
     public virtual int CountActions()
@@ -80,6 +114,4 @@ public abstract class CharacterBattle : MonoBehaviour {
     public virtual bool GetIsAttacking() {return characterAnimation.isAttacking;}
 
     public virtual void Recover() {}
-
-    public virtual AttackAction PickEnemyAttack() { return GetAction(0); }
 }
