@@ -6,6 +6,7 @@ public class DessertList
 {
     private static DessertList instance;
     private IDictionary<string, DessertAction> dessertList;
+    private DessertAction enemyAction;
 
     private DessertList()
     {
@@ -23,14 +24,19 @@ public class DessertList
     {
         if (dessertList.ContainsKey(key)) return dessertList[key];
 
-        else return new DessertAction("Null", EmptyAction, (c) => EmptyAction());
+        else return new DessertAction("Null", EmptyAction, EmptyAction);
     }
 
     public DessertAction GetAction(int index)
     {
         if (dessertList.Count > index) return dessertList.ElementAt(index).Value;
 
-        else return new DessertAction("Null", EmptyAction, (c) => EmptyAction());
+        else return new DessertAction("Null", EmptyAction, EmptyAction);
+    }
+
+    public DessertAction GetEnemyAction()
+    {
+        return enemyAction;
     }
 
     public List<DessertAction> GetAllActions()
@@ -52,7 +58,8 @@ public class DessertList
                 (self) => DessertAction.DoHeal(self, dessert.name, dessert.heal)));
         }
 
-
+        enemyAction = new DessertAction("Steal", 
+            (self, target) => DessertAction.DoAttack(self, target, "Steal", 3), EmptyAction);
 
         // dessertList = new Dictionary<string, DessertAction>();
         // // {
@@ -68,13 +75,13 @@ public class DessertList
         // }
     }
 
-    public void EmptyAction(CharacterBattle self = null, CharacterBattle target = null)
+    public void EmptyAction(CharacterBattle self, CharacterBattle target)
     {
         Debug.Log("This action is null");
-        
-        string attackName = "null";
-        float damage = 0;
+    }
 
-        // DessertAction.DoAttack(self, target, attackName, damage);
+    public void EmptyAction(CharacterBattle self = null)
+    {
+        Debug.Log("This action is null");
     }
 }

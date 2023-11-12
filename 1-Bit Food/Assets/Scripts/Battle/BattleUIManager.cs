@@ -12,21 +12,25 @@ public class BattleUIManager : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI actionText, eHealthPrefab;
 
     [Header("Containers")]
-    [SerializeField] private GameObject attackContainer;
-    [SerializeField] private GameObject targetContainer, eHealthContainer;
+    [SerializeField] private GameObject initialContainer;
+    [SerializeField] private GameObject attackContainer, healContainer, targetContainer, eHealthContainer;
+
+    [Header("Buttons")]
+    [SerializeField] private Button initialButton;
 
     [Header("Button Prefabs")]
-    [SerializeField] private Button attackButtonPrefab;
-    [SerializeField] private Button targetButtonPrefab, backButtonPrefab;
+    [SerializeField] private Button actionButtonPrefab;
+    [SerializeField] private Button backButtonPrefab;
 
     // Lists to fill with instantiated button prefabs
     private List<Button> targetButtons = new();
     private List<Button> attackButtons = new();
+    private List<Button> healButtons = new();
 
     // store character information
     private PlayerBattle player;
     private List<EnemyBattle> enemies = new();
-    private DessertAction selectedAtack;
+    private DessertAction selectedAction;
     private CharacterBattle characterToAttack;
 
     public void SetForBattle(PlayerBattle player, List<EnemyBattle> enemies)
@@ -41,11 +45,13 @@ public class BattleUIManager : MonoBehaviour {
         // Setup all the menus
         SetEnemies();
         UpdateHealth();
-        SetAttacks();
+        SetActions();
         
         // Deactivate menus until they are needed
+        initialContainer.SetActive(false);
         targetContainer.SetActive(false);
         attackContainer.SetActive(false);
+        healContainer.SetActive(false);
     }
 
     public void ActivateForPlayerTurn()
@@ -56,7 +62,7 @@ public class BattleUIManager : MonoBehaviour {
         // reset used variables
         characterToAttack = null;
         
-        attackContainer.SetActive(true);
+        initialContainer.SetActive(true);
         Utility.SetActiveButton(attackButtons[0]);
     }
 
@@ -71,7 +77,7 @@ public class BattleUIManager : MonoBehaviour {
             enemyHealthText.rectTransform.anchoredPosition = new Vector3(0, -i * 100);
 
             // set button to select enemy
-            Button selectEnemy = Instantiate(targetButtonPrefab, targetContainer.transform);
+            Button selectEnemy = Instantiate(actionButtonPrefab, targetContainer.transform);
             selectEnemy.onClick.AddListener(() => PickTarget(enemy));
             targetButtons.Add(selectEnemy);
 
@@ -92,22 +98,34 @@ public class BattleUIManager : MonoBehaviour {
         UpdateEnemyHealth();
     }
 
-    private void SetAttacks()
+    private void SetActions()
     {
         // set a button for each combo attack
         for (int i = 0; i < player.CountActions(); i++)
         {
             // get the player's next combo attack
-            DessertAction currentAttack = player.GetAction(i);
+            DessertAction currentAction = player.GetAction(i);
 
             // make the button to select attack
-            Button selectAttack = Instantiate(attackButtonPrefab, attackContainer.transform);
-            selectAttack.onClick.AddListener(() => PickAttack(currentAttack));
+            Button selectAttack = Instantiate(actionButtonPrefab, attackContainer.transform);
+            selectAttack.onClick.AddListener(() => PickAttack(currentAction));
             attackButtons.Add(selectAttack);
 
+            // make the button to select heal
+            Button selectHeal = Instantiate(actionButtonPrefab, healContainer.transform);
+            selectHeal.onClick.AddListener(() => PickHeal(currentAction));
+            healButtons.Add(selectHeal);
+
             // set button text
-            selectAttack.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentAttack.Name;
+            selectAttack.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentAction.Name;
+            selectHeal.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentAction.Name;
         }
+
+        Button backAttack = Instantiate(backButtonPrefab, attackContainer.transform);
+        backAttack.onClick.AddListener(BackFromAttack);
+
+        Button backHeal = Instantiate(backButtonPrefab, healContainer.transform);
+        backHeal.onClick.AddListener(BackFromHeal);
     }
 
     private void UpdatePlayerHealth()
@@ -128,9 +146,41 @@ public class BattleUIManager : MonoBehaviour {
         }
     }
 
+    public void SelectAttack()
+    {
+        initialContainer.SetActive(false);
+        attackContainer.SetActive(true);
+        Utility.SetActiveButton(attackButtons[0]);
+        SetText("What would you like to throw?");
+    }
+
+    public void SelectHeal()
+    {
+        initialContainer.SetActive(false);
+        healContainer.SetActive(true);
+        Utility.SetActiveButton(healButtons[0]);
+        SetText("What would you like to eat?");
+    }
+
     public void SelectEscape()
     {
         battleManager.Escape();
+    }
+
+    private void BackFromAttack()
+    {
+        attackContainer.SetActive(false);
+        initialContainer.SetActive(true);
+        Utility.SetActiveButton(initialButton);
+        SetText("");
+    }
+
+    private void BackFromHeal()
+    {
+        healContainer.SetActive(false);
+        initialContainer.SetActive(true);
+        Utility.SetActiveButton(initialButton);
+        SetText("");
     }
 
     private void BackFromTarget()
@@ -138,26 +188,47 @@ public class BattleUIManager : MonoBehaviour {
         targetContainer.SetActive(false);
         attackContainer.SetActive(true);
         Utility.SetActiveButton(attackButtons[0]);
+        SetText("What would you like to throw?");
     }
 
-    private void PickAttack(DessertAction attackAction)
+    private void PickAttack(DessertAction action)
     {
-        selectedAtack = attackAction;
+        selectedAction = action;
         attackContainer.SetActive(false);
-        targetContainer.SetActive(true);
-        Utility.SetActiveButton(targetButtons[0]);
+
+        if (enemies.Count > 1)
+        {
+            targetContainer.SetActive(true);
+            Utility.SetActiveButton(targetButtons[0]);
+            SetText($"Who would you like to throw your {action.Name} at?");
+        } else 
+        {
+            PickTarget(enemies[0]);
+        }
+    }
+
+    private void PickHeal(DessertAction action)
+    {
+        selectedAction = action;
+        healContainer.SetActive(false);
+        SendHealAction();
     }
 
     private void PickTarget(CharacterBattle characterToAttack)
     {
         this.characterToAttack = characterToAttack;
-        SendAttackAction();
         targetContainer.SetActive(false);
+        SendAttackAction();
     }
 
     private void SendAttackAction()
     {
-        battleManager.SetComboAction(characterToAttack, selectedAtack);
+        battleManager.SetAttackAction(characterToAttack, selectedAction);
+    }
+
+    private void SendHealAction()
+    {
+        battleManager.SetHealAction(selectedAction);
     }
 
     public void SetText(string s)
@@ -187,6 +258,7 @@ public class BattleUIManager : MonoBehaviour {
         // clear all lists and ui elements from any previous battles
         targetButtons.Clear();
         attackButtons.Clear();
+        healButtons.Clear();
 
         foreach (TextMeshProUGUI t in eHealthContainer.GetComponentsInChildren<TextMeshProUGUI>())
         {
@@ -201,5 +273,4 @@ public class BattleUIManager : MonoBehaviour {
         // reset used variables
         characterToAttack = null;
     }
-    
 }

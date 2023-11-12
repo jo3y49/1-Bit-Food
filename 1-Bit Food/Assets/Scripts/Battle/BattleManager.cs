@@ -22,6 +22,7 @@ public class BattleManager : MonoBehaviour {
     // tracker variables
     public int killCount = 0;
     public bool awaitCommand = false;
+    public bool attack = true;
 
     private void Awake() {
         gameObject.SetActive(false);
@@ -80,11 +81,14 @@ public class BattleManager : MonoBehaviour {
                 }
 
                 // standard action
-                // do the attack and save whether it hit or not
-                Attack(activeCharacter, activeCharacterAttack);
-                    
-                // wait for the attack animation to play
-                while (activeCharacter.GetIsAttacking())
+                // do the attack or heal
+                if (attack)
+                    PlayerAttack(activeCharacter, activeCharacterAttack);
+                else 
+                    Heal(activeCharacter, activeCharacterAttack);
+
+                // wait for the animation to play
+                while (activeCharacter.GetIsActing())
                 {
                     
                     yield return null;
@@ -112,10 +116,10 @@ public class BattleManager : MonoBehaviour {
                 characterToAttack = player;
 
                 // do the attack and save whether it hit or not
-                Attack(activeCharacter, activeCharacterAttack);
+                EnemyAttack(activeCharacter, activeCharacterAttack);
                     
                 // wait for the attack animation to play
-                while (activeCharacter.GetIsAttacking())
+                while (activeCharacter.GetIsActing())
                 {
                     
                     yield return null;
@@ -157,6 +161,7 @@ public class BattleManager : MonoBehaviour {
 
         // reset necessary variables
         activeCharacterAttack = null;
+        characterToAttack = player;
     }
 
     public void Escape()
@@ -166,11 +171,32 @@ public class BattleManager : MonoBehaviour {
         EndBattle();
     }
 
-    private void Attack(CharacterBattle activeCharacter, DessertAction comboAction)
+    private void PlayerAttack(CharacterBattle activeCharacter, DessertAction action)
     {
-        battleUIManager.SetText($"{activeCharacter.CharacterName} used {comboAction.Name} at {characterToAttack.CharacterName}");
+        string text = $"{activeCharacter.CharacterName} threw a {action.Name} at {characterToAttack.CharacterName}";
 
-        activeCharacter.DoAction(comboAction, characterToAttack);
+        Attack(activeCharacter, action, text);
+    }
+
+    private void EnemyAttack(CharacterBattle activeCharacter, DessertAction action)
+    {
+        string text = $"{activeCharacter.CharacterName} tried to steal from {characterToAttack.CharacterName}";
+
+        Attack(activeCharacter, action, text);
+    }
+
+    private void Attack(CharacterBattle activeCharacter, DessertAction action, string text)
+    {
+        battleUIManager.SetText(text);
+
+        activeCharacter.DoAttack(action, characterToAttack);
+    }
+
+    private void Heal(CharacterBattle activeCharacter, DessertAction comboAction)
+    {
+        battleUIManager.SetText($"{activeCharacter.CharacterName} ate {comboAction.Name}");
+
+        activeCharacter.DoHeal(comboAction);
     }
 
     private void DefeatedEnemy()
@@ -199,10 +225,18 @@ public class BattleManager : MonoBehaviour {
         activeCharacterAttack = enemy.PickEnemyAttack();
     }
 
-    public void SetComboAction(CharacterBattle characterToAttack, DessertAction activeCharacterCombo)
+    public void SetAttackAction(CharacterBattle characterToAttack, DessertAction action)
     {
         this.characterToAttack = characterToAttack;
-        this.activeCharacterAttack = activeCharacterCombo;
+        activeCharacterAttack = action;
+        attack = true;
+        awaitCommand = false;
+    }
+
+    public void SetHealAction(DessertAction action)
+    {
+        activeCharacterAttack = action;
+        attack = false;
         awaitCommand = false;
     }
 

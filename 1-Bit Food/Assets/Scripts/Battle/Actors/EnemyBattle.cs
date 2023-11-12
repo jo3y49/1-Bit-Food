@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -17,9 +18,7 @@ public class EnemyBattle : CharacterBattle {
 
         CharacterName = "Thief Guy";
 
-        attackActions = DessertList.GetInstance().GetAllActions();
-
-        attackActionUses = Enumerable.Repeat(10, attackActions.Count).ToList();
+        attackActions = new List<DessertAction>{DessertList.GetInstance().GetEnemyAction()};
     }
 
     // public override void PrepareCombat()

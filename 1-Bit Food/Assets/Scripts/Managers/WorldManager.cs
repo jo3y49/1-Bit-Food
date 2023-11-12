@@ -34,7 +34,7 @@ public abstract class WorldManager : MonoBehaviour {
 
     public virtual void LoseBattle()
     {
-        SceneManager.LoadScene("Title Screen");
+        SceneManager.LoadScene(0);
     }
 
     public virtual void EscapeBattle(){}

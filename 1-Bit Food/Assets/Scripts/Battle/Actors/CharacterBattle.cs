@@ -72,9 +72,14 @@ public abstract class CharacterBattle : MonoBehaviour {
         return attackActions.Count;
     }
 
-    public virtual void DoAction(DessertAction action, CharacterBattle target)
+    public virtual void DoAttack(DessertAction action, CharacterBattle target)
     {
         action.Attack(this, target);
+    }
+
+    public virtual void DoHeal(DessertAction action)
+    {
+        action.Heal(this);
     }
 
     public virtual void PlayAttackSound()
@@ -107,7 +112,7 @@ public abstract class CharacterBattle : MonoBehaviour {
 
     public virtual Animator GetAnimator() {return characterAnimation.GetAnimator();}
 
-    public virtual bool GetIsAttacking() {return characterAnimation.isAttacking;}
+    public virtual bool GetIsActing() {return characterAnimation.isAttacking;}
 
     public virtual void Recover() {}
 }
