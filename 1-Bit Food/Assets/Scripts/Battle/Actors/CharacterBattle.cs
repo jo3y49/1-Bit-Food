@@ -13,9 +13,9 @@ public abstract class CharacterBattle : MonoBehaviour {
 
     protected List<string> attackKeys = new();
 
-    protected List<DessertAction> attackActions = new();
+    protected List<DessertAction> actions = new();
 
-    protected List<int> attackActionUses = new();
+    protected List<int> actionUses = new();
 
     protected virtual void Start() {
         health = maxHealth;
@@ -43,21 +43,21 @@ public abstract class CharacterBattle : MonoBehaviour {
 
     public virtual DessertAction GetAction(int i)
     {
-        if (i < attackActions.Count) return attackActions[i];
+        if (i < actions.Count) return actions[i];
 
-        else return attackActions[0];
+        else return actions[0];
     }
 
     public virtual int GetActionUses(int i)
     {
-        if (i < attackActionUses.Count && i < attackActions.Count) return attackActionUses[i];
+        if (i < actionUses.Count && i < actions.Count) return actionUses[i];
 
         else return 0;
     }
 
-    public virtual int GetActionUses(DessertAction attackAction)
+    public virtual int GetActionUses(DessertAction action)
     {
-        int i = attackActions.FindIndex(item => item == attackAction);
+        int i = actions.FindIndex(item => item == action);
 
         return GetActionUses(i);
     }
@@ -67,18 +67,29 @@ public abstract class CharacterBattle : MonoBehaviour {
         return GetActionUses(attackAction) > 0;
     }
 
+    protected virtual void UseAction(DessertAction action)
+    {
+        int i = actions.FindIndex(item => item == action);
+
+        if (i != -1 && actionUses.Count > i) actionUses[i]--;
+    }
+
     public virtual int CountActions()
     {
-        return attackActions.Count;
+        return actions.Count;
     }
 
     public virtual void DoAttack(DessertAction action, CharacterBattle target)
     {
+        UseAction(action);
+
         action.Attack(this, target);
     }
 
     public virtual void DoHeal(DessertAction action)
     {
+        UseAction(action);
+
         action.Heal(this);
     }
 

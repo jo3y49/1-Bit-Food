@@ -18,7 +18,7 @@ public class EnemyBattle : CharacterBattle {
 
         CharacterName = "Thief Guy";
 
-        attackActions = new List<DessertAction>{DessertList.GetInstance().GetEnemyAction()};
+        actions = new List<DessertAction>{DessertList.GetInstance().GetEnemyAction()};
     }
 
     // public override void PrepareCombat()

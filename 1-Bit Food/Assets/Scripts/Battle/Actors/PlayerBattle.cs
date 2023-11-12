@@ -11,9 +11,9 @@ public class PlayerBattle : CharacterBattle {
 
         CharacterName = "Food Fighter Guy";
 
-        attackActions = DessertList.GetInstance().GetAllActions();
+        actions = DessertList.GetInstance().GetAllActions();
 
-        attackActionUses = Enumerable.Repeat(10, attackActions.Count).ToList();
+        actionUses = Enumerable.Repeat(10, actions.Count).ToList();
         
     }
 
@@ -32,6 +32,11 @@ public class PlayerBattle : CharacterBattle {
         this.experience = experience;
         
         // SetStats(level);
+    }
+
+    public bool OutOfDessert()
+    {
+        return actionUses.Max() <= 0;
     }
 
     public void ResetHealth()

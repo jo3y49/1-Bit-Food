@@ -151,6 +151,7 @@ public class BattleManager : MonoBehaviour {
     {
         // Prepares player for turn
         awaitCommand = true;
+        characterToAttack = player;
     }
 
     private void NextTurn(CharacterBattle activeCharacter)
@@ -161,7 +162,6 @@ public class BattleManager : MonoBehaviour {
 
         // reset necessary variables
         activeCharacterAttack = null;
-        characterToAttack = player;
     }
 
     public void Escape()
@@ -291,5 +291,10 @@ public class BattleManager : MonoBehaviour {
         yield return new WaitForSeconds(dialogueDisplayTime);
 
         worldManager.LoseBattle();
+    }
+
+    public void LoseBattleFood()
+    {
+        StartCoroutine(LoseBattle());
     }
 }

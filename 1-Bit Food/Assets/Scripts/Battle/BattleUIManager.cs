@@ -61,6 +61,7 @@ public class BattleUIManager : MonoBehaviour {
 
         // reset used variables
         characterToAttack = null;
+        UpdateActions();
         
         initialContainer.SetActive(true);
         Utility.SetActiveButton(attackButtons[0]);
@@ -117,8 +118,10 @@ public class BattleUIManager : MonoBehaviour {
             healButtons.Add(selectHeal);
 
             // set button text
-            selectAttack.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentAction.Name;
-            selectHeal.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentAction.Name;
+            string actionText = $"{currentAction.Name} ({player.GetActionUses(i)}) remaining";
+
+            selectAttack.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = actionText;
+            selectHeal.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = actionText;
         }
 
         Button backAttack = Instantiate(backButtonPrefab, attackContainer.transform);
@@ -143,6 +146,29 @@ public class BattleUIManager : MonoBehaviour {
 
             // set health display for enemy
             eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = enemy.CharacterName + "'s Health: " + enemy.health;
+        }
+    }
+
+    private void UpdateActions()
+    {
+        for (int i = 0; i < attackButtons.Count; i++)
+        {
+            DessertAction currentAction = player.GetAction(i);
+            int uses = player.GetActionUses(i);
+
+            // set button text
+            string actionText = $"{currentAction.Name} ({uses}) remaining";
+
+            attackButtons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = actionText;
+            healButtons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = actionText;
+
+            if (uses <= 0)
+            {
+                attackButtons[i].interactable = false;
+                healButtons[i].interactable = false;
+
+                if (player.OutOfDessert()) battleManager.LoseBattleFood();
+            }
         }
     }
 
