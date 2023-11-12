@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,11 +17,9 @@ public class EnemyBattle : CharacterBattle {
 
         CharacterName = "Thief Guy";
 
-        attackKeys.Add("steal");
+        attackActions = DessertList.GetInstance().GetAllActions();
 
-        attackActions = FillAttackList(attackKeys);
-
-        attackActionUses.Add(10);
+        attackActionUses = Enumerable.Repeat(10, attackActions.Count).ToList();
     }
 
     // public override void PrepareCombat()
@@ -53,5 +52,5 @@ public class EnemyBattle : CharacterBattle {
         }
     }
 
-    public virtual AttackAction PickEnemyAttack() { return GetAction(0); }
+    public virtual DessertAction PickEnemyAttack() { return GetAction(0); }
 }

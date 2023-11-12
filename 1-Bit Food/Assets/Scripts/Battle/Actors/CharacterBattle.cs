@@ -7,17 +7,13 @@ public abstract class CharacterBattle : MonoBehaviour {
     public string CharacterName { get; protected set; }
     public int maxHealth;
     public int health;
-    public int attack;
-    public int defense;
-    public float accuracy;
-    public float evasion;
     public bool hitTarget = false;
     protected AudioSource audioSource;
     [SerializeField] protected AudioClip attackClip;
 
     protected List<string> attackKeys = new();
 
-    protected List<AttackAction> attackActions = new();
+    protected List<DessertAction> attackActions = new();
 
     protected List<int> attackActionUses = new();
 
@@ -26,10 +22,10 @@ public abstract class CharacterBattle : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
     }
 
-    protected static List<AttackAction> FillAttackList(List<string> keys)
+    protected static List<DessertAction> FillAttackList(List<string> keys)
     {
-        List<AttackAction> attackActions = new();
-        AttackList attackList = AttackList.GetInstance();
+        List<DessertAction> attackActions = new();
+        DessertList attackList = DessertList.GetInstance();
 
         foreach (string k in keys)
         {
@@ -45,7 +41,7 @@ public abstract class CharacterBattle : MonoBehaviour {
 
     public virtual void PrepareCombat(){}
 
-    public virtual AttackAction GetAction(int i)
+    public virtual DessertAction GetAction(int i)
     {
         if (i < attackActions.Count) return attackActions[i];
 
@@ -59,14 +55,14 @@ public abstract class CharacterBattle : MonoBehaviour {
         else return 0;
     }
 
-    public virtual int GetActionUses(AttackAction attackAction)
+    public virtual int GetActionUses(DessertAction attackAction)
     {
         int i = attackActions.FindIndex(item => item == attackAction);
 
         return GetActionUses(i);
     }
 
-    public virtual bool CanUseAction(AttackAction attackAction)
+    public virtual bool CanUseAction(DessertAction attackAction)
     {
         return GetActionUses(attackAction) > 0;
     }
@@ -76,9 +72,9 @@ public abstract class CharacterBattle : MonoBehaviour {
         return attackActions.Count;
     }
 
-    public virtual bool DoAction(AttackAction action, CharacterBattle target)
+    public virtual void DoAction(DessertAction action, CharacterBattle target)
     {
-        return action.Action(this, target);
+        action.Attack(this, target);
     }
 
     public virtual void PlayAttackSound()

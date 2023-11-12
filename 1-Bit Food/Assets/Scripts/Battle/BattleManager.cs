@@ -16,7 +16,7 @@ public class BattleManager : MonoBehaviour {
     private PlayerBattle player;
     private Queue<CharacterBattle> turnOrder = new();
     public CharacterBattle characterToAttack;
-    public AttackAction activeCharacterAttack;
+    public DessertAction activeCharacterAttack;
     private Coroutine battleLoop;
 
     // tracker variables
@@ -81,7 +81,7 @@ public class BattleManager : MonoBehaviour {
 
                 // standard action
                 // do the attack and save whether it hit or not
-                bool hit = Attack(activeCharacter, activeCharacterAttack);
+                Attack(activeCharacter, activeCharacterAttack);
                     
                 // wait for the attack animation to play
                 while (activeCharacter.GetIsAttacking())
@@ -92,13 +92,6 @@ public class BattleManager : MonoBehaviour {
 
                 // attacked character resets
                 characterToAttack.Recover();
-
-                // handles a miss
-                if (!hit)
-                {
-                    battleUIManager.SetText($"{activeCharacter.CharacterName} missed");
-                    break;
-                }
 
                 // update enemy's health ui
                 battleUIManager.UpdateHealth();
@@ -119,7 +112,7 @@ public class BattleManager : MonoBehaviour {
                 characterToAttack = player;
 
                 // do the attack and save whether it hit or not
-                bool hit = Attack(activeCharacter, activeCharacterAttack);
+                Attack(activeCharacter, activeCharacterAttack);
                     
                 // wait for the attack animation to play
                 while (activeCharacter.GetIsAttacking())
@@ -130,13 +123,6 @@ public class BattleManager : MonoBehaviour {
 
                 // attacked character resets
                 characterToAttack.Recover();
-
-                // handles a miss
-                if (!hit)
-                {
-                    battleUIManager.SetText($"{activeCharacter.CharacterName} missed");
-                    break;
-                }
 
                 // updates player's health
                 battleUIManager.UpdateHealth();
@@ -180,11 +166,11 @@ public class BattleManager : MonoBehaviour {
         EndBattle();
     }
 
-    private bool Attack(CharacterBattle activeCharacter, AttackAction comboAction)
+    private void Attack(CharacterBattle activeCharacter, DessertAction comboAction)
     {
         battleUIManager.SetText($"{activeCharacter.CharacterName} used {comboAction.Name} at {characterToAttack.CharacterName}");
 
-        return activeCharacter.DoAction(comboAction, characterToAttack);
+        activeCharacter.DoAction(comboAction, characterToAttack);
     }
 
     private void DefeatedEnemy()
@@ -213,7 +199,7 @@ public class BattleManager : MonoBehaviour {
         activeCharacterAttack = enemy.PickEnemyAttack();
     }
 
-    public void SetComboAction(CharacterBattle characterToAttack, AttackAction activeCharacterCombo)
+    public void SetComboAction(CharacterBattle characterToAttack, DessertAction activeCharacterCombo)
     {
         this.characterToAttack = characterToAttack;
         this.activeCharacterAttack = activeCharacterCombo;

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PlayerBattle : CharacterBattle {
     private int experience = 0;
@@ -10,38 +11,15 @@ public class PlayerBattle : CharacterBattle {
 
         CharacterName = "Food Fighter Guy";
 
-        attackKeys.Add("cake");
+        attackActions = DessertList.GetInstance().GetAllActions();
 
-        attackActions = FillAttackList(attackKeys);
-
-        attackActionUses.Add(10);
+        attackActionUses = Enumerable.Repeat(10, attackActions.Count).ToList();
         
     }
 
     public override void PrepareCombat()
     {
         GetComponent<PlayerMovement>().enabled = false;
-    }
-
-    private void LevelUp(int xpForLevel)
-    {
-        experience -= xpForLevel;
-        level++;
-
-        SetStats(level);
-
-        GameManager.instance.SetPlayerLevel(level);
-    }
-
-    public void SetStats(int level)
-    {
-        maxHealth = 20 + level * 5;
-        attack = 9 + (int)(level * 1.5f);
-        defense = 5 + (int)(level * 1.1f);
-        accuracy = .85f + level / 2000f;
-        evasion = .05f + level / 1000f;
-
-        ResetHealth();
     }
 
     public void EndCombat()

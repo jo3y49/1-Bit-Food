@@ -26,7 +26,7 @@ public class BattleUIManager : MonoBehaviour {
     // store character information
     private PlayerBattle player;
     private List<EnemyBattle> enemies = new();
-    private AttackAction selectedAtack;
+    private DessertAction selectedAtack;
     private CharacterBattle characterToAttack;
 
     public void SetForBattle(PlayerBattle player, List<EnemyBattle> enemies)
@@ -98,7 +98,7 @@ public class BattleUIManager : MonoBehaviour {
         for (int i = 0; i < player.CountActions(); i++)
         {
             // get the player's next combo attack
-            AttackAction currentAttack = player.GetAction(i);
+            DessertAction currentAttack = player.GetAction(i);
 
             // make the button to select attack
             Button selectAttack = Instantiate(attackButtonPrefab, attackContainer.transform);
@@ -140,7 +140,7 @@ public class BattleUIManager : MonoBehaviour {
         Utility.SetActiveButton(attackButtons[0]);
     }
 
-    private void PickAttack(AttackAction attackAction)
+    private void PickAttack(DessertAction attackAction)
     {
         selectedAtack = attackAction;
         attackContainer.SetActive(false);
