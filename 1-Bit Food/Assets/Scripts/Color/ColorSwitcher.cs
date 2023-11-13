@@ -23,6 +23,12 @@ public class ColorSwitcher : MonoBehaviour {
 
     public void SetColors(Color bright, Color dark)
     {
+        if (bright == null || dark == null) 
+        {
+            ResetFlavor();
+            return;
+        }
+
         Bright = bright;
         Dark = dark;
 
