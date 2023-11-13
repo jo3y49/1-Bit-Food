@@ -250,6 +250,7 @@ public class BattleManager : MonoBehaviour {
 
         killCount = 0;
         activeCharacterAttack = null;
+        ColorSwitcher.instance.ResetFlavor();
 
         battleUIManager.ClearUI();
 

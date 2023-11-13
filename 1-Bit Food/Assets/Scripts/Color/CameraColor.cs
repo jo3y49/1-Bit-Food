@@ -14,6 +14,4 @@ public class CameraColor : EditColor {
     {
         cam.backgroundColor = color;
     }
-
-    
 }
