@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterAnimation: {fileID: 7113688701200873565}
+  spriteRenderer: {fileID: 4632155104684606569}
   maxHealth: 10
   health: 10
   hitTarget: 0

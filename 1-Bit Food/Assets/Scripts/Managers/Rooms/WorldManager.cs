@@ -81,4 +81,8 @@ public abstract class WorldManager : MonoBehaviour {
     }
 
     public PlayerBattle GetPlayer() { return playerBattle; }
+
+    private void Update() {
+        
+    }
 }

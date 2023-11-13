@@ -4,6 +4,7 @@ using System;
 
 public abstract class CharacterBattle : MonoBehaviour {
     [SerializeField] protected CharacterAnimation characterAnimation;
+    [SerializeField] protected SpriteRenderer spriteRenderer; 
     public string CharacterName { get; protected set; }
     public int maxHealth;
     public int health;
@@ -20,6 +21,8 @@ public abstract class CharacterBattle : MonoBehaviour {
     protected virtual void Start() {
         health = maxHealth;
         audioSource = GetComponent<AudioSource>();
+
+        spriteRenderer.color = ColorSwitcher.instance.bright;
     }
 
     protected static List<DessertAction> FillAttackList(List<string> keys)
