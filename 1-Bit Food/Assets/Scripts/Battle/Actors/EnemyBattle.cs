@@ -9,6 +9,8 @@ public class EnemyBattle : CharacterBattle {
     protected GameObject player;
     protected bool isAttacking;
 
+    public Flavor favoriteFlavor;
+
     protected override void Start()
     {
         base.Start();
@@ -19,6 +21,13 @@ public class EnemyBattle : CharacterBattle {
         CharacterName = "Food Thief";
 
         actions = new List<DessertAction>{DessertList.GetInstance().GetEnemyAction()};
+    }
+
+    public override void Attacked(int damage, Flavor flavor = null)
+    {
+        if (favoriteFlavor == flavor) damage *= 2;
+
+        base.Attacked(damage);
     }
 
     public override void PrepareCombat()

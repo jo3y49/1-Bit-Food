@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DessertAction
 {
-    public delegate void AttackDelegate(CharacterBattle self, CharacterBattle target);
+    public delegate void AttackDelegate(CharacterBattle self, CharacterBattle target, Flavor flavor);
     public delegate void HealDelegate(CharacterBattle self);
 
     public string Name { get; private set; }
@@ -16,13 +16,13 @@ public class DessertAction
         Heal = heal;
     }
 
-    public static void DoAttack(CharacterBattle self, CharacterBattle target, string attackName, int damage = 1)
+    public static void DoAttack(CharacterBattle self, CharacterBattle target, string attackName, int damage = 1, Flavor flavor = null)
     {
         DoAction(self, attackName);
 
         target.SetAnimationTrigger("Attacked");
 
-        target.Attacked(damage);
+        target.Attacked(damage, flavor);
     }
 
     public static void DoHeal(CharacterBattle self, string attackName, int heal = 1)

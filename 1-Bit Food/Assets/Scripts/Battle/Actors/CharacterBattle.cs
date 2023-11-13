@@ -21,8 +21,6 @@ public abstract class CharacterBattle : MonoBehaviour {
     protected virtual void Start() {
         health = maxHealth;
         audioSource = GetComponent<AudioSource>();
-
-        spriteRenderer.color = ColorSwitcher.instance.bright;
     }
 
     protected static List<DessertAction> FillAttackList(List<string> keys)
@@ -82,11 +80,11 @@ public abstract class CharacterBattle : MonoBehaviour {
         return actions.Count;
     }
 
-    public virtual void DoAttack(DessertAction action, CharacterBattle target)
+    public virtual void DoAttack(DessertAction action, CharacterBattle target, Flavor flavor)
     {
         UseAction(action);
 
-        action.Attack(this, target);
+        action.Attack(this, target, flavor);
     }
 
     public virtual void DoHeal(DessertAction action)
@@ -106,7 +104,7 @@ public abstract class CharacterBattle : MonoBehaviour {
         }
     }
 
-    public virtual void Attacked(int damage)
+    public virtual void Attacked(int damage, Flavor flavor = null)
     {
         health -= damage;
         if (health < 0) health = 0;

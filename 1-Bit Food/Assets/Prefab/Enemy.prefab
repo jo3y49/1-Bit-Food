@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4632155104684606569}
   - component: {fileID: 6822786970716077783}
   - component: {fileID: 7113688701200873565}
+  - component: {fileID: -3665102947770765480}
   - component: {fileID: 2884541118432212556}
   - component: {fileID: 7279200151872187989}
   - component: {fileID: 3659510304730262456}
@@ -107,6 +108,7 @@ MonoBehaviour:
   health: 10
   hitTarget: 0
   attackClip: {fileID: 0}
+  favoriteFlavor: {fileID: 0}
 --- !u!114 &7113688701200873565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +124,19 @@ MonoBehaviour:
   anim: {fileID: 3659510304730262456}
   currentTrigger: 
   isAttacking: 0
+--- !u!114 &-3665102947770765480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998067529695172208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b10321b4c11100449a255320e6810c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameColor: 0
 --- !u!50 &2884541118432212556
 Rigidbody2D:
   serializedVersion: 4

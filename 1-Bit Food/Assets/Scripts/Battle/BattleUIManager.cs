@@ -13,10 +13,10 @@ public class BattleUIManager : MonoBehaviour {
 
     [Header("Containers")]
     [SerializeField] private GameObject initialContainer;
-    [SerializeField] private GameObject attackContainer, healContainer, targetContainer, eHealthContainer;
+    [SerializeField] private GameObject attackContainer, healContainer, flavorContainer, targetContainer, eHealthContainer;
 
     [Header("Buttons")]
-    [SerializeField] private Button initialButton;
+    [SerializeField] private Button initialButton, flavorButton;
 
     [Header("Button Prefabs")]
     [SerializeField] private Button actionButtonPrefab;
@@ -32,6 +32,7 @@ public class BattleUIManager : MonoBehaviour {
     private List<EnemyBattle> enemies = new();
     private DessertAction selectedAction;
     private CharacterBattle characterToAttack;
+    private Flavor flavor;
 
     public void SetForBattle(PlayerBattle player, List<EnemyBattle> enemies)
     {
@@ -51,6 +52,7 @@ public class BattleUIManager : MonoBehaviour {
         initialContainer.SetActive(false);
         targetContainer.SetActive(false);
         attackContainer.SetActive(false);
+        flavorContainer.SetActive(false);
         healContainer.SetActive(false);
     }
 
@@ -61,6 +63,7 @@ public class BattleUIManager : MonoBehaviour {
 
         // reset used variables
         characterToAttack = null;
+        flavor = null;
         UpdateActions();
         
         initialContainer.SetActive(true);
@@ -88,15 +91,6 @@ public class BattleUIManager : MonoBehaviour {
 
         Button back = Instantiate(backButtonPrefab, targetContainer.transform);
         back.onClick.AddListener(BackFromTarget);
-    }
-
-    public void UpdateHealth()
-    {
-        // update player's health
-        UpdatePlayerHealth();
-
-        // update health for each enemy
-        UpdateEnemyHealth();
     }
 
     private void SetActions()
@@ -129,6 +123,15 @@ public class BattleUIManager : MonoBehaviour {
 
         Button backHeal = Instantiate(backButtonPrefab, healContainer.transform);
         backHeal.onClick.AddListener(BackFromHeal);
+    }
+
+    public void UpdateHealth()
+    {
+        // update player's health
+        UpdatePlayerHealth();
+
+        // update health for each enemy
+        UpdateEnemyHealth();
     }
 
     private void UpdatePlayerHealth()
@@ -203,6 +206,25 @@ public class BattleUIManager : MonoBehaviour {
         SetText("");
     }
 
+    public void BackFromFlavor()
+    {
+        flavorContainer.SetActive(false);
+        attackContainer.SetActive(true);
+        Utility.SetActiveButton(attackButtons[0]);
+        SetText("What would you like to throw?");
+    }
+
+    
+
+    private void BackFromTarget()
+    {   
+        targetContainer.SetActive(false);
+        flavorContainer.SetActive(true);
+        ColorSwitcher.instance.ResetFlavor();
+        Utility.SetActiveButton(flavorButton);
+        SetText("Which flavor would you like to use?");
+    }
+
     private void BackFromHeal()
     {
         healContainer.SetActive(false);
@@ -211,35 +233,32 @@ public class BattleUIManager : MonoBehaviour {
         SetText("");
     }
 
-    private void BackFromTarget()
-    {   
-        targetContainer.SetActive(false);
-        attackContainer.SetActive(true);
-        Utility.SetActiveButton(attackButtons[0]);
-        SetText("What would you like to throw?");
-    }
-
     private void PickAttack(DessertAction action)
     {
         selectedAction = action;
         attackContainer.SetActive(false);
+        flavorContainer.SetActive(true);
+        Utility.SetActiveButton(flavorButton);
+        SetText("Which flavor would you like to use?");
+    }
+
+    public void PickFlavor(Flavor flavor)
+    {
+        this.flavor = flavor;
+
+        ColorSwitcher.instance.SetFlavor(flavor);
+        flavorContainer.SetActive(false);
 
         if (enemies.Count > 1)
         {
             targetContainer.SetActive(true);
             Utility.SetActiveButton(targetButtons[0]);
-            SetText($"Who would you like to throw your {action.Name} at?");
+            SetText($"Who would you like to throw your {selectedAction.Name} at?");
         } else 
         {
             PickTarget(enemies[0]);
         }
-    }
 
-    private void PickHeal(DessertAction action)
-    {
-        selectedAction = action;
-        healContainer.SetActive(false);
-        SendHealAction();
     }
 
     private void PickTarget(CharacterBattle characterToAttack)
@@ -249,9 +268,16 @@ public class BattleUIManager : MonoBehaviour {
         SendAttackAction();
     }
 
+    private void PickHeal(DessertAction action)
+    {
+        selectedAction = action;
+        healContainer.SetActive(false);
+        SendHealAction();
+    }
+
     private void SendAttackAction()
     {
-        battleManager.SetAttackAction(characterToAttack, selectedAction);
+        battleManager.SetAttackAction(characterToAttack, selectedAction, flavor);
     }
 
     private void SendHealAction()

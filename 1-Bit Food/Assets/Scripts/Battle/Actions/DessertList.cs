@@ -54,12 +54,12 @@ public class DessertList
         foreach (Dessert dessert in desserts)
         {
             dessertList.Add(dessert.name, new DessertAction(dessert.name, 
-                (self, target) => DessertAction.DoAttack(self, target, dessert.name, dessert.damage),
+                (self, target, flavor) => DessertAction.DoAttack(self, target, dessert.name, dessert.damage, flavor),
                 (self) => DessertAction.DoHeal(self, dessert.name, dessert.heal)));
         }
 
         enemyAction = new DessertAction("Steal", 
-            (self, target) => DessertAction.DoAttack(self, target, "Steal", 3), EmptyAction);
+            (self, target, flavor) => DessertAction.DoAttack(self, target, "Steal", 3), EmptyAction);
 
         // dessertList = new Dictionary<string, DessertAction>();
         // // {
@@ -75,7 +75,7 @@ public class DessertList
         // }
     }
 
-    public void EmptyAction(CharacterBattle self, CharacterBattle target)
+    public void EmptyAction(CharacterBattle self, CharacterBattle target, Flavor flavor = null)
     {
         Debug.Log("This action is null");
     }

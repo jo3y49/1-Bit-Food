@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -3894777459355942162}
   - component: {fileID: -6004681861973576217}
   - component: {fileID: 6525304494865002230}
+  - component: {fileID: 4935774005538962151}
   - component: {fileID: 7495525209363228837}
   - component: {fileID: 69195450056691705}
   - component: {fileID: 8022776622084488219}
@@ -140,6 +141,19 @@ MonoBehaviour:
   anim: {fileID: 8022776622084488219}
   currentTrigger: 
   isAttacking: 0
+--- !u!114 &4935774005538962151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163316866350572919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b10321b4c11100449a255320e6810c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameColor: 0
 --- !u!50 &7495525209363228837
 Rigidbody2D:
   serializedVersion: 4

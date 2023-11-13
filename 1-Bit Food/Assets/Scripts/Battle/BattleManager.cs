@@ -23,6 +23,7 @@ public class BattleManager : MonoBehaviour {
     public int killCount = 0;
     public bool awaitCommand = false;
     public bool attack = true;
+    public Flavor flavor;
 
     private void Awake() {
         gameObject.SetActive(false);
@@ -83,7 +84,7 @@ public class BattleManager : MonoBehaviour {
                 // standard action
                 // do the attack or heal
                 if (attack)
-                    PlayerAttack(activeCharacter, activeCharacterAttack);
+                    PlayerAttack(activeCharacter, activeCharacterAttack, flavor);
                 else 
                     Heal(activeCharacter, activeCharacterAttack);
 
@@ -159,6 +160,7 @@ public class BattleManager : MonoBehaviour {
 
         // reset necessary variables
         activeCharacterAttack = null;
+        ColorSwitcher.instance.ResetFlavor();
     }
 
     public void Escape()
@@ -166,11 +168,13 @@ public class BattleManager : MonoBehaviour {
         StartCoroutine(WinBattle());
     }
 
-    private void PlayerAttack(CharacterBattle activeCharacter, DessertAction action)
+    private void PlayerAttack(CharacterBattle activeCharacter, DessertAction action, Flavor flavor)
     {
         string text = $"{activeCharacter.CharacterName} threw a {action.Name} at {characterToAttack.CharacterName}";
 
-        Attack(activeCharacter, action, text);
+        if ((characterToAttack as EnemyBattle).favoriteFlavor == flavor) text += " He loved it!";
+
+        Attack(activeCharacter, action, text, flavor);
     }
 
     private void EnemyAttack(CharacterBattle activeCharacter, DessertAction action)
@@ -180,11 +184,11 @@ public class BattleManager : MonoBehaviour {
         Attack(activeCharacter, action, text);
     }
 
-    private void Attack(CharacterBattle activeCharacter, DessertAction action, string text)
+    private void Attack(CharacterBattle activeCharacter, DessertAction action, string text, Flavor flavor = null)
     {
         battleUIManager.SetText(text);
 
-        activeCharacter.DoAttack(action, characterToAttack);
+        activeCharacter.DoAttack(action, characterToAttack, flavor);
     }
 
     private void Heal(CharacterBattle activeCharacter, DessertAction comboAction)
@@ -220,10 +224,11 @@ public class BattleManager : MonoBehaviour {
         activeCharacterAttack = enemy.PickEnemyAttack();
     }
 
-    public void SetAttackAction(CharacterBattle characterToAttack, DessertAction action)
+    public void SetAttackAction(CharacterBattle characterToAttack, DessertAction action, Flavor flavor)
     {
         this.characterToAttack = characterToAttack;
         activeCharacterAttack = action;
+        this.flavor = flavor;
         attack = true;
         awaitCommand = false;
     }
