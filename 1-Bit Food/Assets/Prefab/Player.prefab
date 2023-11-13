@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7495525209363228837}
   - component: {fileID: 69195450056691705}
   - component: {fileID: 8022776622084488219}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -103,8 +103,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 7495525209363228837}
+  cd: {fileID: 69195450056691705}
   anim: {fileID: 8022776622084488219}
   walkSpeed: 5
+  sprintSpeed: 8
 --- !u!114 &-6004681861973576217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,10 +122,6 @@ MonoBehaviour:
   characterAnimation: {fileID: 6525304494865002230}
   maxHealth: 10
   health: 10
-  attack: 5
-  defense: 5
-  accuracy: 1
-  evasion: 0
   hitTarget: 0
   attackClip: {fileID: 0}
 --- !u!114 &6525304494865002230

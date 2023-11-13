@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2884541118432212556}
   - component: {fileID: 7279200151872187989}
   - component: {fileID: 3659510304730262456}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -104,10 +104,6 @@ MonoBehaviour:
   characterAnimation: {fileID: 7113688701200873565}
   maxHealth: 10
   health: 10
-  attack: 7
-  defense: 1
-  accuracy: 1
-  evasion: 0
   hitTarget: 0
   attackClip: {fileID: 0}
 --- !u!114 &7113688701200873565
