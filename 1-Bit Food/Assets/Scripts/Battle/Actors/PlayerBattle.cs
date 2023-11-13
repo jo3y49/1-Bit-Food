@@ -9,7 +9,7 @@ public class PlayerBattle : CharacterBattle {
     protected override void Start() {
         base.Start();
 
-        CharacterName = "Food Fighter Guy";
+        CharacterName = "Player";
 
         actions = DessertList.GetInstance().GetAllActions();
 

@@ -104,9 +104,6 @@ public class BattleManager : MonoBehaviour {
                 if (characterToAttack.health <= 0)
                 {
                     DefeatedEnemy();
-
-                    // break out of combo when enemy dies
-                    break;
                 }
             } else {
                 // set enemy combo
@@ -166,9 +163,7 @@ public class BattleManager : MonoBehaviour {
 
     public void Escape()
     {
-        StopCoroutine(battleLoop);
-        worldManager.EscapeBattle();
-        EndBattle();
+        StartCoroutine(WinBattle());
     }
 
     private void PlayerAttack(CharacterBattle activeCharacter, DessertAction action)
@@ -262,15 +257,7 @@ public class BattleManager : MonoBehaviour {
 
         battleUIManager.SetText("You won!");
 
-        int currentLevel = player.level;
-
         yield return new WaitForSeconds(dialogueDisplayTime);
-
-        if (player.level > currentLevel)
-        {
-            battleUIManager.SetText("Level up! You are now level " + player.level);
-            yield return new WaitForSeconds(dialogueDisplayTime);
-        }
 
         foreach (EnemyBattle e in enemies)
         {

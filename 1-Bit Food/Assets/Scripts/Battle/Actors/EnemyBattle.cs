@@ -16,15 +16,15 @@ public class EnemyBattle : CharacterBattle {
         player = GameObject.FindGameObjectWithTag("Player");
         worldManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WorldManager>();
 
-        CharacterName = "Thief Guy";
+        CharacterName = "Food Thief";
 
         actions = new List<DessertAction>{DessertList.GetInstance().GetEnemyAction()};
     }
 
-    // public override void PrepareCombat()
-    // {
-    //     SetStats();
-    // }
+    public override void PrepareCombat()
+    {
+        GetComponent<Collider2D>().enabled = false;
+    }
 
     public void ResetFromFight()
     {

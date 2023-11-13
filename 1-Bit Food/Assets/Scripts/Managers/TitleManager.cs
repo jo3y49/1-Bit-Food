@@ -11,13 +11,13 @@ public class TitleManager : MonoBehaviour {
 
     private void Awake() 
     {
-        gameData = SaveSystem.LoadGameData();
+        // gameData = SaveSystem.LoadGameData();
 
-        if (gameData == null)
-        {
+        // if (gameData == null)
+        // {
             loadButton.interactable = false;
             gameData = new GameData();
-        }
+        // }
 
         // settingsMenu.GetComponent<SettingsMenuManager>().Initialize(gameData.settingsData);
     }

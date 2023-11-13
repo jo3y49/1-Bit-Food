@@ -11,6 +11,8 @@ public abstract class WorldManager : MonoBehaviour {
     protected PlayerMovement playerMovement;
     protected List<EnemyBattle> enemies = new();
 
+    public float nearbyEncounterRange = 3f;
+
     protected virtual void Start() {
 
         player = GameObject.FindGameObjectWithTag("Player");
@@ -26,11 +28,27 @@ public abstract class WorldManager : MonoBehaviour {
 
     public virtual void EncounterEnemy(GameObject enemy)
     {
-        enemies.Add(enemy.GetComponent<EnemyBattle>());
+        if (battleUI.activeSelf) return;
+
+        foreach (EnemyBattle e in FindObjectsOfType<EnemyBattle>())
+        {
+            if (Vector2.Distance(e.transform.position, enemy.transform.position) < nearbyEncounterRange)
+            {
+                enemies.Add(e);
+                e.PrepareCombat();
+            }
+                
+        }
+
+        enemies.Reverse();
+
         StartBattle();
     }
 
-    public virtual void WinBattle(){}
+    public virtual void WinBattle()
+    {
+        
+    }
 
     public virtual void LoseBattle()
     {

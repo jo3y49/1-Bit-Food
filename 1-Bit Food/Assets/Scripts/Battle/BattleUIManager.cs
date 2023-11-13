@@ -144,6 +144,8 @@ public class BattleUIManager : MonoBehaviour {
         {
             EnemyBattle enemy = enemies[i];
 
+            if (enemy.health <= 0) continue;
+
             // set health display for enemy
             eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = enemy.CharacterName + "'s Health: " + enemy.health;
         }
@@ -276,7 +278,7 @@ public class BattleUIManager : MonoBehaviour {
         eHealthContainer.transform.GetChild(enemyIndex).GetComponent<TextMeshProUGUI>().text = enemy.CharacterName + " is defeated";
 
         // remove from list
-        enemies.Remove(enemy);
+        // enemies.Remove(enemy);
     }
 
     public void ClearUI()
@@ -294,6 +296,16 @@ public class BattleUIManager : MonoBehaviour {
         for (int i = 0; i < targetContainer.transform.childCount; i++)
         {
             Destroy(targetContainer.transform.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < attackContainer.transform.childCount; i++)
+        {
+            Destroy(attackContainer.transform.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < healContainer.transform.childCount; i++)
+        {
+            Destroy(healContainer.transform.GetChild(i).gameObject);
         }
 
         // reset used variables
