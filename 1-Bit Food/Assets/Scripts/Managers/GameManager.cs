@@ -46,6 +46,11 @@ public class GameManager : MonoBehaviour {
         return gameData.playerData.foodUses;
     }
 
+    public int GetFoodUses(int i)
+    {
+        return gameData.playerData.foodUses[i];
+    }
+
     public void AddFoodUse(int index, int uses = 1)
     {
         List<int> desserts = gameData.playerData.foodUses;
@@ -66,7 +71,7 @@ public class GameManager : MonoBehaviour {
             instance = this;
             DontDestroyOnLoad(gameObject);
 
-            InitializeGameData(new GameData(Resources.LoadAll<Food>("CombatFood").Length));
+            InitializeGameData(new GameData(Resources.LoadAll<Food>("").Length));
         }
         else
         {

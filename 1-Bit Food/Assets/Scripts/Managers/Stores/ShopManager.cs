@@ -1,27 +1,17 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections;
-using UnityEngine.SceneManagement;
 
-public class ShopManager : MonoBehaviour 
+public class ShopManager : StoreManager 
 {
-    [SerializeField] private GameObject foodContainer;
-    [SerializeField] private GameObject buttonPrefab;
-    [SerializeField] private GameObject popUp;
-    [SerializeField] private TextMeshProUGUI moneyText, confirmationMessage;
+    [SerializeField] private TextMeshProUGUI moneyText;
 
     private int money;
 
-    private Food[] foods;
-    private Food selectedFood;
+    protected override void Start() {
+        base.Start();
 
-    private int level = 0;
-
-    private void Start() {
         SetMoney(GameManager.instance.GetPlayerMoney());
-        popUp.SetActive(false);
-        foods = FoodList.GetInstance().GetFoods();
 
         foreach (Food food in foods)
         {
@@ -41,30 +31,17 @@ public class ShopManager : MonoBehaviour
 
             selectedFood = food;
 
-            confirmationMessage.text = $"Buy {food.name} for {food.price}?";
+            confirmationMessage.text = $"Buy {food.name} for {food.price} coins?";
 
             popUp.SetActive(true);
         }
 
     }
 
-    public void Confirm()
+    protected override void Transaction()
     {
-        AudioManager.instance.PlayUIClip(1);
-
         GameManager.instance.AddPlayerMoney(-selectedFood.price);
         SetMoney(GameManager.instance.GetPlayerMoney());
-
-        GameManager.instance.AddFoodUse(FoodList.GetInstance().GetFoodIndex(selectedFood));
-
-        popUp.SetActive(false);
-    }
-
-    public void Cancel()
-    {
-        AudioManager.instance.PlayUIClip(2);
-
-        popUp.SetActive(false);
     }
 
     private void SetMoney(int money)
@@ -72,11 +49,5 @@ public class ShopManager : MonoBehaviour
         this.money = money;
 
         moneyText.text = "Coins: " + money;
-    }
-
-    public void Return()
-    {
-        AudioManager.instance.PlayUIClip(3);
-        SceneManager.LoadScene(level);
     }
 }

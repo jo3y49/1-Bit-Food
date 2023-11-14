@@ -65,7 +65,6 @@ public class FoodList
         return foods.ToList().FindIndex(item => item == food);
     }
 
-
     private void FillDictionary()
     {
         foods = Resources.LoadAll<Food>("");
