@@ -1,6 +1,5 @@
 using UnityEngine;
-public class InventoryItem : ScriptableObject {
-    // public string itemName = "";
+public abstract class InventoryItem : ScriptableObject {
     public Sprite sprite;
     public int price;
 }

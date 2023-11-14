@@ -20,7 +20,7 @@ public class EnemyBattle : CharacterBattle {
 
         CharacterName = "Food Thief";
 
-        actions = new List<DessertAction>{DessertList.GetInstance().GetEnemyAction()};
+        actions = new List<FoodAction>{FoodList.GetInstance().GetEnemyAction()};
     }
 
     public override void Attacked(int damage, Flavor flavor = null)
@@ -67,5 +67,5 @@ public class EnemyBattle : CharacterBattle {
         }
     }
 
-    public virtual DessertAction PickEnemyAttack() { return GetAction(0); }
+    public virtual FoodAction PickEnemyAttack() { return GetAction(0); }
 }

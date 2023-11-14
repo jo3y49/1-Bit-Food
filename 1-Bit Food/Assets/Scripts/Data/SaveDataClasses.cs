@@ -6,16 +6,16 @@ public class PlayerData
 {
     public int money = 120;
     public int score = 0;
-    public List<int> dessertUses;
+    public List<int> foodUses;
 
     public PlayerData(int dessertLength)
     {
-        dessertUses = Enumerable.Repeat(10, dessertLength).ToList();
+        foodUses = Enumerable.Repeat(10, dessertLength).ToList();
     }
 
     public PlayerData(List<int> dessertUses)
     {
-        this.dessertUses = dessertUses;
+        this.foodUses = dessertUses;
     }
 }
 
@@ -45,7 +45,7 @@ public class GameData
 
     public GameData NewGame()
     {
-        playerData = new(playerData.dessertUses);
+        playerData = new(playerData.foodUses);
         worldData = new();
 
         return this;

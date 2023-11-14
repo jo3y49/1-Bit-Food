@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DessertAction
+public class FoodAction
 {
     public delegate void AttackDelegate(CharacterBattle self, CharacterBattle target, Flavor flavor);
     public delegate void HealDelegate(CharacterBattle self);
@@ -9,7 +9,7 @@ public class DessertAction
     public AttackDelegate Attack { get; private set; }
     public HealDelegate Heal { get; private set; }
 
-    public DessertAction(string name, AttackDelegate attack, HealDelegate heal)
+    public FoodAction(string name, AttackDelegate attack, HealDelegate heal)
     {
         Name = name;
         Attack = attack;
