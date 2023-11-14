@@ -10,6 +10,7 @@ public class DebugRoomManager : WorldManager {
     public TextMeshProUGUI tutText;
 
     private int shopScene = 2;
+    private int craftScene = 3;
 
     private void Awake() {
         activeEnemies = new GameObject[spawnLocations.Length];
@@ -33,6 +34,11 @@ public class DebugRoomManager : WorldManager {
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             SceneManager.LoadScene(shopScene);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SceneManager.LoadScene(craftScene);
         }
     }
 

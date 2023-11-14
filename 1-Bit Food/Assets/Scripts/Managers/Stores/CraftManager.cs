@@ -30,6 +30,7 @@ public class CraftManager : StoreManager {
         if (popUp.activeSelf) return;
 
         string ingredientList = "";
+        string playerIngredientList = "";
         FoodList foodList = FoodList.GetInstance();
 
         for (int i = 0; i < recipe.ingredientQuantities.Count; i++)
@@ -41,16 +42,18 @@ public class CraftManager : StoreManager {
             if (have < need) return;
 
             ingredientList += ", " + need + " " + ingredient.name;
+            playerIngredientList += ", " + have + " " + ingredient.name;
         }
 
         ingredientList = ingredientList.TrimStart(',');
+        playerIngredientList = playerIngredientList.TrimStart(',');
 
         AudioManager.instance.PlayUIClip(0);
 
         selectedFood = recipe.result;
         selectedRecipe = recipe;
 
-        confirmationMessage.text = $"Craft {selectedFood.name} with{ingredientList}?";
+        confirmationMessage.text = $"Craft {selectedFood.name} with{ingredientList}? You have{playerIngredientList}";
 
         popUp.SetActive(true);
     }
