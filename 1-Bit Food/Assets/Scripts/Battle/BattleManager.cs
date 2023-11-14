@@ -179,6 +179,8 @@ public class BattleManager : MonoBehaviour {
 
     private void EnemyAttack(CharacterBattle activeCharacter, DessertAction action)
     {
+        AudioManager.instance.PlayUIClip(5);
+
         string text = $"{activeCharacter.CharacterName} tried to steal from {characterToAttack.CharacterName}";
 
         Attack(activeCharacter, action, text);
