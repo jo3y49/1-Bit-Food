@@ -4,10 +4,10 @@ using UnityEngine;
 public class CameraColor : EditColor {
     private Camera cam;
 
-    protected override void Start() {
+    protected override void OnEnable() {
         cam = GetComponent<Camera>();
 
-        base.Start();
+        base.OnEnable();
     }
 
     public override void ChangeColor(Color color)

@@ -52,6 +52,13 @@ public class EnemyBattle : CharacterBattle {
         gameObject.SetActive(false);
     }
 
+    public int GetLoot()
+    {
+        int loot = Random.Range(20,40);
+
+        return loot;
+    }
+
     protected virtual void OnTriggerEnter2D(Collider2D other) 
     {
         if (other.gameObject.CompareTag("Player"))

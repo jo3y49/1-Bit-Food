@@ -195,6 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleUI: {fileID: 6234795568015641830}
+  nearbyEncounterRange: 3
 --- !u!1001 &3560318447545717928
 PrefabInstance:
   m_ObjectHideFlags: 0

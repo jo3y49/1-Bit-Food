@@ -20,7 +20,7 @@ public class BattleManager : MonoBehaviour {
     private Coroutine battleLoop;
 
     // tracker variables
-    public int killCount = 0;
+    public int moneyCount = 0;
     public bool awaitCommand = false;
     public bool attack = true;
     public Flavor flavor;
@@ -208,7 +208,7 @@ public class BattleManager : MonoBehaviour {
         turnOrder = newTurnOrder;
 
         // gain stats from kill
-        killCount++;
+        moneyCount += defeatedEnemy.GetLoot();
 
         // remove enemy from ui
         battleUIManager.DefeatedEnemy(defeatedEnemy);
@@ -242,13 +242,13 @@ public class BattleManager : MonoBehaviour {
 
     private void EndBattle()
     {
-        player.EndCombat();
+        player.EndCombat(moneyCount);
 
         StopAllCoroutines();
 
         enemies.Clear();
 
-        killCount = 0;
+        moneyCount = 0;
         activeCharacterAttack = null;
         ColorSwitcher.instance.ResetFlavor();
 
@@ -261,7 +261,7 @@ public class BattleManager : MonoBehaviour {
     {
         StopCoroutine(battleLoop);
 
-        battleUIManager.SetText("You won!");
+        battleUIManager.SetText($"You won! You got {moneyCount} coins");
 
         yield return new WaitForSeconds(dialogueDisplayTime);
 

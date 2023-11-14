@@ -50,8 +50,11 @@ public class ColorSwitcher : MonoBehaviour {
 
     private void SwitchColor()
     {
-        walls.color = Bright;
-        floor.color = Dark;
+        if (walls != null && floor != null)
+        {
+            walls.color = Bright;
+            floor.color = Dark;
+        }
 
         foreach (EditColor c in FindObjectsOfType<EditColor>())
         {

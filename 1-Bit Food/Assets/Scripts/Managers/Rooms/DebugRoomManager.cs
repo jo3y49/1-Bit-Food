@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DebugRoomManager : WorldManager {
     public Vector2[] spawnLocations;
@@ -7,6 +8,8 @@ public class DebugRoomManager : WorldManager {
     public GameObject enemyPrefab;
 
     public TextMeshProUGUI tutText;
+
+    private int shopScene = 2;
 
     private void Awake() {
         activeEnemies = new GameObject[spawnLocations.Length];
@@ -25,6 +28,11 @@ public class DebugRoomManager : WorldManager {
                     break;
                 }
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SceneManager.LoadScene(shopScene);
         }
     }
 

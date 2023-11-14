@@ -5,6 +5,7 @@ using UnityEngine;
 public class DessertList
 {
     private static DessertList instance;
+    private Dessert[] desserts;
     private IDictionary<string, DessertAction> dessertList;
     private DessertAction enemyAction;
 
@@ -44,10 +45,20 @@ public class DessertList
         return dessertList.Values.ToList();
     }
 
+    public Dessert[] GetDesserts()
+    {
+        return desserts;
+    }
+
+    public int GetDessertIndex(Dessert dessert)
+    {
+        return desserts.ToList().FindIndex(item => item == dessert);
+    }
+
 
     private void FillDictionary()
     {
-        Dessert[] desserts = Resources.LoadAll<Dessert>("Desserts");
+        desserts = Resources.LoadAll<Dessert>("Desserts");
 
         dessertList = new Dictionary<string, DessertAction>();
 

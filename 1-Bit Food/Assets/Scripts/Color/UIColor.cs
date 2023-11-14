@@ -5,10 +5,10 @@ using UnityEngine.UI;
 public class UIColor : EditColor {
     private Image image;
 
-    protected override void Start() {
+    protected override void OnEnable() {
         image = GetComponent<Image>();
 
-        base.Start();
+        base.OnEnable();
     }
 
 
