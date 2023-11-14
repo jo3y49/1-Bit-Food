@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
@@ -20,9 +21,19 @@ public class GameManager : MonoBehaviour {
         this.player = player;
     }
 
-    public void SetPlayerLevel(int level)
+    public void AddPlayerMoney(int money)
     {
-        
+        gameData.playerData.money += money;
+    }
+
+    public int GetPlayerMoney()
+    {
+        return gameData.playerData.money;
+    }
+
+    public void AddPlayerScore(int score)
+    {
+        gameData.playerData.score += score;
     }
 
     public void SetCurrentScene(int sceneIndex)
@@ -30,11 +41,32 @@ public class GameManager : MonoBehaviour {
         gameData.worldData.currentScene = sceneIndex;
     }
 
+    public List<int> GetDessertUses()
+    {
+        return gameData.playerData.dessertUses;
+    }
+
+    public void AddDessertUse(int index, int uses = 1)
+    {
+        List<int> desserts = gameData.playerData.dessertUses;
+
+        if (index >= desserts.Count) return;
+
+        desserts[index] += uses;
+    }
+
+    public void SetDessertUses(List<int> uses)
+    {
+        gameData.playerData.dessertUses = uses;
+    }
+
     private void Awake() {
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            InitializeGameData(new GameData(Resources.LoadAll<Dessert>("Desserts").Length));
         }
         else
         {

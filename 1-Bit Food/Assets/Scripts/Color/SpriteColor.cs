@@ -4,10 +4,10 @@ using UnityEngine;
 public class SpriteColor : EditColor {
     private SpriteRenderer spriteRenderer;
 
-    protected override void Start() {
+    protected override void OnEnable() {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        base.Start();
+        base.OnEnable();
     }
 
     public override void ChangeColor(Color color)

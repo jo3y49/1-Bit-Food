@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class PlayerBattle : CharacterBattle {
-    private int experience = 0;
     public int level {get; private set;}
 
     protected override void Start() {
@@ -13,7 +12,7 @@ public class PlayerBattle : CharacterBattle {
 
         actions = DessertList.GetInstance().GetAllActions();
 
-        actionUses = Enumerable.Repeat(10, actions.Count).ToList();
+        actionUses = GameManager.instance.GetDessertUses();
         
     }
 
@@ -22,16 +21,12 @@ public class PlayerBattle : CharacterBattle {
         GetComponent<PlayerMovement>().enabled = false;
     }
 
-    public void EndCombat()
+    public void EndCombat(int money)
     {
         GetComponent<PlayerMovement>().enabled = true;
-    }
-    public void SetData(int level, int experience)
-    {
-        this.level = level;
-        this.experience = experience;
-        
-        // SetStats(level);
+
+        GameManager.instance.AddPlayerMoney(money);
+        GameManager.instance.SetDessertUses(actionUses);
     }
 
     public bool OutOfDessert()
