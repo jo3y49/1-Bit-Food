@@ -16,7 +16,8 @@ public class BattleUIManager : MonoBehaviour {
     [SerializeField] private GameObject attackContainer, healContainer, flavorContainer, targetContainer, eHealthContainer;
 
     [Header("Buttons")]
-    [SerializeField] private Button initialButton, flavorButton;
+    [SerializeField] private Button initialButton;
+    [SerializeField] private Button flavorButton;
 
     [Header("Button Prefabs")]
     [SerializeField] private Button actionButtonPrefab;
@@ -179,6 +180,7 @@ public class BattleUIManager : MonoBehaviour {
 
     public void SelectAttack()
     {
+        PlayAudio(0);
         initialContainer.SetActive(false);
         attackContainer.SetActive(true);
         Utility.SetActiveButton(attackButtons[0]);
@@ -187,6 +189,7 @@ public class BattleUIManager : MonoBehaviour {
 
     public void SelectHeal()
     {
+        PlayAudio(1);
         initialContainer.SetActive(false);
         healContainer.SetActive(true);
         Utility.SetActiveButton(healButtons[0]);
@@ -200,6 +203,7 @@ public class BattleUIManager : MonoBehaviour {
 
     private void BackFromAttack()
     {
+        PlayAudio(2);
         attackContainer.SetActive(false);
         initialContainer.SetActive(true);
         Utility.SetActiveButton(initialButton);
@@ -208,16 +212,16 @@ public class BattleUIManager : MonoBehaviour {
 
     public void BackFromFlavor()
     {
+        PlayAudio(3);
         flavorContainer.SetActive(false);
         attackContainer.SetActive(true);
         Utility.SetActiveButton(attackButtons[0]);
         SetText("What would you like to throw?");
     }
 
-    
-
     private void BackFromTarget()
     {   
+        PlayAudio(4);
         targetContainer.SetActive(false);
         flavorContainer.SetActive(true);
         ColorSwitcher.instance.ResetFlavor();
@@ -227,6 +231,7 @@ public class BattleUIManager : MonoBehaviour {
 
     private void BackFromHeal()
     {
+        PlayAudio(5);
         healContainer.SetActive(false);
         initialContainer.SetActive(true);
         Utility.SetActiveButton(initialButton);
@@ -235,6 +240,7 @@ public class BattleUIManager : MonoBehaviour {
 
     private void PickAttack(DessertAction action)
     {
+        PlayAudio(6);
         selectedAction = action;
         attackContainer.SetActive(false);
         flavorContainer.SetActive(true);
@@ -244,6 +250,7 @@ public class BattleUIManager : MonoBehaviour {
 
     public void PickFlavor(Flavor flavor)
     {
+        PlayAudio(7);
         this.flavor = flavor;
 
         ColorSwitcher.instance.SetFlavor(flavor);
@@ -263,6 +270,7 @@ public class BattleUIManager : MonoBehaviour {
 
     private void PickTarget(CharacterBattle characterToAttack)
     {
+        PlayAudio(8);
         this.characterToAttack = characterToAttack;
         targetContainer.SetActive(false);
         SendAttackAction();
@@ -270,6 +278,7 @@ public class BattleUIManager : MonoBehaviour {
 
     private void PickHeal(DessertAction action)
     {
+        PlayAudio(9);
         selectedAction = action;
         healContainer.SetActive(false);
         SendHealAction();
@@ -336,5 +345,10 @@ public class BattleUIManager : MonoBehaviour {
 
         // reset used variables
         characterToAttack = null;
+    }
+
+    private void PlayAudio(int i)
+    {
+        AudioManager.instance.PlayUIClip(i);
     }
 }

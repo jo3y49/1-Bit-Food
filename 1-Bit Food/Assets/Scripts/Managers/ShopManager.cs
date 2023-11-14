@@ -37,16 +37,21 @@ public class ShopManager : MonoBehaviour
     {
         if (money >= dessert.price && !popUp.activeSelf)
         {
+            AudioManager.instance.PlayUIClip(0);
+
             selectedDessert = dessert;
 
             confirmationMessage.text = $"Buy {dessert.name} for {dessert.price}?";
 
             popUp.SetActive(true);
         }
+
     }
 
     public void Confirm()
     {
+        AudioManager.instance.PlayUIClip(1);
+
         GameManager.instance.AddPlayerMoney(-selectedDessert.price);
         SetMoney(GameManager.instance.GetPlayerMoney());
 
@@ -57,6 +62,8 @@ public class ShopManager : MonoBehaviour
 
     public void Cancel()
     {
+        AudioManager.instance.PlayUIClip(2);
+
         popUp.SetActive(false);
     }
 
@@ -69,6 +76,7 @@ public class ShopManager : MonoBehaviour
 
     public void Return()
     {
+        AudioManager.instance.PlayUIClip(3);
         SceneManager.LoadScene(level);
     }
 }
