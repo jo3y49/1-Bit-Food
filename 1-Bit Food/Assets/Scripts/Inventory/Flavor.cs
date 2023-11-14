@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ItemData", menuName = "Flavor")]
-public class Flavor : InventoryItem {
+public class Flavor : ScriptableObject{
     public Color bright = Color.white;
     public Color dark = Color.black;
 }

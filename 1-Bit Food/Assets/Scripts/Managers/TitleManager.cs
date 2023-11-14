@@ -16,7 +16,7 @@ public class TitleManager : MonoBehaviour {
         // if (gameData == null)
         // {
             loadButton.interactable = false;
-            gameData = new GameData();
+            gameData = new(Resources.LoadAll<Dessert>("Desserts").Length);
         // }
 
         // settingsMenu.GetComponent<SettingsMenuManager>().Initialize(gameData.settingsData);

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3347a8826d2bbff46896e77efa6dca00, type: 3}
   m_Name: Cake
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: ae2295759c3cd4c4f8311bae7e0abb21, type: 3}
+  sprite: {fileID: 0}
+  price: 50
   damage: 5
   heal: 8

@@ -23,6 +23,12 @@ public class ColorSwitcher : MonoBehaviour {
 
     public void SetColors(Color bright, Color dark)
     {
+        if (bright == null || dark == null) 
+        {
+            ResetFlavor();
+            return;
+        }
+
         Bright = bright;
         Dark = dark;
 
@@ -44,8 +50,11 @@ public class ColorSwitcher : MonoBehaviour {
 
     private void SwitchColor()
     {
-        walls.color = Bright;
-        floor.color = Dark;
+        if (walls != null && floor != null)
+        {
+            walls.color = Bright;
+            floor.color = Dark;
+        }
 
         foreach (EditColor c in FindObjectsOfType<EditColor>())
         {
