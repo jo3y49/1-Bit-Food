@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CraftManager : StoreManager {
+public class BakeManager : StoreManager {
     private Recipe[] recipes;
 
     private Recipe selectedRecipe;
@@ -17,12 +16,10 @@ public class CraftManager : StoreManager {
         {
             GameObject button = Instantiate(buttonPrefab, foodContainer.transform);
             button.GetComponentInChildren<Image>().sprite = recipe.result.sprite;
-            button.GetComponentInChildren<TextMeshProUGUI>().text = recipe.result.name;
+            button.GetComponentInChildren<TextMeshProUGUI>().text = "Bake a " + recipe.result.name;
 
             button.GetComponent<Button>().onClick.AddListener(() => Craft(recipe));
         }
-
-        
     }
 
     private void Craft(Recipe recipe)
@@ -53,7 +50,7 @@ public class CraftManager : StoreManager {
         selectedFood = recipe.result;
         selectedRecipe = recipe;
 
-        confirmationMessage.text = $"Craft {selectedFood.name} with{ingredientList}? You have{playerIngredientList}";
+        confirmationMessage.text = $"Bake a {selectedFood.name} with{ingredientList}? You have{playerIngredientList}";
 
         popUp.SetActive(true);
     }
