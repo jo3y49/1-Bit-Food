@@ -14,7 +14,7 @@ public abstract class CharacterBattle : MonoBehaviour {
 
     protected List<string> attackKeys = new();
 
-    protected List<DessertAction> actions = new();
+    protected List<FoodAction> actions = new();
 
     protected List<int> actionUses = new();
 
@@ -23,26 +23,13 @@ public abstract class CharacterBattle : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
     }
 
-    protected static List<DessertAction> FillAttackList(List<string> keys)
-    {
-        List<DessertAction> attackActions = new();
-        DessertList attackList = DessertList.GetInstance();
-
-        foreach (string k in keys)
-        {
-            attackActions.Add(attackList.GetAction(k));
-        }
-
-        return attackActions;
-    }
-
     public virtual void Kill(){}
 
     public virtual void Defeated(){}
 
     public virtual void PrepareCombat(){}
 
-    public virtual DessertAction GetAction(int i)
+    public virtual FoodAction GetAction(int i)
     {
         if (i < actions.Count) return actions[i];
 
@@ -56,19 +43,19 @@ public abstract class CharacterBattle : MonoBehaviour {
         else return 0;
     }
 
-    public virtual int GetActionUses(DessertAction action)
+    public virtual int GetActionUses(FoodAction action)
     {
         int i = actions.FindIndex(item => item == action);
 
         return GetActionUses(i);
     }
 
-    public virtual bool CanUseAction(DessertAction attackAction)
+    public virtual bool CanUseAction(FoodAction attackAction)
     {
         return GetActionUses(attackAction) > 0;
     }
 
-    protected virtual void UseAction(DessertAction action)
+    protected virtual void UseAction(FoodAction action)
     {
         int i = actions.FindIndex(item => item == action);
 
@@ -80,14 +67,14 @@ public abstract class CharacterBattle : MonoBehaviour {
         return actions.Count;
     }
 
-    public virtual void DoAttack(DessertAction action, CharacterBattle target, Flavor flavor)
+    public virtual void DoAttack(FoodAction action, CharacterBattle target, Flavor flavor)
     {
         UseAction(action);
 
         action.Attack(this, target, flavor);
     }
 
-    public virtual void DoHeal(DessertAction action)
+    public virtual void DoHeal(FoodAction action)
     {
         UseAction(action);
 

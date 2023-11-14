@@ -16,7 +16,7 @@ public class BattleManager : MonoBehaviour {
     private PlayerBattle player;
     private Queue<CharacterBattle> turnOrder = new();
     public CharacterBattle characterToAttack;
-    public DessertAction activeCharacterAttack;
+    public FoodAction activeCharacterAttack;
     private Coroutine battleLoop;
 
     // tracker variables
@@ -168,7 +168,7 @@ public class BattleManager : MonoBehaviour {
         StartCoroutine(WinBattle());
     }
 
-    private void PlayerAttack(CharacterBattle activeCharacter, DessertAction action, Flavor flavor)
+    private void PlayerAttack(CharacterBattle activeCharacter, FoodAction action, Flavor flavor)
     {
         string text = $"{activeCharacter.CharacterName} threw a {action.Name} at {characterToAttack.CharacterName}";
 
@@ -177,7 +177,7 @@ public class BattleManager : MonoBehaviour {
         Attack(activeCharacter, action, text, flavor);
     }
 
-    private void EnemyAttack(CharacterBattle activeCharacter, DessertAction action)
+    private void EnemyAttack(CharacterBattle activeCharacter, FoodAction action)
     {
         AudioManager.instance.PlayUIClip(5);
 
@@ -186,14 +186,14 @@ public class BattleManager : MonoBehaviour {
         Attack(activeCharacter, action, text);
     }
 
-    private void Attack(CharacterBattle activeCharacter, DessertAction action, string text, Flavor flavor = null)
+    private void Attack(CharacterBattle activeCharacter, FoodAction action, string text, Flavor flavor = null)
     {
         battleUIManager.SetText(text);
 
         activeCharacter.DoAttack(action, characterToAttack, flavor);
     }
 
-    private void Heal(CharacterBattle activeCharacter, DessertAction comboAction)
+    private void Heal(CharacterBattle activeCharacter, FoodAction comboAction)
     {
         battleUIManager.SetText($"{activeCharacter.CharacterName} ate {comboAction.Name}");
 
@@ -226,7 +226,7 @@ public class BattleManager : MonoBehaviour {
         activeCharacterAttack = enemy.PickEnemyAttack();
     }
 
-    public void SetAttackAction(CharacterBattle characterToAttack, DessertAction action, Flavor flavor)
+    public void SetAttackAction(CharacterBattle characterToAttack, FoodAction action, Flavor flavor)
     {
         this.characterToAttack = characterToAttack;
         activeCharacterAttack = action;
@@ -235,7 +235,7 @@ public class BattleManager : MonoBehaviour {
         awaitCommand = false;
     }
 
-    public void SetHealAction(DessertAction action)
+    public void SetHealAction(FoodAction action)
     {
         activeCharacterAttack = action;
         attack = false;

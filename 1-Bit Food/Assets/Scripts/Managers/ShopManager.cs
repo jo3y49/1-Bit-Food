@@ -6,42 +6,42 @@ using UnityEngine.SceneManagement;
 
 public class ShopManager : MonoBehaviour 
 {
-    [SerializeField] private GameObject dessertContainer;
+    [SerializeField] private GameObject foodContainer;
     [SerializeField] private GameObject buttonPrefab;
     [SerializeField] private GameObject popUp;
     [SerializeField] private TextMeshProUGUI moneyText, confirmationMessage;
 
     private int money;
 
-    private Dessert[] desserts;
-    private Dessert selectedDessert;
+    private Food[] foods;
+    private Food selectedFood;
 
     private int level = 0;
 
     private void Start() {
         SetMoney(GameManager.instance.GetPlayerMoney());
         popUp.SetActive(false);
-        desserts = DessertList.GetInstance().GetDesserts();
+        foods = FoodList.GetInstance().GetFoods();
 
-        foreach (Dessert dessert in desserts)
+        foreach (Food food in foods)
         {
-            GameObject button = Instantiate(buttonPrefab, dessertContainer.transform);
-            button.GetComponentInChildren<Image>().sprite = dessert.sprite;
-            button.GetComponentInChildren<TextMeshProUGUI>().text = $"{dessert.name}: {dessert.price} coins";
+            GameObject button = Instantiate(buttonPrefab, foodContainer.transform);
+            button.GetComponentInChildren<Image>().sprite = food.sprite;
+            button.GetComponentInChildren<TextMeshProUGUI>().text = $"{food.name}: {food.price} coins";
 
-            button.GetComponent<Button>().onClick.AddListener(() => Buy(dessert));
+            button.GetComponent<Button>().onClick.AddListener(() => Buy(food));
         }
     }
 
-    private void Buy(Dessert dessert)
+    private void Buy(Food food)
     {
-        if (money >= dessert.price && !popUp.activeSelf)
+        if (money >= food.price && !popUp.activeSelf)
         {
             AudioManager.instance.PlayUIClip(0);
 
-            selectedDessert = dessert;
+            selectedFood = food;
 
-            confirmationMessage.text = $"Buy {dessert.name} for {dessert.price}?";
+            confirmationMessage.text = $"Buy {food.name} for {food.price}?";
 
             popUp.SetActive(true);
         }
@@ -52,10 +52,10 @@ public class ShopManager : MonoBehaviour
     {
         AudioManager.instance.PlayUIClip(1);
 
-        GameManager.instance.AddPlayerMoney(-selectedDessert.price);
+        GameManager.instance.AddPlayerMoney(-selectedFood.price);
         SetMoney(GameManager.instance.GetPlayerMoney());
 
-        GameManager.instance.AddDessertUse(DessertList.GetInstance().GetDessertIndex(selectedDessert));
+        GameManager.instance.AddFoodUse(FoodList.GetInstance().GetFoodIndex(selectedFood));
 
         popUp.SetActive(false);
     }

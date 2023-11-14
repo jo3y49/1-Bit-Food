@@ -10,9 +10,9 @@ public class PlayerBattle : CharacterBattle {
 
         CharacterName = "Player";
 
-        actions = DessertList.GetInstance().GetAllActions();
+        actions = FoodList.GetInstance().GetAllActions();
 
-        actionUses = GameManager.instance.GetDessertUses();
+        actionUses = GameManager.instance.GetFoodUses();
         
     }
 
@@ -26,7 +26,7 @@ public class PlayerBattle : CharacterBattle {
         GetComponent<PlayerMovement>().enabled = true;
 
         GameManager.instance.AddPlayerMoney(money);
-        GameManager.instance.SetDessertUses(actionUses);
+        GameManager.instance.SetFoodUses(actionUses);
     }
 
     public bool OutOfDessert()
