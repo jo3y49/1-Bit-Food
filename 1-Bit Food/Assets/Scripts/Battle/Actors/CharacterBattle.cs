@@ -12,12 +12,6 @@ public abstract class CharacterBattle : MonoBehaviour {
     protected AudioSource audioSource;
     [SerializeField] protected AudioClip attackClip;
 
-    protected List<string> attackKeys = new();
-
-    protected List<FoodAction> actions = new();
-
-    protected List<int> actionUses = new();
-
     protected virtual void Start() {
         health = maxHealth;
         audioSource = GetComponent<AudioSource>();
@@ -29,57 +23,13 @@ public abstract class CharacterBattle : MonoBehaviour {
 
     public virtual void PrepareCombat(){}
 
-    public virtual FoodAction GetAction(int i)
-    {
-        if (i < actions.Count) return actions[i];
+    
+    
 
-        else return actions[0];
-    }
+    public virtual string DoAttack(Actions action, CharacterBattle target, Flavor flavor = null) {return "";}
 
-    public virtual int GetActionUses(int i)
-    {
-        if (i < actionUses.Count && i < actions.Count) return actionUses[i];
-
-        else return 0;
-    }
-
-    public virtual int GetActionUses(FoodAction action)
-    {
-        int i = actions.FindIndex(item => item == action);
-
-        return GetActionUses(i);
-    }
-
-    public virtual bool CanUseAction(FoodAction attackAction)
-    {
-        return GetActionUses(attackAction) > 0;
-    }
-
-    protected virtual void UseAction(FoodAction action)
-    {
-        int i = actions.FindIndex(item => item == action);
-
-        if (i != -1 && actionUses.Count > i) actionUses[i]--;
-    }
-
-    public virtual int CountActions()
-    {
-        return actions.Count;
-    }
-
-    public virtual void DoAttack(FoodAction action, CharacterBattle target, Flavor flavor)
-    {
-        UseAction(action);
-
-        action.Attack(this, target, flavor);
-    }
-
-    public virtual void DoHeal(FoodAction action)
-    {
-        UseAction(action);
-
-        action.Heal(this);
-    }
+    
+    
 
     public virtual void PlayAttackSound()
     {

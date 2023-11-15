@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour {
         actions.Gameplay.Sprint.canceled -= context => isSprinting = false;
 
         StopMovement();
+        isSprinting = false;
 
         actions.Gameplay.Disable();
     }
