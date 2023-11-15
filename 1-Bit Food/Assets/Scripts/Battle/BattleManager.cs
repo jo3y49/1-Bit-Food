@@ -16,7 +16,7 @@ public class BattleManager : MonoBehaviour {
     private PlayerBattle player;
     private Queue<CharacterBattle> turnOrder = new();
     public CharacterBattle characterToAttack;
-    public FoodAction activeCharacterAttack;
+    public Actions activeCharacterAttack;
     private Coroutine battleLoop;
 
     // tracker variables
@@ -168,7 +168,7 @@ public class BattleManager : MonoBehaviour {
         StartCoroutine(WinBattle());
     }
 
-    private void PlayerAttack(CharacterBattle activeCharacter, FoodAction action, Flavor flavor)
+    private void PlayerAttack(CharacterBattle activeCharacter, Actions action, Flavor flavor)
     {
         string text = $"{activeCharacter.CharacterName} threw a {action.Name} at {characterToAttack.CharacterName}";
 
@@ -177,7 +177,7 @@ public class BattleManager : MonoBehaviour {
         Attack(activeCharacter, action, text, flavor);
     }
 
-    private void EnemyAttack(CharacterBattle activeCharacter, FoodAction action)
+    private void EnemyAttack(CharacterBattle activeCharacter, Actions action)
     {
         AudioManager.instance.PlayUIClip(5);
 
@@ -186,18 +186,21 @@ public class BattleManager : MonoBehaviour {
         Attack(activeCharacter, action, text);
     }
 
-    private void Attack(CharacterBattle activeCharacter, FoodAction action, string text, Flavor flavor = null)
+    private void Attack(CharacterBattle activeCharacter, Actions action, string text, Flavor flavor = null)
     {
-        battleUIManager.SetText(text);
+        string tempText = activeCharacter.DoAttack(action, characterToAttack, flavor);
 
-        activeCharacter.DoAttack(action, characterToAttack, flavor);
+        if (tempText != "")
+            text = tempText;
+
+        battleUIManager.SetText(text);
     }
 
-    private void Heal(CharacterBattle activeCharacter, FoodAction comboAction)
+    private void Heal(CharacterBattle activeCharacter, Actions comboAction)
     {
         battleUIManager.SetText($"{activeCharacter.CharacterName} ate {comboAction.Name}");
 
-        activeCharacter.DoHeal(comboAction);
+        (activeCharacter as PlayerBattle).DoHeal(comboAction);
     }
 
     private void DefeatedEnemy()

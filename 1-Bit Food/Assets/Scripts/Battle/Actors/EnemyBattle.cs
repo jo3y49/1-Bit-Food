@@ -11,6 +11,8 @@ public class EnemyBattle : CharacterBattle {
 
     public Flavor favoriteFlavor;
 
+    public List<Food> stolenFood = new();
+
     protected override void Start()
     {
         base.Start();
@@ -19,8 +21,6 @@ public class EnemyBattle : CharacterBattle {
         worldManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WorldManager>();
 
         CharacterName = "Food Thief";
-
-        actions = new List<FoodAction>{FoodList.GetInstance().GetEnemyAction()};
     }
 
     public override void Attacked(int damage, Flavor flavor = null)
@@ -59,6 +59,34 @@ public class EnemyBattle : CharacterBattle {
         return loot;
     }
 
+    public override string DoAttack(Actions action, CharacterBattle target, Flavor flavor = null) 
+    {
+        (action as StealAction).Attack(this, target);
+
+        if (action.Name == "Steal") return $"{CharacterName} Stole {GetRecentlyStolenItem().name}!";
+
+        else return "";
+    }
+
+    public void TakeItem(Food food)
+    {
+        stolenFood.Add(food);
+    }
+
+    public Food GetRecentlyStolenItem()
+    {
+        return stolenFood.Last();
+    }
+
+    public Food StealBackItem()
+    {
+        Food food = GetRecentlyStolenItem();
+
+        stolenFood.Remove(food);
+
+        return food;
+    }
+
     protected virtual void OnTriggerEnter2D(Collider2D other) 
     {
         if (other.gameObject.CompareTag("Player"))
@@ -67,5 +95,5 @@ public class EnemyBattle : CharacterBattle {
         }
     }
 
-    public virtual FoodAction PickEnemyAttack() { return GetAction(0); }
+    public virtual Actions PickEnemyAttack() { return StealList.GetInstance().GetAction(); }
 }
