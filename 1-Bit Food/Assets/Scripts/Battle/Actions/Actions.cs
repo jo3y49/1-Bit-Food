@@ -1,19 +1,12 @@
 using UnityEngine;
 
-public class DessertAction
-{
-    public delegate void AttackDelegate(CharacterBattle self, CharacterBattle target, Flavor flavor);
-    public delegate void HealDelegate(CharacterBattle self);
+public abstract class Actions {
 
-    public string Name { get; private set; }
-    public AttackDelegate Attack { get; private set; }
-    public HealDelegate Heal { get; private set; }
+    public string Name { get; protected set; }
 
-    public DessertAction(string name, AttackDelegate attack, HealDelegate heal)
+    public Actions(string name)
     {
         Name = name;
-        Attack = attack;
-        Heal = heal;
     }
 
     public static void DoAttack(CharacterBattle self, CharacterBattle target, string attackName, int damage = 1, Flavor flavor = null)
@@ -36,4 +29,5 @@ public class DessertAction
     {
         self.AttackTrigger(attackName);
     }
+    
 }
