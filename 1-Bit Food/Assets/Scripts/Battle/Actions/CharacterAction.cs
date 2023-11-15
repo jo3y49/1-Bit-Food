@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public abstract class Actions {
+public abstract class CharacterAction {
 
     public string Name { get; protected set; }
 
-    public Actions(string name)
+    public CharacterAction(string name)
     {
         Name = name;
     }

@@ -16,7 +16,7 @@ public class BattleManager : MonoBehaviour {
     private PlayerBattle player;
     private Queue<CharacterBattle> turnOrder = new();
     public CharacterBattle characterToAttack;
-    public Actions activeCharacterAttack;
+    public CharacterAction activeCharacterAttack;
     private Coroutine battleLoop;
 
     // tracker variables
@@ -168,7 +168,7 @@ public class BattleManager : MonoBehaviour {
         StartCoroutine(WinBattle());
     }
 
-    private void PlayerAttack(CharacterBattle activeCharacter, Actions action, Flavor flavor)
+    private void PlayerAttack(CharacterBattle activeCharacter, CharacterAction action, Flavor flavor)
     {
         string text = $"{activeCharacter.CharacterName} threw a {action.Name} at {characterToAttack.CharacterName}";
 
@@ -177,7 +177,7 @@ public class BattleManager : MonoBehaviour {
         Attack(activeCharacter, action, text, flavor);
     }
 
-    private void EnemyAttack(CharacterBattle activeCharacter, Actions action)
+    private void EnemyAttack(CharacterBattle activeCharacter, CharacterAction action)
     {
         AudioManager.instance.PlayUIClip(5);
 
@@ -186,7 +186,7 @@ public class BattleManager : MonoBehaviour {
         Attack(activeCharacter, action, text);
     }
 
-    private void Attack(CharacterBattle activeCharacter, Actions action, string text, Flavor flavor = null)
+    private void Attack(CharacterBattle activeCharacter, CharacterAction action, string text, Flavor flavor = null)
     {
         string tempText = activeCharacter.DoAttack(action, characterToAttack, flavor);
 
@@ -196,7 +196,7 @@ public class BattleManager : MonoBehaviour {
         battleUIManager.SetText(text);
     }
 
-    private void Heal(CharacterBattle activeCharacter, Actions comboAction)
+    private void Heal(CharacterBattle activeCharacter, CharacterAction comboAction)
     {
         battleUIManager.SetText($"{activeCharacter.CharacterName} ate {comboAction.Name}");
 
@@ -229,7 +229,7 @@ public class BattleManager : MonoBehaviour {
         activeCharacterAttack = enemy.PickEnemyAttack();
     }
 
-    public void SetAttackAction(CharacterBattle characterToAttack, FoodAction action, Flavor flavor)
+    public void SetAttackAction(CharacterBattle characterToAttack, PlayerAction action, Flavor flavor)
     {
         this.characterToAttack = characterToAttack;
         activeCharacterAttack = action;
@@ -238,7 +238,7 @@ public class BattleManager : MonoBehaviour {
         awaitCommand = false;
     }
 
-    public void SetHealAction(FoodAction action)
+    public void SetHealAction(PlayerAction action)
     {
         activeCharacterAttack = action;
         attack = false;

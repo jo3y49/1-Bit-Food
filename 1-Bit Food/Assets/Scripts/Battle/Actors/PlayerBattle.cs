@@ -6,7 +6,7 @@ public class PlayerBattle : CharacterBattle {
 
     protected List<int> actionUses = new();
 
-    protected List<FoodAction> actions = new();
+    protected List<PlayerAction> actions = new();
 
     protected override void Start() {
         base.Start();
@@ -64,7 +64,7 @@ public class PlayerBattle : CharacterBattle {
         health = maxHealth;
     }
 
-    public virtual FoodAction GetAction(int i)
+    public virtual PlayerAction GetAction(int i)
     {
         if (i < actions.Count) return actions[i];
 
@@ -78,35 +78,35 @@ public class PlayerBattle : CharacterBattle {
         else return 0;
     }
 
-    public virtual int GetActionUses(FoodAction action)
+    public virtual int GetActionUses(PlayerAction action)
     {
         int i = actions.FindIndex(item => item == action);
 
         return GetActionUses(i);
     }
 
-    public virtual bool CanUseAction(FoodAction attackAction)
+    public virtual bool CanUseAction(PlayerAction attackAction)
     {
         return GetActionUses(attackAction) > 0;
     }
 
-    public override string DoAttack(Actions action, CharacterBattle target, Flavor flavor = null)
+    public override string DoAttack(CharacterAction action, CharacterBattle target, Flavor flavor = null)
     {
         UseAction(action);
 
-        (action as FoodAction).Attack(this, target, flavor);
+        (action as PlayerAction).Attack(this, target, flavor);
 
         return "";
     }
 
-    public virtual void DoHeal(Actions action)
+    public virtual void DoHeal(CharacterAction action)
     {
         UseAction(action);
 
-        (action as FoodAction).Heal(this);
+        (action as PlayerAction).Heal(this);
     }
 
-    protected void UseAction(Actions action)
+    protected void UseAction(CharacterAction action)
     {
         int i = actions.FindIndex(item => item == action);
 

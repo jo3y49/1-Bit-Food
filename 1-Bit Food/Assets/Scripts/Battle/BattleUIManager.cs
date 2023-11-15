@@ -31,7 +31,7 @@ public class BattleUIManager : MonoBehaviour {
     // store character information
     private PlayerBattle player;
     private List<EnemyBattle> enemies = new();
-    private FoodAction selectedAction;
+    private PlayerAction selectedAction;
     private CharacterBattle characterToAttack;
     private Flavor flavor;
 
@@ -100,7 +100,7 @@ public class BattleUIManager : MonoBehaviour {
         for (int i = 0; i < player.CountActions(); i++)
         {
             // get the player's next combo attack
-            FoodAction currentAction = player.GetAction(i);
+            PlayerAction currentAction = player.GetAction(i);
 
             // make the button to select attack
             Button selectAttack = Instantiate(actionButtonPrefab, attackContainer.transform);
@@ -159,7 +159,7 @@ public class BattleUIManager : MonoBehaviour {
     {
         for (int i = 0; i < attackButtons.Count; i++)
         {
-            FoodAction currentAction = player.GetAction(i);
+            PlayerAction currentAction = player.GetAction(i);
             int uses = player.GetActionUses(i);
 
             // set button text
@@ -238,7 +238,7 @@ public class BattleUIManager : MonoBehaviour {
         SetText("");
     }
 
-    private void PickAttack(FoodAction action)
+    private void PickAttack(PlayerAction action)
     {
         PlayAudio(6);
         selectedAction = action;
@@ -276,7 +276,7 @@ public class BattleUIManager : MonoBehaviour {
         SendAttackAction();
     }
 
-    private void PickHeal(FoodAction action)
+    private void PickHeal(PlayerAction action)
     {
         PlayAudio(9);
         selectedAction = action;

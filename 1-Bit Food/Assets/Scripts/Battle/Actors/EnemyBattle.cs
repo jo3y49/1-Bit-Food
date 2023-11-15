@@ -59,9 +59,9 @@ public class EnemyBattle : CharacterBattle {
         return loot;
     }
 
-    public override string DoAttack(Actions action, CharacterBattle target, Flavor flavor = null) 
+    public override string DoAttack(CharacterAction action, CharacterBattle target, Flavor flavor = null) 
     {
-        (action as StealAction).Attack(this, target);
+        (action as EnemyAction).Attack(this, target);
 
         if (action.Name == "Steal") return $"{CharacterName} Stole {GetRecentlyStolenItem().name}!";
 
@@ -95,5 +95,5 @@ public class EnemyBattle : CharacterBattle {
         }
     }
 
-    public virtual Actions PickEnemyAttack() { return StealList.GetInstance().GetAction(); }
+    public virtual CharacterAction PickEnemyAttack() { return StealList.GetInstance().GetAction(); }
 }
