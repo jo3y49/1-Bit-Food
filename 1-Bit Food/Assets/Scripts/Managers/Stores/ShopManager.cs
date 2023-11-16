@@ -25,16 +25,16 @@ public class ShopManager : StoreManager
 
     private void Buy(Food food)
     {
-        if (money >= food.price && !popUp.activeSelf)
-        {
-            AudioManager.instance.PlayUIClip(0);
+        if (money < food.price || popUp.activeSelf || !GameManager.instance.OpenInventory()) return;
+        
+        AudioManager.instance.PlayUIClip(0);
 
-            selectedFood = food;
+        selectedFood = food;
 
-            confirmationMessage.text = $"Buy {food.name} for {food.price} coins?";
+        confirmationMessage.text = $"Buy {food.name} for {food.price} coins?";
 
-            popUp.SetActive(true);
-        }
+        popUp.SetActive(true);
+        
 
     }
 

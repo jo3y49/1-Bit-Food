@@ -15,7 +15,7 @@ public class PlayerBattle : CharacterBattle {
 
         actions = FoodList.GetInstance().GetAllActions();
 
-        actionUses = GameManager.instance.GetFoodUses();
+        actionUses = GameManager.instance.GetFoodIntUsesList();
         
     }
 

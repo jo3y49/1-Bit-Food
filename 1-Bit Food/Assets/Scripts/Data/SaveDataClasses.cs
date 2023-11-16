@@ -7,6 +7,7 @@ public class PlayerData
     public int money = 120;
     public int score = 0;
     public List<int> foodUses;
+    public readonly int maxFoodUses = 99;
 
     public PlayerData(int dessertLength)
     {

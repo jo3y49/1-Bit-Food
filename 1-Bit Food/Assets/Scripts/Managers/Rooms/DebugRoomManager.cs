@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -39,6 +41,16 @@ public class DebugRoomManager : WorldManager {
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             SceneManager.LoadScene(craftScene);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            GameManager.instance.SetFoodUses(Enumerable.Repeat(0, GameManager.instance.GetFoodIntUsesList().Count).ToList());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            GameManager.instance.AddPlayerMoney(50);
         }
     }
 

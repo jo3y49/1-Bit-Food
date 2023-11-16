@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -28,5 +29,17 @@ public static class Utility {
     public static IEnumerator WaitAFrame()
     {
         yield return new WaitForEndOfFrame();
+    }
+
+    public static int CountListOfInts(List<int> ints)
+    {
+        int c = 0;
+
+        foreach (int i in ints)
+        {
+            c += i;
+        }
+
+        return c;
     }
 }

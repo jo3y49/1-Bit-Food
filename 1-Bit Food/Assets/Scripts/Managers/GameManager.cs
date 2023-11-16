@@ -41,9 +41,14 @@ public class GameManager : MonoBehaviour {
         gameData.worldData.currentScene = sceneIndex;
     }
 
-    public List<int> GetFoodUses()
+    public List<int> GetFoodIntUsesList()
     {
         return gameData.playerData.foodUses;
+    }
+
+    public int GetFoodUses()
+    {
+        return Utility.CountListOfInts(gameData.playerData.foodUses);
     }
 
     public int GetFoodUses(int i)
@@ -51,18 +56,26 @@ public class GameManager : MonoBehaviour {
         return gameData.playerData.foodUses[i];
     }
 
-    public void AddFoodUse(int index, int uses = 1)
+    public bool AddFoodUse(int index, int uses = 1)
     {
         List<int> desserts = gameData.playerData.foodUses;
 
-        if (index >= desserts.Count) return;
+        if (index >= desserts.Count || GetFoodUses() + uses > gameData.playerData.maxFoodUses) return false;
 
         desserts[index] += uses;
+
+        return true;
+    }
+
+    public bool OpenInventory()
+    {
+        return GetFoodUses() < gameData.playerData.maxFoodUses;
     }
 
     public void SetFoodUses(List<int> uses)
     {
-        gameData.playerData.foodUses = uses;
+        if (Utility.CountListOfInts(uses) <= gameData.playerData.maxFoodUses)
+            gameData.playerData.foodUses = uses;
     }
 
     private void Awake() {

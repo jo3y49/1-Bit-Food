@@ -24,7 +24,7 @@ public class BakeManager : StoreManager {
 
     private void Craft(Recipe recipe)
     {
-        if (popUp.activeSelf) return;
+        if (popUp.activeSelf || !GameManager.instance.OpenInventory()) return;
 
         string ingredientList = "";
         string playerIngredientList = "";
