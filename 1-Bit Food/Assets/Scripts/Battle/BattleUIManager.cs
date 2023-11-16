@@ -178,7 +178,7 @@ public class BattleUIManager : MonoBehaviour {
                 attackButtons[i].interactable = false;
                 healButtons[i].interactable = false;
 
-                if (player.OutOfDessert()) battleManager.LoseBattleFood();
+                if (player.OutOfDessert() && stolen.Count == 0) battleManager.LoseBattleFood();
             }
         }
 

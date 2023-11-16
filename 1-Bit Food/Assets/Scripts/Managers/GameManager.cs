@@ -76,6 +76,8 @@ public class GameManager : MonoBehaviour {
     {
         if (Utility.CountListOfInts(uses) <= gameData.playerData.maxFoodUses)
             gameData.playerData.foodUses = uses;
+
+        Debug.Log(Utility.CountListOfInts(uses) + " " + gameData.playerData.maxFoodUses);
     }
 
     private void Awake() {

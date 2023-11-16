@@ -9,7 +9,7 @@ public class DebugRoomManager : WorldManager {
     private GameObject[] activeEnemies;
     public GameObject enemyPrefab;
 
-    public TextMeshProUGUI tutText;
+    public GameObject tutText;
 
     private int shopScene = 2;
     private int craftScene = 3;
@@ -46,6 +46,7 @@ public class DebugRoomManager : WorldManager {
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             GameManager.instance.SetFoodUses(Enumerable.Repeat(0, GameManager.instance.GetFoodIntUsesList().Count).ToList());
+            playerBattle.RegetUses();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
@@ -58,13 +59,13 @@ public class DebugRoomManager : WorldManager {
     {
         base.EncounterEnemy(enemy);
 
-        tutText.enabled = false;
+        tutText.SetActive(false);
     }
 
     public override void WinBattle()
     {
         base.WinBattle();
 
-        tutText.enabled = true;
+        tutText.SetActive(true);
     }
 }

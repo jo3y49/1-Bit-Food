@@ -129,4 +129,9 @@ public class PlayerBattle : CharacterBattle {
     {
         return actions.Count;
     }
+
+    public void RegetUses()
+    {
+        actionUses = GameManager.instance.GetFoodIntUsesList();
+    }
 }
