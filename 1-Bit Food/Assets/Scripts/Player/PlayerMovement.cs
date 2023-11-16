@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour {
         actions.Gameplay.Movement.canceled += context => StopMovement();
         actions.Gameplay.Sprint.performed += context => isSprinting = true;
         actions.Gameplay.Sprint.canceled += context => isSprinting = false;
+
+        PauseManager.pauseEvent += TogglePause;
     }
 
     private void OnDisable() {
@@ -34,6 +36,8 @@ public class PlayerMovement : MonoBehaviour {
         actions.Gameplay.Movement.canceled -= context => StopMovement();
         actions.Gameplay.Sprint.performed -= context => isSprinting = true;
         actions.Gameplay.Sprint.canceled -= context => isSprinting = false;
+
+        PauseManager.pauseEvent -= TogglePause;
 
         StopMovement();
         isSprinting = false;
@@ -64,5 +68,13 @@ public class PlayerMovement : MonoBehaviour {
         moveInput = Vector2.zero;
         rb.velocity = moveInput;
         // anim.SetBool("Moving", false);
+    }
+
+    private void TogglePause(bool pause)
+    {
+        if (pause)
+            actions.Gameplay.Disable();
+        else 
+            actions.Gameplay.Enable();
     }
 }

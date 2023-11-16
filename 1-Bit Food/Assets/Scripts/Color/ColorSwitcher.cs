@@ -1,9 +1,8 @@
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class ColorSwitcher : MonoBehaviour {
     public static ColorSwitcher instance;
-    [SerializeField] private Tilemap floor, walls;
+    
     public Color Bright { get; private set; }
     public Color Dark { get; private set; }
 
@@ -50,12 +49,6 @@ public class ColorSwitcher : MonoBehaviour {
 
     private void SwitchColor()
     {
-        if (walls != null && floor != null)
-        {
-            walls.color = Bright;
-            floor.color = Dark;
-        }
-
         foreach (EditColor c in FindObjectsOfType<EditColor>())
         {
             if (c.gameColor == GameColor.Bright)
