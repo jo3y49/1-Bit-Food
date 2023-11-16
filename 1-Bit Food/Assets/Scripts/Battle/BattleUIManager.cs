@@ -144,6 +144,8 @@ public class BattleUIManager : MonoBehaviour {
     {
         // set player's health ui element
         pHealth.text = player.CharacterName + "'s Health: " + player.health;
+
+
     }
 
     private void UpdateEnemyHealth()

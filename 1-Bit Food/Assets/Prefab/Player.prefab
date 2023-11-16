@@ -122,8 +122,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterAnimation: {fileID: 6525304494865002230}
   spriteRenderer: {fileID: 1399767455760595538}
-  maxHealth: 20
-  health: 20
+  maxHealth: 27
+  health: 27
   hitTarget: 0
   attackClip: {fileID: 0}
 --- !u!114 &6525304494865002230

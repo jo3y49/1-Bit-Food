@@ -16,6 +16,8 @@ public class ButtonColor : UIColor
     {
         base.ChangeColor(color);
 
+        if (tm == null) return;
+
         if (gameColor == ColorSwitcher.GameColor.Bright) tm.color = ColorSwitcher.instance.Dark;
 
         else tm.color = ColorSwitcher.instance.Bright;

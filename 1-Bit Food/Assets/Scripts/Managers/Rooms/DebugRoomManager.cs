@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DebugRoomManager : WorldManager {
+public class DebugRoomManager : LevelManager {
     public Vector2[] spawnLocations;
     private GameObject[] activeEnemies;
     public GameObject enemyPrefab;
