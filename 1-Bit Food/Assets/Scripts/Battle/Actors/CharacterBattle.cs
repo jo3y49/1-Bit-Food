@@ -22,15 +22,7 @@ public abstract class CharacterBattle : MonoBehaviour {
     public virtual void Defeated(){}
 
     public virtual void PrepareCombat(){}
-
-    
-    
-
-    public virtual string DoAttack(Actions action, CharacterBattle target, Flavor flavor = null) {return "";}
-
-    
-    
-
+    public virtual string DoAttack(CharacterAction action, CharacterBattle target, Flavor flavor = null) {return "";}
     public virtual void PlayAttackSound()
     {
         if (hitTarget)
@@ -46,6 +38,10 @@ public abstract class CharacterBattle : MonoBehaviour {
         health -= damage;
         if (health < 0) health = 0;
     }
+
+    public virtual void TakeItem(Food food) {}
+
+    public virtual Food StealItem(Food food) { return null;}
 
     public virtual void Heal(int heal)
     {

@@ -59,16 +59,16 @@ public class EnemyBattle : CharacterBattle {
         return loot;
     }
 
-    public override string DoAttack(Actions action, CharacterBattle target, Flavor flavor = null) 
+    public override string DoAttack(CharacterAction action, CharacterBattle target, Flavor flavor = null) 
     {
-        (action as StealAction).Attack(this, target);
+        (action as EnemyAction).Attack(this, target);
 
         if (action.Name == "Steal") return $"{CharacterName} Stole {GetRecentlyStolenItem().name}!";
 
         else return "";
     }
 
-    public void TakeItem(Food food)
+    public override void TakeItem(Food food)
     {
         stolenFood.Add(food);
     }
@@ -78,10 +78,8 @@ public class EnemyBattle : CharacterBattle {
         return stolenFood.Last();
     }
 
-    public Food StealBackItem()
+    public override Food StealItem(Food food)
     {
-        Food food = GetRecentlyStolenItem();
-
         stolenFood.Remove(food);
 
         return food;
@@ -95,5 +93,5 @@ public class EnemyBattle : CharacterBattle {
         }
     }
 
-    public virtual Actions PickEnemyAttack() { return StealList.GetInstance().GetAction(); }
+    public virtual CharacterAction PickEnemyAttack() { return StealList.GetInstance().GetAction(); }
 }

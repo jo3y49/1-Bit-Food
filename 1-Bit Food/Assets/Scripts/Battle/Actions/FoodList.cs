@@ -6,7 +6,7 @@ public class FoodList
 {
     private static FoodList instance;
     private Food[] foods;
-    private IDictionary<string, FoodAction> foodList;
+    private IDictionary<string, PlayerAction> foodList;
 
     private FoodList()
     {
@@ -24,31 +24,31 @@ public class FoodList
     {
         foods = Resources.LoadAll<Food>("");
 
-        foodList = new Dictionary<string, FoodAction>();
+        foodList = new Dictionary<string, PlayerAction>();
 
         foreach (Food food in foods)
         {
-            foodList.Add(food.name, new FoodAction(food.name, 
-                (self, target, flavor) => Actions.DoAttack(self, target, food.name, food.damage, flavor),
-                (self) => Actions.DoHeal(self, food.name, food.heal)));
+            foodList.Add(food.name, new PlayerAction(food.name, 
+                (self, target, flavor) => CharacterAction.DoAttack(self, target, food.name, food.damage, flavor),
+                (self) => CharacterAction.DoHeal(self, food.name, food.heal)));
         }
     }
 
-    public FoodAction GetAction(string key)
+    public PlayerAction GetAction(string key)
     {
         if (foodList.ContainsKey(key)) return foodList[key];
 
-        else return new FoodAction("Null", EmptyAction, EmptyAction);
+        else return new PlayerAction("Null", EmptyAction, EmptyAction);
     }
 
-    public FoodAction GetAction(int index)
+    public PlayerAction GetAction(int index)
     {
         if (foodList.Count > index) return foodList.ElementAt(index).Value;
 
-        else return new FoodAction("Null", EmptyAction, EmptyAction);
+        else return new PlayerAction("Null", EmptyAction, EmptyAction);
     }
 
-    public List<FoodAction> GetAllActions()
+    public List<PlayerAction> GetAllActions()
     {
         return foodList.Values.ToList();
     }

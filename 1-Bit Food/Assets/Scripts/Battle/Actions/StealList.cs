@@ -4,7 +4,7 @@ using UnityEngine;
 public class StealList {
     private static StealList instance;
 
-    private Dictionary<string, StealAction> actionList;
+    private Dictionary<string, EnemyAction> actionList;
 
     private StealList()
     {
@@ -18,7 +18,7 @@ public class StealList {
         return instance;
     }
 
-    public StealAction GetAction()
+    public EnemyAction GetAction()
     {
         int r = Random.Range(0,10);
 
@@ -28,20 +28,25 @@ public class StealList {
         else return actionList["Attack"];
     }
 
+    public EnemyAction GetAction(string key)
+    {
+        return actionList[key];
+    }
+
     private void FillDictionary()
     {
-        actionList = new Dictionary<string, StealAction>()
+        actionList = new Dictionary<string, EnemyAction>()
         {
-            {"Attack" ,new StealAction("Attack", 
-            (self, target) => Actions.DoAttack(self, target, "Attack", 3))},
-            {"Steal", new StealAction("Steal", Steal)}
+            {"Attack" ,new EnemyAction("Attack", 
+            (self, target, food) => CharacterAction.DoAttack(self, target, "Attack", 3))},
+            {"Steal", new EnemyAction("Steal", Steal)}
 
         };
     }
 
-    private void Steal(CharacterBattle self, CharacterBattle target)
+    private void Steal(CharacterBattle self, CharacterBattle target, Food food = null)
     {
-        (self as EnemyBattle).TakeItem((target as PlayerBattle).StealRandomItem());
+        self.TakeItem(target.StealItem(food));
     }
 
     public void EmptyAction(CharacterBattle self, CharacterBattle target)
