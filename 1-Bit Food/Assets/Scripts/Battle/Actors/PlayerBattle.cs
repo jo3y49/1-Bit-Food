@@ -19,6 +19,20 @@ public class PlayerBattle : CharacterBattle {
         
     }
 
+    public override void Attacked(int damage, Flavor flavor = null)
+    {
+        base.Attacked(damage);
+
+        (worldManager as LevelManager).LoseHealth(damage);
+    }
+
+    public override void Heal(int heal)
+    {
+        base.Heal(heal);
+
+        (worldManager as LevelManager).AddHealth(heal);
+    }
+
     public override void PrepareCombat()
     {
         GetComponent<PlayerMovement>().enabled = false;

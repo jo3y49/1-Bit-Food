@@ -1030,8 +1030,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleUI: {fileID: 0}
   nearbyEncounterRange: 3
-  heart: {fileID: 2501754898624889237, guid: 6079b8aaffbb0374f920ff40be774f8c, type: 3}
+  heart: {fileID: 5371357764282836196, guid: 6079b8aaffbb0374f920ff40be774f8c, type: 3}
   heartContainer: {fileID: 1269631400}
+  currentHealthIndex: 0
 --- !u!114 &1394832448
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class EnemyBattle : CharacterBattle {
-    protected WorldManager worldManager;
     protected GameObject player;
     protected bool isAttacking;
 
@@ -18,7 +17,6 @@ public class EnemyBattle : CharacterBattle {
         base.Start();
 
         player = GameObject.FindGameObjectWithTag("Player");
-        worldManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WorldManager>();
 
         CharacterName = "Food Thief";
     }

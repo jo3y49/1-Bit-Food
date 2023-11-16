@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class BattleUIManager : MonoBehaviour {
     [SerializeField] private BattleManager battleManager;
+    [SerializeField] private WorldManager worldManager;
 
     [Header("Text Display")]
     [SerializeField] private TextMeshProUGUI pHealth;
@@ -144,8 +145,6 @@ public class BattleUIManager : MonoBehaviour {
     {
         // set player's health ui element
         pHealth.text = player.CharacterName + "'s Health: " + player.health;
-
-
     }
 
     private void UpdateEnemyHealth()
