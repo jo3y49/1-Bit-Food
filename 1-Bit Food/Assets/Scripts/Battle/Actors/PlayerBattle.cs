@@ -32,8 +32,14 @@ public class PlayerBattle : CharacterBattle {
         GameManager.instance.SetFoodUses(actionUses);
     }
 
-    public Food StealRandomItem()
+    public override Food StealItem(Food food)
     {
+        if (food != null)
+        {
+            actionUses[FoodList.GetInstance().GetFoodIndex(food)]--;
+            return food;
+        }
+
         int r = Random.Range(0, actions.Count);
 
         for (int i = 0; i < actions.Count; i++)
@@ -52,6 +58,11 @@ public class PlayerBattle : CharacterBattle {
         }
 
         return null;
+    }
+
+    public override void TakeItem(Food food)
+    {
+        actionUses[FoodList.GetInstance().GetFoodIndex(food)]++;
     }
 
     public bool OutOfDessert()
@@ -94,7 +105,7 @@ public class PlayerBattle : CharacterBattle {
     {
         UseAction(action);
 
-        (action as PlayerAction).Attack(this, target, flavor);
+        if (action.GetType() == typeof(PlayerAction)) (action as PlayerAction).Attack(this, target, flavor);
 
         return "";
     }

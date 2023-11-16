@@ -22,7 +22,8 @@ public class BattleManager : MonoBehaviour {
     // tracker variables
     public int moneyCount = 0;
     public bool awaitCommand = false;
-    public bool attack = true;
+    public bool heal = false;
+    public bool steal = false;
     public Flavor flavor;
 
     private void Awake() {
@@ -83,10 +84,12 @@ public class BattleManager : MonoBehaviour {
 
                 // standard action
                 // do the attack or heal
-                if (attack)
-                    PlayerAttack(activeCharacter, activeCharacterAttack, flavor);
-                else 
+                if (heal)
                     Heal(activeCharacter, activeCharacterAttack);
+                    
+                else if (!steal)
+                    PlayerAttack(activeCharacter, activeCharacterAttack, flavor);
+                    
 
                 // wait for the animation to play
                 while (activeCharacter.GetIsActing())
@@ -107,14 +110,8 @@ public class BattleManager : MonoBehaviour {
                     DefeatedEnemy();
                 }
             } else {
-                // set enemy combo
-                activeCharacterAttack = (activeCharacter as EnemyBattle).PickEnemyAttack();
 
-                // enemy targets the player
-                characterToAttack = player;
-
-                // do the attack and save whether it hit or not
-                EnemyAttack(activeCharacter, activeCharacterAttack);
+                GetEnemyAttack(activeCharacter);
                     
                 // wait for the attack animation to play
                 while (activeCharacter.GetIsActing())
@@ -149,6 +146,8 @@ public class BattleManager : MonoBehaviour {
     {
         // Prepares player for turn
         awaitCommand = true;
+        heal = false;
+        steal = false;
         characterToAttack = player;
     }
 
@@ -191,8 +190,12 @@ public class BattleManager : MonoBehaviour {
         string tempText = activeCharacter.DoAttack(action, characterToAttack, flavor);
 
         if (tempText != "")
+        {
             text = tempText;
 
+            if (activeCharacter.GetType() == typeof(EnemyBattle)) battleUIManager.EnemyStolen(activeCharacter as EnemyBattle);
+        }
+            
         battleUIManager.SetText(text);
     }
 
@@ -224,24 +227,37 @@ public class BattleManager : MonoBehaviour {
             StartCoroutine(WinBattle());
     }
 
-    private void GetEnemyAttack(EnemyBattle enemy)
+    private void GetEnemyAttack(CharacterBattle enemy)
     {
-        activeCharacterAttack = enemy.PickEnemyAttack();
+        // set enemy combo
+        activeCharacterAttack = (enemy as EnemyBattle).PickEnemyAttack();
+
+        // enemy targets the player
+        characterToAttack = player;
+
+        // do the attack and save whether it hit or not
+        EnemyAttack(enemy, activeCharacterAttack);
     }
 
-    public void SetAttackAction(CharacterBattle characterToAttack, PlayerAction action, Flavor flavor)
+    public void SetAttackAction(CharacterBattle characterToAttack, CharacterAction action, Flavor flavor)
     {
         this.characterToAttack = characterToAttack;
         activeCharacterAttack = action;
         this.flavor = flavor;
-        attack = true;
         awaitCommand = false;
     }
 
-    public void SetHealAction(PlayerAction action)
+    public void SetHealAction(CharacterAction action)
     {
         activeCharacterAttack = action;
-        attack = false;
+        heal = true;
+        awaitCommand = false;
+    }
+
+    public void SetStealAction(CharacterBattle characterToAttack, Food food)
+    {
+        player.TakeItem(characterToAttack.StealItem(food));
+        steal = true;
         awaitCommand = false;
     }
 

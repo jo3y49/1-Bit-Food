@@ -68,7 +68,7 @@ public class EnemyBattle : CharacterBattle {
         else return "";
     }
 
-    public void TakeItem(Food food)
+    public override void TakeItem(Food food)
     {
         stolenFood.Add(food);
     }
@@ -78,10 +78,8 @@ public class EnemyBattle : CharacterBattle {
         return stolenFood.Last();
     }
 
-    public Food StealBackItem()
+    public override Food StealItem(Food food)
     {
-        Food food = GetRecentlyStolenItem();
-
         stolenFood.Remove(food);
 
         return food;

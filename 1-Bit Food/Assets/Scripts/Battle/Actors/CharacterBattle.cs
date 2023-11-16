@@ -39,6 +39,10 @@ public abstract class CharacterBattle : MonoBehaviour {
         if (health < 0) health = 0;
     }
 
+    public virtual void TakeItem(Food food) {}
+
+    public virtual Food StealItem(Food food) { return null;}
+
     public virtual void Heal(int heal)
     {
         health += heal;

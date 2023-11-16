@@ -28,20 +28,25 @@ public class StealList {
         else return actionList["Attack"];
     }
 
+    public EnemyAction GetAction(string key)
+    {
+        return actionList[key];
+    }
+
     private void FillDictionary()
     {
         actionList = new Dictionary<string, EnemyAction>()
         {
             {"Attack" ,new EnemyAction("Attack", 
-            (self, target) => CharacterAction.DoAttack(self, target, "Attack", 3))},
+            (self, target, food) => CharacterAction.DoAttack(self, target, "Attack", 3))},
             {"Steal", new EnemyAction("Steal", Steal)}
 
         };
     }
 
-    private void Steal(CharacterBattle self, CharacterBattle target)
+    private void Steal(CharacterBattle self, CharacterBattle target, Food food = null)
     {
-        (self as EnemyBattle).TakeItem((target as PlayerBattle).StealRandomItem());
+        self.TakeItem(target.StealItem(food));
     }
 
     public void EmptyAction(CharacterBattle self, CharacterBattle target)

@@ -13,11 +13,11 @@ public class BattleUIManager : MonoBehaviour {
 
     [Header("Containers")]
     [SerializeField] private GameObject initialContainer;
-    [SerializeField] private GameObject attackContainer, healContainer, flavorContainer, targetContainer, eHealthContainer;
+    [SerializeField] private GameObject attackContainer, healContainer, flavorContainer, stealBackContainer, targetContainer, eHealthContainer;
 
     [Header("Buttons")]
     [SerializeField] private Button initialButton;
-    [SerializeField] private Button flavorButton;
+    [SerializeField] private Button stealBackButton, flavorButton;
 
     [Header("Button Prefabs")]
     [SerializeField] private Button actionButtonPrefab;
@@ -27,13 +27,16 @@ public class BattleUIManager : MonoBehaviour {
     private List<Button> targetButtons = new();
     private List<Button> attackButtons = new();
     private List<Button> healButtons = new();
+    private List<Button> stealButtons = new();
 
     // store character information
     private PlayerBattle player;
     private List<EnemyBattle> enemies = new();
-    private PlayerAction selectedAction;
+    private CharacterAction selectedAction;
     private CharacterBattle characterToAttack;
     private Flavor flavor;
+
+    private List<(EnemyBattle, Food)> stolen = new();
 
     public void SetForBattle(PlayerBattle player, List<EnemyBattle> enemies)
     {
@@ -55,6 +58,8 @@ public class BattleUIManager : MonoBehaviour {
         attackContainer.SetActive(false);
         flavorContainer.SetActive(false);
         healContainer.SetActive(false);
+        stealBackContainer.SetActive(false);
+        stealBackButton.interactable = false;
     }
 
     public void ActivateForPlayerTurn()
@@ -176,24 +181,44 @@ public class BattleUIManager : MonoBehaviour {
                 if (player.OutOfDessert()) battleManager.LoseBattleFood();
             }
         }
+
+        stealButtons.Clear();
+
+        for (int i = 0; i < stealBackContainer.transform.childCount; i++)
+        {
+            Destroy(stealBackContainer.transform.GetChild(i).gameObject);
+        }
+
+        if (stolen.Count <= 0) return;
+
+        for (int i = 0; i < stolen.Count; i++)
+        {
+            (EnemyBattle, Food) element = stolen[i];
+
+            Button button = Instantiate(actionButtonPrefab, stealBackContainer.transform);
+            button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = element.Item2.name;
+            button.onClick.AddListener(() => PickSteal(element));
+            stealButtons.Add(button);
+        }
+
+        Button back = Instantiate(backButtonPrefab, stealBackContainer.transform);
+        back.onClick.AddListener(BackFromSteal);
+        stealButtons.Add(back);
     }
 
     public void SelectAttack()
     {
-        PlayAudio(0);
-        initialContainer.SetActive(false);
-        attackContainer.SetActive(true);
-        Utility.SetActiveButton(attackButtons[0]);
-        SetText("What would you like to throw?");
+        ToggleMenu(initialContainer, attackContainer, attackButtons[0], 0, "What would you like to throw?");
     }
 
     public void SelectHeal()
     {
-        PlayAudio(1);
-        initialContainer.SetActive(false);
-        healContainer.SetActive(true);
-        Utility.SetActiveButton(healButtons[0]);
-        SetText("What would you like to eat?");
+        ToggleMenu(initialContainer, healContainer, healButtons[0], 1, "What would you like to eat?");
+    }
+
+    public void SelectSteal()
+    {
+        ToggleMenu(initialContainer, stealBackContainer, stealButtons[0], 1, "What do you want to take back?");
     }
 
     public void SelectEscape()
@@ -203,49 +228,36 @@ public class BattleUIManager : MonoBehaviour {
 
     private void BackFromAttack()
     {
-        PlayAudio(2);
-        attackContainer.SetActive(false);
-        initialContainer.SetActive(true);
-        Utility.SetActiveButton(initialButton);
-        SetText("");
+        ToggleMenu(attackContainer, initialContainer, initialButton, 2);
     }
 
     public void BackFromFlavor()
     {
-        PlayAudio(3);
-        flavorContainer.SetActive(false);
-        attackContainer.SetActive(true);
-        Utility.SetActiveButton(attackButtons[0]);
-        SetText("What would you like to throw?");
+        ToggleMenu(flavorContainer, attackContainer, attackButtons[0], 3);
     }
 
     private void BackFromTarget()
     {   
-        PlayAudio(4);
-        targetContainer.SetActive(false);
-        flavorContainer.SetActive(true);
         ColorSwitcher.instance.ResetFlavor();
-        Utility.SetActiveButton(flavorButton);
-        SetText("Which flavor would you like to use?");
+
+        ToggleMenu(targetContainer, flavorContainer, flavorButton, 4, "Which flavor would you like to use?");
     }
 
     private void BackFromHeal()
     {
-        PlayAudio(5);
-        healContainer.SetActive(false);
-        initialContainer.SetActive(true);
-        Utility.SetActiveButton(initialButton);
-        SetText("");
+        ToggleMenu(healContainer, initialContainer, initialButton, 5);
+    }
+
+    private void BackFromSteal()
+    {
+        ToggleMenu(stealBackContainer, initialContainer, initialButton, 5);
     }
 
     private void PickAttack(PlayerAction action)
     {
-        PlayAudio(6);
         selectedAction = action;
-        attackContainer.SetActive(false);
-        flavorContainer.SetActive(true);
-        Utility.SetActiveButton(flavorButton);
-        SetText("Which flavor would you like to use?");
+
+        ToggleMenu(attackContainer, flavorContainer, flavorButton, 6, "Which flavor would you like to use?");
     }
 
     public void PickFlavor(Flavor flavor)
@@ -265,7 +277,6 @@ public class BattleUIManager : MonoBehaviour {
         {
             PickTarget(enemies[0]);
         }
-
     }
 
     private void PickTarget(CharacterBattle characterToAttack)
@@ -274,6 +285,16 @@ public class BattleUIManager : MonoBehaviour {
         this.characterToAttack = characterToAttack;
         targetContainer.SetActive(false);
         SendAttackAction();
+    }
+
+    private void PickSteal((EnemyBattle, Food) element)
+    {
+        PlayAudio(8);
+        characterToAttack = element.Item1;
+        stealBackContainer.SetActive(false);
+        SendStealAction(element.Item2);
+        SetText($"Stole back your {element.Item2.name} from {characterToAttack.CharacterName}!");
+        RemoveFood(element);
     }
 
     private void PickHeal(PlayerAction action)
@@ -294,6 +315,11 @@ public class BattleUIManager : MonoBehaviour {
         battleManager.SetHealAction(selectedAction);
     }
 
+    private void SendStealAction(Food food)
+    {
+        battleManager.SetStealAction(characterToAttack, food);
+    }
+
     public void SetText(string s)
     {
         actionText.text = s;
@@ -312,8 +338,7 @@ public class BattleUIManager : MonoBehaviour {
         // set enemy's health ui to defeated text
         eHealthContainer.transform.GetChild(enemyIndex).GetComponent<TextMeshProUGUI>().text = enemy.CharacterName + " is defeated";
 
-        // remove from list
-        // enemies.Remove(enemy);
+        RemoveFoods(enemy);
     }
 
     public void ClearUI()
@@ -322,6 +347,7 @@ public class BattleUIManager : MonoBehaviour {
         targetButtons.Clear();
         attackButtons.Clear();
         healButtons.Clear();
+        stolen.Clear();
 
         foreach (TextMeshProUGUI t in eHealthContainer.GetComponentsInChildren<TextMeshProUGUI>())
         {
@@ -343,8 +369,52 @@ public class BattleUIManager : MonoBehaviour {
             Destroy(healContainer.transform.GetChild(i).gameObject);
         }
 
+        for (int i = 0; i < stealBackContainer.transform.childCount; i++)
+        {
+            Destroy(stealBackContainer.transform.GetChild(i).gameObject);
+        }
+
         // reset used variables
         characterToAttack = null;
+    }
+
+    public void EnemyStolen(EnemyBattle enemy)
+    {
+        stolen.Add((enemy, enemy.GetRecentlyStolenItem()));
+
+        stealBackButton.interactable = true;
+    }
+
+    private void RemoveFoods(EnemyBattle enemy)
+    {
+        if (stolen.Count <= 0) return;
+
+        List<(EnemyBattle, Food)> temp = new();
+
+        foreach ((EnemyBattle, Food) s in stolen)
+        {
+            if (s.Item1 == enemy)
+                temp.Add(s);
+        }
+
+        foreach ((EnemyBattle, Food) s in temp)
+            RemoveFood(s);
+    }
+
+    private void RemoveFood((EnemyBattle, Food) food)
+    {
+        stolen.Remove(food);
+
+        if (stolen.Count <= 0) stealBackButton.interactable = false;
+    }
+
+    private void ToggleMenu(GameObject close, GameObject open, Button activeButton, int audioIndex = 0, string text = "")
+    {
+        PlayAudio(audioIndex);
+        close.SetActive(false);
+        open.SetActive(true);
+        Utility.SetActiveButton(activeButton);
+        SetText(text);
     }
 
     private void PlayAudio(int i)
