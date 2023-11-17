@@ -71,6 +71,8 @@ public class UIManager : MonoBehaviour {
         flavorValues = new TextMeshProUGUI[flavorContainer.transform.childCount];
 
         backButton.SetActive(false);
+
+        SetText("");
         
         SetHealth();
     }
