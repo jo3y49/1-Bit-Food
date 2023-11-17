@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -22,7 +23,20 @@ public class FoodList
 
     private void FillDictionary()
     {
-        foods = Resources.LoadAll<Food>("");
+        Ingredient[] ingredients = Resources.LoadAll<Ingredient>("Ingredients");
+        Dessert[] desserts = Resources.LoadAll<Dessert>("Desserts");
+        
+        Array.Sort(ingredients, (x, y) => {
+            return x.index.CompareTo(y.index);
+        });
+
+        Array.Sort(desserts, (x, y) => {
+            return x.index.CompareTo(y.index);
+        });
+
+        foods = new Food[ingredients.Length + desserts.Length];
+        Array.Copy(ingredients, foods, ingredients.Length);
+        Array.Copy(desserts, 0, foods, ingredients.Length, desserts.Length);
 
         foodList = new Dictionary<string, PlayerAction>();
 
