@@ -23,14 +23,14 @@ public class PlayerBattle : CharacterBattle {
     {
         base.Attacked(damage);
 
-        (worldManager as LevelManager).LoseHealth(damage);
+        uiManager.LoseHealth(damage);
     }
 
     public override void Heal(int heal)
     {
         base.Heal(heal);
 
-        (worldManager as LevelManager).AddHealth(heal);
+        uiManager.AddHealth(heal);
     }
 
     public override void PrepareCombat()

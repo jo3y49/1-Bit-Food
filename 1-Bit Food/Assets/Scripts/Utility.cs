@@ -9,7 +9,9 @@ public static class Utility {
     public static void SetActiveButton(Button button)
     {
         if (button != null)
+        {
             EventSystem.current.SetSelectedGameObject(button.gameObject);
+        }
     }
 
     public static bool CheckIfAnimationParamExists(string triggerName, Animator anim) 

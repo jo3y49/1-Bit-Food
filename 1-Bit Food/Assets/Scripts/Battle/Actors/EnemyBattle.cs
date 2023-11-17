@@ -8,6 +8,8 @@ public class EnemyBattle : CharacterBattle {
     protected GameObject player;
     protected bool isAttacking;
 
+    protected WorldManager worldManager;
+
     public Flavor favoriteFlavor;
 
     public List<Food> stolenFood = new();
@@ -17,6 +19,7 @@ public class EnemyBattle : CharacterBattle {
         base.Start();
 
         player = GameObject.FindGameObjectWithTag("Player");
+        worldManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WorldManager>();
 
         CharacterName = "Food Thief";
     }

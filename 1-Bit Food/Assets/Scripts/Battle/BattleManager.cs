@@ -6,7 +6,7 @@ using System.Collections;
 public class BattleManager : MonoBehaviour {
     [Header("Managers")]
     [SerializeField] private WorldManager worldManager;
-    [SerializeField] private BattleUIManager battleUIManager;
+    [SerializeField] private UIManager uiManager;
 
     [Header("Other Variables")]
     public float dialogueDisplayTime = 1.5f;
@@ -58,7 +58,7 @@ public class BattleManager : MonoBehaviour {
 
     private void SetUpUI()
     {
-        battleUIManager.SetForBattle(player, enemies);
+        uiManager.SetForBattle(enemies);
     }
 
     private IEnumerator BattleLoop()
@@ -73,7 +73,7 @@ public class BattleManager : MonoBehaviour {
                 InitializePlayer();
 
                 // activate ui
-                battleUIManager.ActivateForPlayerTurn();
+                uiManager.ActivateForPlayerTurn();
                 
                 // make the loop stay here until the player selects their commands in the ui
                 while (awaitCommand)
@@ -102,7 +102,7 @@ public class BattleManager : MonoBehaviour {
                 characterToAttack.Recover();
 
                 // update enemy's health ui
-                battleUIManager.UpdateHealth();
+                uiManager.UpdateHealth();
 
                 // handle enemy's death
                 if (characterToAttack.health <= 0)
@@ -124,7 +124,7 @@ public class BattleManager : MonoBehaviour {
                 characterToAttack.Recover();
 
                 // updates player's health
-                battleUIManager.UpdateHealth();
+                uiManager.UpdateHealth();
 
                 // lose battle if player dies
                 if (characterToAttack.health <= 0)
@@ -193,15 +193,15 @@ public class BattleManager : MonoBehaviour {
         {
             text = tempText;
 
-            if (activeCharacter.GetType() == typeof(EnemyBattle)) battleUIManager.EnemyStolen(activeCharacter as EnemyBattle);
+            if (activeCharacter.GetType() == typeof(EnemyBattle)) uiManager.EnemyStolen(activeCharacter as EnemyBattle);
         }
             
-        battleUIManager.SetText(text);
+        uiManager.SetText(text);
     }
 
     private void Heal(CharacterBattle activeCharacter, CharacterAction comboAction)
     {
-        battleUIManager.SetText($"{activeCharacter.CharacterName} ate {comboAction.Name}");
+        uiManager.SetText($"{activeCharacter.CharacterName} ate {comboAction.Name}");
 
         (activeCharacter as PlayerBattle).DoHeal(comboAction);
     }
@@ -219,7 +219,7 @@ public class BattleManager : MonoBehaviour {
         moneyCount += defeatedEnemy.GetLoot();
 
         // remove enemy from ui
-        battleUIManager.DefeatedEnemy(defeatedEnemy);
+        uiManager.DefeatedEnemy(defeatedEnemy);
         defeatedEnemy.Defeated();
 
         // end battle if it was the last enemy
@@ -273,7 +273,7 @@ public class BattleManager : MonoBehaviour {
         activeCharacterAttack = null;
         ColorSwitcher.instance.ResetFlavor();
 
-        battleUIManager.ClearUI();
+        uiManager.ClearUI();
 
         gameObject.SetActive(false);
     }
@@ -282,7 +282,7 @@ public class BattleManager : MonoBehaviour {
     {
         StopCoroutine(battleLoop);
 
-        battleUIManager.SetText($"You won! You got {moneyCount} coins");
+        uiManager.SetText($"You won! You got {moneyCount} coins");
 
         yield return new WaitForSeconds(dialogueDisplayTime);
 
@@ -300,7 +300,7 @@ public class BattleManager : MonoBehaviour {
     {
         StopCoroutine(battleLoop);
 
-        battleUIManager.SetText("You were defeated!");
+        uiManager.SetText("You were defeated!");
 
         yield return new WaitForSeconds(dialogueDisplayTime);
 

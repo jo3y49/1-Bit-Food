@@ -4,17 +4,22 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BattleUIManager : MonoBehaviour {
+public class UIManager : MonoBehaviour {
+    [Header("Managers")]
     [SerializeField] private BattleManager battleManager;
     [SerializeField] private WorldManager worldManager;
 
-    [Header("Text Display")]
-    [SerializeField] private TextMeshProUGUI pHealth;
-    [SerializeField] private TextMeshProUGUI actionText, eHealthPrefab;
+    [Header("Left Menu")]
+    [SerializeField] private GameObject heartPrefab;
+    [SerializeField] private GameObject heartContainer;
 
+    private GameObject[] hearts;
+    private int currentHealthIndex;
+
+    [Header("Middle Menu")]
     [Header("Containers")]
     [SerializeField] private GameObject initialContainer;
-    [SerializeField] private GameObject attackContainer, healContainer, flavorContainer, stealBackContainer, targetContainer, eHealthContainer;
+    [SerializeField] private GameObject arrowContainer, attackContainer, healContainer, flavorContainer, stealBackContainer, targetContainer, eHealthContainer;
 
     [Header("Buttons")]
     [SerializeField] private Button initialButton;
@@ -37,15 +42,34 @@ public class BattleUIManager : MonoBehaviour {
     private CharacterBattle characterToAttack;
     private Flavor flavor;
 
+    private bool[] initialChoice = new bool[3]{false,false,false};
+
     private List<(EnemyBattle, Food)> stolen = new();
 
-    public void SetForBattle(PlayerBattle player, List<EnemyBattle> enemies)
+    [Header("Right Menu")]
+
+    [Header("Text Display")]
+    [SerializeField] private TextMeshProUGUI actionText;
+    [SerializeField] private TextMeshProUGUI eHealthPrefab;
+
+    private void Start() {
+        player = worldManager.GetPlayer();
+
+        hearts = new GameObject[player.maxHealth];
+
+        currentHealthIndex = player.health - 1;
+
+        arrowContainer.SetActive(false);
+        
+        SetHealth();
+    }
+
+    public void SetForBattle(List<EnemyBattle> enemies)
     {
         // ensure everything is reset
         ClearUI();
 
         // Initialize characters in the fight
-        this.player = player;
         this.enemies = enemies;
 
         // Setup all the menus
@@ -61,6 +85,8 @@ public class BattleUIManager : MonoBehaviour {
         healContainer.SetActive(false);
         stealBackContainer.SetActive(false);
         stealBackButton.interactable = false;
+
+        initialChoice = new bool[]{false,false,false};
     }
 
     public void ActivateForPlayerTurn()
@@ -74,6 +100,7 @@ public class BattleUIManager : MonoBehaviour {
         UpdateActions();
         
         initialContainer.SetActive(true);
+        arrowContainer.SetActive(false);
         Utility.SetActiveButton(attackButtons[0]);
     }
 
@@ -135,17 +162,17 @@ public class BattleUIManager : MonoBehaviour {
     public void UpdateHealth()
     {
         // update player's health
-        UpdatePlayerHealth();
+        // UpdatePlayerHealth();
 
         // update health for each enemy
         UpdateEnemyHealth();
     }
 
-    private void UpdatePlayerHealth()
-    {
-        // set player's health ui element
-        pHealth.text = player.CharacterName + "'s Health: " + player.health;
-    }
+    // private void UpdatePlayerHealth()
+    // {
+    //     // set player's health ui element
+    //     worldUIManager.UpdateHealth();
+    // }
 
     private void UpdateEnemyHealth()
     {
@@ -421,5 +448,63 @@ public class BattleUIManager : MonoBehaviour {
     private void PlayAudio(int i)
     {
         AudioManager.instance.PlayUIClip(i);
+    }
+
+    private void SetHealth()
+    {
+        int children = heartContainer.transform.childCount;
+
+        if (children > 0)
+        {
+            for (int i = 0; i < children; i++)
+            {
+                Destroy(heartContainer.transform.GetChild(i).gameObject);
+            }
+        }
+
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            GameObject image = Instantiate(heartPrefab, heartContainer.transform);
+            hearts[i] = image;
+        }
+
+        LoseHealth(player.maxHealth - player.health);      
+    }
+
+    // public void UpdateHealth()
+    // {
+    //     int targetIndex = playerBattle.health - 1;
+
+    //     if (targetIndex > currentHealthIndex) AddHealth(targetIndex - currentHealthIndex);
+
+    //     else if (targetIndex < currentHealthIndex) LoseHealth(currentHealthIndex - targetIndex);
+    // }
+
+    public void AddHealth(int heal = 1)
+    {
+        int targetIndex = currentHealthIndex + heal;
+
+        if (targetIndex >= hearts.Length) targetIndex = hearts.Length - 1;
+
+        for (int i = currentHealthIndex; i < targetIndex; i++)
+        {
+            hearts[i + 1].SetActive(true);
+        }
+
+        currentHealthIndex = targetIndex;
+    }
+
+    public void LoseHealth(int damage = 1)
+    {
+        int targetIndex = currentHealthIndex - damage;
+
+        if (targetIndex < -1) targetIndex = -1;
+
+        for (int i = currentHealthIndex; i > targetIndex; i--)
+        {
+            hearts[i].SetActive(false);
+        }
+
+        currentHealthIndex = targetIndex;
     }
 }

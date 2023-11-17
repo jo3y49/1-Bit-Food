@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public abstract class WorldManager : MonoBehaviour {
+public class WorldManager : MonoBehaviour {
     [SerializeField] protected GameObject battleUI;
     // [SerializeField] protected DialogManager dialogManager;
     protected GameObject player;
