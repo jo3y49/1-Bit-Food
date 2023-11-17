@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Egg
   m_EditorClassIdentifier: 
   sprite: {fileID: -13905737, guid: 7a7876a27a0704845a379afecb2881e5, type: 3}
-  price: 2
-  damage: 2
-  heal: 2
+  price: 3
+  heal: 6
+  damage: 6
   index: 2

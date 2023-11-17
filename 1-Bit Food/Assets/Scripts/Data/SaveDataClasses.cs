@@ -6,7 +6,7 @@ public class PlayerData
 {
     public int money = 120;
     public int score = 0;
-    public readonly int startFoodAmount = 10;
+    public readonly int startFoodAmount = 9;
     public readonly int startFlavorAmount = 3;
     public List<int> foodUses;
     public List<int> flavorUses;

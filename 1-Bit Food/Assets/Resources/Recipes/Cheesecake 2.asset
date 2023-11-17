@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6c72904e5ead8342916a7acce1f17cc, type: 3}
-  m_Name: Recipe
+  m_Name: Cheesecake 2
   m_EditorClassIdentifier: 
-  result: {fileID: 11400000, guid: dfbafe6340f0ac4409ceb5e1260b2411, type: 2}
+  result: {fileID: 11400000, guid: ccd01bf9476a72b4786561cb2c81fe9e, type: 2}
   ingredients:
-  - {fileID: 11400000, guid: 21930844a049a1b4aa6f31d0c4eab06a, type: 2}
-  - {fileID: 11400000, guid: ec4948ed82469354f82d20d41c0ee2b6, type: 2}
+  - {fileID: 11400000, guid: 3e993bcdb69ab634cb9683ce66695585, type: 2}
+  - {fileID: 11400000, guid: dfbafe6340f0ac4409ceb5e1260b2411, type: 2}
   ingredientQuantities: 0200000001000000

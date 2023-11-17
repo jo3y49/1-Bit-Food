@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pie
   m_EditorClassIdentifier: 
   sprite: {fileID: 1457917026, guid: 7a7876a27a0704845a379afecb2881e5, type: 3}
-  price: 50
-  damage: 3
-  heal: 10
+  price: 30
+  heal: 12
+  damage: 9
   index: 1

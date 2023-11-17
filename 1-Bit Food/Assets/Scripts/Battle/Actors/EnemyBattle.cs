@@ -10,8 +10,6 @@ public class EnemyBattle : CharacterBattle {
 
     protected WorldManager worldManager;
 
-    public Flavor favoriteFlavor;
-
     public List<Food> stolenFood = new();
 
     protected override void Start()
@@ -22,13 +20,6 @@ public class EnemyBattle : CharacterBattle {
         worldManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WorldManager>();
 
         CharacterName = "Food Thief";
-    }
-
-    public override void Attacked(int damage, Flavor flavor = null)
-    {
-        if (favoriteFlavor == flavor) damage *= 2;
-
-        base.Attacked(damage);
     }
 
     public override void PrepareCombat()

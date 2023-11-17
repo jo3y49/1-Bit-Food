@@ -85,7 +85,7 @@ public class BattleManager : MonoBehaviour {
                 // standard action
                 // do the attack or heal
                 if (heal)
-                    Heal(activeCharacter, activeCharacterAttack);
+                    Heal(activeCharacter, activeCharacterAttack, flavor);
                     
                 else if (!steal)
                     PlayerAttack(activeCharacter, activeCharacterAttack, flavor);
@@ -171,8 +171,6 @@ public class BattleManager : MonoBehaviour {
     {
         string text = $"{activeCharacter.CharacterName} threw a {action.Name} at {characterToAttack.CharacterName}";
 
-        if ((characterToAttack as EnemyBattle).favoriteFlavor == flavor) text += " He loved it!";
-
         Attack(activeCharacter, action, text, flavor);
     }
 
@@ -199,11 +197,11 @@ public class BattleManager : MonoBehaviour {
         uiManager.SetText(text);
     }
 
-    private void Heal(CharacterBattle activeCharacter, CharacterAction comboAction)
+    private void Heal(CharacterBattle activeCharacter, CharacterAction comboAction, Flavor flavor = null)
     {
         uiManager.SetText($"{activeCharacter.CharacterName} ate {comboAction.Name}");
 
-        (activeCharacter as PlayerBattle).DoHeal(comboAction);
+        (activeCharacter as PlayerBattle).DoHeal(comboAction, flavor);
     }
 
     private void DefeatedEnemy()
@@ -247,10 +245,11 @@ public class BattleManager : MonoBehaviour {
         awaitCommand = false;
     }
 
-    public void SetHealAction(CharacterAction action)
+    public void SetHealAction(CharacterAction action, Flavor flavor)
     {
         activeCharacterAttack = action;
         heal = true;
+        this.flavor = flavor;
         awaitCommand = false;
     }
 

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 2093740981, guid: 7a7876a27a0704845a379afecb2881e5, type: 3}
   price: 20
-  damage: 5
-  heal: 7
+  heal: 5
+  damage: 8
+  index: 0

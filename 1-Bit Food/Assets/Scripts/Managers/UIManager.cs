@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour {
     [Header("Managers")]
     [SerializeField] private BattleManager battleManager;
     public WorldManager worldManager;
+    [SerializeField] private FeedbackUIManager feedbackManager;
 
     [Header("Left Menu")]
     [SerializeField] private GameObject heartPrefab;
@@ -100,6 +101,7 @@ public class UIManager : MonoBehaviour {
         itemContainer.SetActive(false);
         flavorContainer.SetActive(false);
         stealBackContainer.SetActive(false);
+        // feedbackManager.gameObject.SetActive(true);
 
         stealBackButton.SetActive(false);
         backButton.SetActive(false);
@@ -116,6 +118,7 @@ public class UIManager : MonoBehaviour {
         UpdateActions();
         currentMenu = 0;
         attack = true;
+        // feedbackManager.SwitchMenu(currentMenu);
         
         initialContainer.SetActive(true);
         Utility.SetActiveButton(initialButton);
@@ -170,7 +173,7 @@ public class UIManager : MonoBehaviour {
 
         for (int i = 0; i < flavorValues.Length; i++)
         {
-            flavorValues[i] = flavorButtons.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>();
+            flavorValues[i] = flavorButtons.GetChild(i).GetChild(2).GetComponent<TextMeshProUGUI>();
         }
     }
 
@@ -251,7 +254,7 @@ public class UIManager : MonoBehaviour {
 
         if (stolen.Count <= 0) return;
 
-        if (stolen.Count == 1) rightArrowItem.SetActive(false);
+        if (stolen.Count == 1) rightArrowSteal.SetActive(false);
 
         for (int i = 0; i < stolen.Count; i++)
         {
@@ -476,7 +479,7 @@ public class UIManager : MonoBehaviour {
 
     private void SendHealAction()
     {
-        battleManager.SetHealAction(selectedAction);
+        battleManager.SetHealAction(selectedAction, flavor);
     }
 
     private void SendStealAction(Food food)
@@ -538,6 +541,8 @@ public class UIManager : MonoBehaviour {
 
         // reset used variables
         characterToAttack = null;
+
+        // feedbackManager.gameObject.SetActive(false);
     }
 
     public void EnemyStolen(EnemyBattle enemy)
@@ -578,6 +583,7 @@ public class UIManager : MonoBehaviour {
         close.SetActive(false);
         open.SetActive(true);
         Utility.SetActiveButton(activeButton);
+        // feedbackManager.SwitchMenu(currentMenu);
         SetText(text);
     }
 

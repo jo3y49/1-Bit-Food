@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cheesecake
   m_EditorClassIdentifier: 
   sprite: {fileID: -1739434336, guid: 7a7876a27a0704845a379afecb2881e5, type: 3}
-  price: 50
-  damage: 3
-  heal: 10
+  price: 100
+  heal: 16
+  damage: 15
   index: 4

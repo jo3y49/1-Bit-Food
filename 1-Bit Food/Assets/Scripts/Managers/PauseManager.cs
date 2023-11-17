@@ -21,18 +21,6 @@ public class PauseManager : MonoBehaviour {
         pauseUI.SetActive(false);
     }
 
-    private void OnEnable() {
-        actions.Gameplay.Enable();
-
-        actions.Gameplay.Pause.performed += (context) => TogglePause();
-    }
-
-    private void OnDisable() {
-        actions.Gameplay.Pause.performed -= (context) => TogglePause();
-
-        actions.Gameplay.Disable();
-    }
-
     public void TogglePause() {
         if (pauseUI.activeSelf)
             Resume();

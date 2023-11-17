@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ButtonColor : UIColor, ISelectHandler, IDeselectHandler
 {
     private TextMeshProUGUI tm;
+    private Button button;
     // private Image backdrop;
     private TextColor tmScript;
     public bool flipColor, fliptext, hoverChange = true;
@@ -14,6 +15,7 @@ public class ButtonColor : UIColor, ISelectHandler, IDeselectHandler
     protected override void OnEnable()
     {
         tm = GetComponentInChildren<TextMeshProUGUI>();
+        button = GetComponent<Button>();
 
         // backdrop = GetComponentInChildren<Image>();
 
@@ -103,7 +105,7 @@ public class ButtonColor : UIColor, ISelectHandler, IDeselectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-        if (hoverChange) image.color = new Color(image.color.r, image.color.g, image.color.b, .5f);
+        if (hoverChange && button!= null && button.transition != Selectable.Transition.SpriteSwap) image.color = new Color(image.color.r, image.color.g, image.color.b, .5f);
         // if (!flipColor) return;
 
         // FlipColor();
@@ -112,7 +114,7 @@ public class ButtonColor : UIColor, ISelectHandler, IDeselectHandler
 
     public void OnDeselect(BaseEventData eventData)
     {
-        if (hoverChange) image.color = new Color(image.color.r, image.color.g, image.color.b, 255);
+        if (hoverChange && button!= null && button.transition != Selectable.Transition.SpriteSwap) image.color = new Color(image.color.r, image.color.g, image.color.b, 255);
         // if (!flipColor) return;
 
         // SetColors();

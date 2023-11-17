@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Butter
   m_EditorClassIdentifier: 
   sprite: {fileID: -502281767, guid: 7a7876a27a0704845a379afecb2881e5, type: 3}
-  price: 2
+  price: 10
+  heal: 4
   damage: 2
-  heal: 2
   index: 4

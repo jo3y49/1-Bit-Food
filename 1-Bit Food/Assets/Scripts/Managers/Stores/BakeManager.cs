@@ -32,14 +32,14 @@ public class BakeManager : StoreManager {
 
         for (int i = 0; i < recipe.ingredientQuantities.Count; i++)
         {
-            Ingredient ingredient = recipe.ingredients[i];
-            int have = GameManager.instance.GetFoodUses(foodList.GetFoodIndex(ingredient));
+            Food food = recipe.ingredients[i];
+            int have = GameManager.instance.GetFoodUses(foodList.GetFoodIndex(food));
             int need = recipe.ingredientQuantities[i];
 
             if (have < need) return;
 
-            ingredientList += ", " + need + " " + ingredient.name;
-            playerIngredientList += ", " + have + " " + ingredient.name;
+            ingredientList += ", " + need + " " + food.name;
+            playerIngredientList += ", " + have + " " + food.name;
         }
 
         ingredientList = ingredientList.TrimStart(',');

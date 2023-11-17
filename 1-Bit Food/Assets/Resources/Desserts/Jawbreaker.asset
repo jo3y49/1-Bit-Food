@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Jawbreaker
   m_EditorClassIdentifier: 
   sprite: {fileID: -1883198425, guid: 7a7876a27a0704845a379afecb2881e5, type: 3}
-  price: 50
-  damage: 8
+  price: 40
   heal: 2
+  damage: 12
   index: 2
