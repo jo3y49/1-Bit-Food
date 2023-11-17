@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e61bdc1fd320b644a421e00cffa6644, type: 3}
   m_Name: Egg
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: -13905737, guid: 7a7876a27a0704845a379afecb2881e5, type: 3}
   price: 2
   damage: 2
   heal: 2

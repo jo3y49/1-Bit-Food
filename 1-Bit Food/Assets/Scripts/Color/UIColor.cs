@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
 public class UIColor : EditColor {
-    private Image image;
+    protected Image image;
 
     protected override void OnEnable() {
         image = GetComponent<Image>();

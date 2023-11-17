@@ -1,28 +1,86 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 public class ButtonColor : UIColor, ISelectHandler, IDeselectHandler
 {
     private TextMeshProUGUI tm;
+    // private Image backdrop;
     private TextColor tmScript;
-    public bool flipColor, fliptext = true;
+    public bool flipColor, fliptext, hoverChange = true;
+    private bool flipped = false;
+    private bool selected = false;
 
     protected override void OnEnable()
     {
         tm = GetComponentInChildren<TextMeshProUGUI>();
 
+        // backdrop = GetComponentInChildren<Image>();
+
         if (tm != null) tmScript = tm.GetComponent<TextColor>();
 
         base.OnEnable();
     }
+    
+    private void OnDisable() {
+        image.color = new Color(image.color.r, image.color.g, image.color.b, 255);
+
+        // if (!flipColor) return;
+
+        // selected = false;
+
+        // SetColors();
+        // ResetTextColor();
+    }
 
     public override void ChangeColor(Color color)
     {
+        // if (selected) return;
+
         base.ChangeColor(color);
 
-        if (tm == null || tmScript != null) return;
+        ColorSwitcher.GameColor tempColor = gameColor;
 
-        tm.color = color;
+        // if (flipped)
+        // {
+        //     if (gameColor == ColorSwitcher.GameColor.Bright)
+        //     {
+        //         tempColor = ColorSwitcher.GameColor.Dark;
+        //     }
+        //     else 
+        //     {
+        //         tempColor = ColorSwitcher.GameColor.Bright;
+        //     }
+        // }
+
+        // if (backdrop != null)
+        // {
+        //     if (tempColor == ColorSwitcher.GameColor.Bright)
+        //     {
+        //         backdrop.color = ColorSwitcher.instance.Dark;
+        //     }
+        //     else 
+        //     {
+        //         backdrop.color = ColorSwitcher.instance.Bright;
+        //     }
+        // }
+            
+
+        if (tm != null && tmScript == null)
+        {
+            tm.color = color;
+
+            // if (tempColor == ColorSwitcher.GameColor.Bright)
+            // {
+            //     tm.color = ColorSwitcher.instance.Dark;
+            // }
+            // else 
+            // {
+            //     tm.color = ColorSwitcher.instance.Bright;
+            // }
+        }
+
+        // flipped = false;
     }
 
     private void FlipTextColor()
@@ -45,24 +103,36 @@ public class ButtonColor : UIColor, ISelectHandler, IDeselectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-        if (!flipColor) return;
+        if (hoverChange) image.color = new Color(image.color.r, image.color.g, image.color.b, .5f);
+        // if (!flipColor) return;
 
-        FlipColor();
-        FlipTextColor();
+        // FlipColor();
+        // FlipTextColor();
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        if (!flipColor) return;
+        if (hoverChange) image.color = new Color(image.color.r, image.color.g, image.color.b, 255);
+        // if (!flipColor) return;
 
-        SetColors();
-        ResetTextColor();
+        // SetColors();
+        // ResetTextColor();
     }
 
     private void FlipColor()
     {
-        if (gameColor == ColorSwitcher.GameColor.Bright) ChangeColor(ColorSwitcher.instance.Dark);
+        flipped = true;
 
-        else ChangeColor(ColorSwitcher.instance.Dark);
+        if (gameColor == ColorSwitcher.GameColor.Bright)
+        {
+            ChangeColor(ColorSwitcher.instance.Dark);
+            // if (backdrop != null) backdrop.color = ColorSwitcher.instance.Bright;
+        }
+
+        else 
+        {
+            ChangeColor(ColorSwitcher.instance.Dark);
+            // if (backdrop != null) backdrop.color = ColorSwitcher.instance.Dark;
+        }
     }
 }

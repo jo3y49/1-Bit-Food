@@ -5,6 +5,7 @@ using System.Linq;
 public class PlayerBattle : CharacterBattle {    
 
     protected List<int> actionUses = new();
+    private Dictionary<string, int> flavorUses = new();
 
     protected List<PlayerAction> actions = new();
 
@@ -15,7 +16,18 @@ public class PlayerBattle : CharacterBattle {
 
         actions = FoodList.GetInstance().GetAllActions();
 
-        actionUses = GameManager.instance.GetFoodIntUsesList();
+        actionUses = GameManager.instance.GetFoodUsesList();
+
+        List<int> flavorList = GameManager.instance.GetFlavorUsesList();
+
+        flavorUses = new Dictionary<string, int>
+        {
+            {"Vanilla", flavorList[0]},
+            {"Chocolate", flavorList[1]},
+            {"StrawBerry", flavorList[2]},
+            {"Lemon", flavorList[3]},
+            {"Mint", flavorList[4]},
+        };
         
     }
 
@@ -44,6 +56,7 @@ public class PlayerBattle : CharacterBattle {
 
         GameManager.instance.AddPlayerMoney(money);
         GameManager.instance.SetFoodUses(actionUses);
+        GameManager.instance.SetFlavorUses(flavorUses.Values.ToList());
     }
 
     public override Food StealItem(Food food)
@@ -110,6 +123,13 @@ public class PlayerBattle : CharacterBattle {
         return GetActionUses(i);
     }
 
+    public virtual int GetFlavorUses(int i)
+    {
+        if (i < flavorUses.Count) return flavorUses.ElementAt(i).Value;
+
+        else return 0;
+    }
+
     public virtual bool CanUseAction(PlayerAction attackAction)
     {
         return GetActionUses(attackAction) > 0;
@@ -117,25 +137,32 @@ public class PlayerBattle : CharacterBattle {
 
     public override string DoAttack(CharacterAction action, CharacterBattle target, Flavor flavor = null)
     {
-        UseAction(action);
+        UseAction(action, flavor);
 
         if (action.GetType() == typeof(PlayerAction)) (action as PlayerAction).Attack(this, target, flavor);
 
         return "";
     }
 
-    public virtual void DoHeal(CharacterAction action)
+    public virtual void DoHeal(CharacterAction action, Flavor flavor = null)
     {
         UseAction(action);
 
-        (action as PlayerAction).Heal(this);
+        (action as PlayerAction).Heal(this, flavor);
     }
 
-    protected void UseAction(CharacterAction action)
+    protected void UseAction(CharacterAction action, Flavor flavor = null)
     {
         int i = actions.FindIndex(item => item == action);
 
-        if (i != -1 && actionUses.Count > i) actionUses[i]--;
+        if (i != -1 && actionUses.Count > i)
+        {
+            actionUses[i]--;
+            if (flavor != null && flavorUses.ContainsKey(flavor.name))
+            {
+                flavorUses[flavor.name]--;
+            }
+        }
     }
     
 
@@ -146,6 +173,6 @@ public class PlayerBattle : CharacterBattle {
 
     public void RegetUses()
     {
-        actionUses = GameManager.instance.GetFoodIntUsesList();
+        actionUses = GameManager.instance.GetFoodUsesList();
     }
 }

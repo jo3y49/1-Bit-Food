@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e61bdc1fd320b644a421e00cffa6644, type: 3}
   m_Name: Sugar
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: -1883198425, guid: 7a7876a27a0704845a379afecb2881e5, type: 3}
   price: 1
   damage: 1
   heal: 1

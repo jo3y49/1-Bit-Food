@@ -30,7 +30,7 @@ public class FoodList
         {
             foodList.Add(food.name, new PlayerAction(food.name, 
                 (self, target, flavor) => CharacterAction.DoAttack(self, target, food.name, food.damage, flavor),
-                (self) => CharacterAction.DoHeal(self, food.name, food.heal)));
+                (self, flavor) => CharacterAction.DoHeal(self, food.name, food.heal, flavor), food));
         }
     }
 
@@ -38,14 +38,14 @@ public class FoodList
     {
         if (foodList.ContainsKey(key)) return foodList[key];
 
-        else return new PlayerAction("Null", EmptyAction, EmptyAction);
+        else return new PlayerAction("Null", EmptyAction, EmptyAction, null);
     }
 
     public PlayerAction GetAction(int index)
     {
         if (foodList.Count > index) return foodList.ElementAt(index).Value;
 
-        else return new PlayerAction("Null", EmptyAction, EmptyAction);
+        else return new PlayerAction("Null", EmptyAction, EmptyAction, null);
     }
 
     public List<PlayerAction> GetAllActions()
@@ -78,7 +78,7 @@ public class FoodList
         Debug.Log("This action is null");
     }
 
-    public void EmptyAction(CharacterBattle self = null)
+    public void EmptyAction(CharacterBattle self, Flavor flavor = null)
     {
         Debug.Log("This action is null");
     }

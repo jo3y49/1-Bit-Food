@@ -45,7 +45,7 @@ public class DebugRoomManager : WorldManager {
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            GameManager.instance.SetFoodUses(Enumerable.Repeat(0, GameManager.instance.GetFoodIntUsesList().Count).ToList());
+            GameManager.instance.SetFoodUses(Enumerable.Repeat(0, GameManager.instance.GetFoodUsesList().Count).ToList());
             playerBattle.RegetUses();
         }
 

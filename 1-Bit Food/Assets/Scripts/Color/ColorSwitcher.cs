@@ -36,6 +36,8 @@ public class ColorSwitcher : MonoBehaviour {
 
     public void SetFlavor(Flavor flavor)
     {
+        if (flavor == null) return;
+
         prevBright = Bright;
         prevDark = Dark;
 

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e13ad3a2bbcd964cbb90455fc6a5fa7, type: 3}
   m_Name: Strawberry
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
   bright: {r: 1, g: 0.31671154, b: 0.31671154, a: 1}
   dark: {r: 0.1254902, g: 0, b: 0, a: 1}
+  bonus: 3

@@ -6,17 +6,22 @@ public class PlayerData
 {
     public int money = 120;
     public int score = 0;
+    public readonly int startFoodAmount = 10;
+    public readonly int startFlavorAmount = 3;
     public List<int> foodUses;
+    public List<int> flavorUses;
     public readonly int maxFoodUses = 99;
 
     public PlayerData(int dessertLength)
     {
-        foodUses = Enumerable.Repeat(10, dessertLength).ToList();
+        foodUses = Enumerable.Repeat(startFoodAmount, dessertLength).ToList();
+        flavorUses = Enumerable.Repeat(startFlavorAmount, 5).ToList();
     }
 
     public PlayerData(List<int> dessertUses)
     {
         this.foodUses = dessertUses;
+        flavorUses = Enumerable.Repeat(startFlavorAmount, 5).ToList();
     }
 }
 
