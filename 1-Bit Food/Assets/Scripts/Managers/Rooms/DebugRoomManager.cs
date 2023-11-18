@@ -35,7 +35,7 @@ public class DebugRoomManager : WorldManager {
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            SceneManager.LoadScene(shopScene);
+            shopUI.SetActive(!shopUI.activeSelf);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))

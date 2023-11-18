@@ -76,8 +76,8 @@ MonoBehaviour:
 
     Press 5 to get 50 coins'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0c28cd9740ac3694c8d6ea70419e2354, type: 2}
-  m_sharedMaterial: {fileID: 5682896108735424352, guid: 0c28cd9740ac3694c8d6ea70419e2354, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -161,10 +161,6 @@ PrefabInstance:
       objectReference: {fileID: 247649610862916010}
     - target: {fileID: 1385834621942126132, guid: dc87430de5adade499d9e103770bccd7, type: 3}
       propertyPath: m_RenderMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1385834621942126132, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_PixelPerfect
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1433815327528338073, guid: dc87430de5adade499d9e103770bccd7, type: 3}
@@ -577,6 +573,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8606531597226286453, guid: dc87430de5adade499d9e103770bccd7, type: 3}
   m_PrefabInstance: {fileID: 4884271775777301969}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4184096263651170900 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8779923808109444997, guid: dc87430de5adade499d9e103770bccd7, type: 3}
+  m_PrefabInstance: {fileID: 4884271775777301969}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5559814326132880665 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1071864276696371400, guid: dc87430de5adade499d9e103770bccd7, type: 3}
@@ -606,6 +607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleUI: {fileID: 3799034424158664868}
+  shopUI: {fileID: 4184096263651170900}
   nearbyEncounterRange: 10
   spawnLocations:
   - {x: -7.73, y: 0}

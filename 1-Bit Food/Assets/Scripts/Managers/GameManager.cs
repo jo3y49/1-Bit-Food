@@ -56,6 +56,11 @@ public class GameManager : MonoBehaviour {
         return gameData.playerData.foodUses[i];
     }
 
+    public int GetMaxFoodUses()
+    {
+        return gameData.playerData.maxFoodUses;
+    }
+
     public bool AddFoodUse(int index, int uses = 1)
     {
         List<int> desserts = gameData.playerData.foodUses;

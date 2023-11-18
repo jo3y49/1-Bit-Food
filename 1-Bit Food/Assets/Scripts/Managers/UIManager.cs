@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.Android;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
@@ -37,7 +38,7 @@ public class UIManager : MonoBehaviour {
     private List<Button> targetButtons = new();
     private List<Button> itemButtons = new();
     private List<Button> stealButtons = new();
-    private TextMeshProUGUI[] flavorValues;
+    private List<Button> flavorButtons = new();
 
     // store character information
     private PlayerBattle player;
@@ -71,8 +72,6 @@ public class UIManager : MonoBehaviour {
         hearts = new GameObject[player.maxHealth];
 
         currentHealthIndex = player.health - 1;
-
-        flavorValues = new TextMeshProUGUI[flavorContainer.transform.childCount];
 
         backButton.SetActive(false);
 
@@ -139,7 +138,7 @@ public class UIManager : MonoBehaviour {
             // set health display
             TextMeshProUGUI enemyHealthText = Instantiate(enemyPrefabText, enemyHealthContainer.transform);
             enemyHealthText.rectTransform.anchoredPosition = new Vector3(0, -i * 50);
-            enemyHealthText.text = $"enemy {i}: {enemies[i].health}";
+            enemyHealthText.text = $"enemy {i+1}: {enemies[i].health}";
             enemyHealthTexts.Add(enemyHealthText);
 
             // set button to select enemy
@@ -176,13 +175,14 @@ public class UIManager : MonoBehaviour {
 
         itemButtons[0].gameObject.SetActive(true);
 
-        Transform flavorButtons = flavorContainer.transform.GetChild(1);
+        Transform flavorItems = flavorContainer.transform.GetChild(1);
 
-        flavorButton = flavorButtons.GetChild(0).GetComponent<Button>();
-
-        for (int i = 0; i < flavorValues.Length; i++)
+        for (int i = 0; i < flavorItems.childCount; i++)
         {
-            flavorValues[i] = flavorButtons.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>();
+            Button button = flavorItems.GetChild(i).GetComponent<Button>();
+
+            button.interactable = true;
+            flavorButtons.Add(button);
         }
     }
 
@@ -208,7 +208,7 @@ public class UIManager : MonoBehaviour {
         {
             EnemyBattle enemy = enemies[i];
 
-            enemyHealthTexts[i].text = $"enemy {i}: {enemy.health}"; 
+            enemyHealthTexts[i].text = $"enemy {i+1}: {enemy.health}"; 
 
             if (enemy.health < 0 && targetButtons[i].interactable)
             {
@@ -251,9 +251,13 @@ public class UIManager : MonoBehaviour {
             itemButtons.Remove(b);
         }
 
-        for (int i = 0; i < flavorValues.Length; i++)
+        for (int i = 0; i < flavorButtons.Count; i++)
         {
-            flavorValues[i].text = player.GetFlavorUses(i).ToString("D2");
+            int uses = player.GetFlavorUses(i);
+
+            if (uses <= 0) flavorButtons[i].interactable = false;
+
+            flavorButtons[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = uses.ToString("D2");
         }
 
         stealButtons.Clear();

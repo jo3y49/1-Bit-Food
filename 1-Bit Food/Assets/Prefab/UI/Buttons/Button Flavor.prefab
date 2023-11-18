@@ -123,7 +123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2321664924210820899, guid: 5b739280773658e438d44c8e2c55a413, type: 3}
       propertyPath: m_Transition
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2321664924210820899, guid: 5b739280773658e438d44c8e2c55a413, type: 3}
       propertyPath: m_TargetGraphic

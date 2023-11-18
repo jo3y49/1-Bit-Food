@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 500165733340129173, guid: cf9f54d17c7069e4db01200a3266c648, type: 3}
       propertyPath: m_Name
-      value: Button Outline Variant
+      value: Button Back
       objectReference: {fileID: 0}
     - target: {fileID: 1310813226709368222, guid: cf9f54d17c7069e4db01200a3266c648, type: 3}
       propertyPath: m_text
@@ -32,6 +32,18 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2835525785070436965, guid: cf9f54d17c7069e4db01200a3266c648, type: 3}
+      propertyPath: m_Transition
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2835525785070436965, guid: cf9f54d17c7069e4db01200a3266c648, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: -1157857817, guid: c2bdc20ffb26e144eaf09026032b07ac, type: 3}
+    - target: {fileID: 2835525785070436965, guid: cf9f54d17c7069e4db01200a3266c648, type: 3}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: -1157857817, guid: c2bdc20ffb26e144eaf09026032b07ac, type: 3}
     - target: {fileID: 3230308088940044504, guid: cf9f54d17c7069e4db01200a3266c648, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -112,8 +124,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8831308946989041325, guid: cf9f54d17c7069e4db01200a3266c648, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 469617772, guid: c2bdc20ffb26e144eaf09026032b07ac, type: 3}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1446646427025825785, guid: cf9f54d17c7069e4db01200a3266c648, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf9f54d17c7069e4db01200a3266c648, type: 3}

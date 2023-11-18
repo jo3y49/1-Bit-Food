@@ -7,19 +7,10 @@ public class BakeManager : StoreManager {
 
     private Recipe selectedRecipe;
 
-    protected override void Start() {
-        base.Start();
+    protected override void OnEnable() {
+        base.OnEnable();
 
         recipes = Resources.LoadAll<Recipe>("Recipes");
-
-        foreach (Recipe recipe in recipes)
-        {
-            GameObject button = Instantiate(buttonPrefab, foodContainer.transform);
-            button.GetComponentInChildren<Image>().sprite = recipe.result.sprite;
-            button.GetComponentInChildren<TextMeshProUGUI>().text = "Bake a " + recipe.result.name;
-
-            button.GetComponent<Button>().onClick.AddListener(() => Craft(recipe));
-        }
     }
 
     private void Craft(Recipe recipe)

@@ -24,7 +24,7 @@ public class PlayerBattle : CharacterBattle {
         {
             {"Vanilla", flavorList[0]},
             {"Chocolate", flavorList[1]},
-            {"StrawBerry", flavorList[2]},
+            {"Strawberry", flavorList[2]},
             {"Lemon", flavorList[3]},
             {"Mint", flavorList[4]},
         };
@@ -146,7 +146,7 @@ public class PlayerBattle : CharacterBattle {
 
     public virtual void DoHeal(CharacterAction action, Flavor flavor = null)
     {
-        UseAction(action);
+        UseAction(action, flavor);
 
         (action as PlayerAction).Heal(this, flavor);
     }

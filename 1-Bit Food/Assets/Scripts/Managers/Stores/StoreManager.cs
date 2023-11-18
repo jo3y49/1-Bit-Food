@@ -3,19 +3,26 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public abstract class StoreManager : MonoBehaviour {
-    [SerializeField] protected GameObject foodContainer;
-    [SerializeField] protected GameObject buttonPrefab;
     [SerializeField] protected GameObject popUp;
     [SerializeField] protected TextMeshProUGUI confirmationMessage;
+    [SerializeField] protected TextMeshProUGUI inventoryAmountText, inventoryCapText;
 
     protected Food[] foods;
     protected Food selectedFood;
 
-    protected readonly int level = 0;
+    protected int inventoryAmount;
 
-    protected virtual void Start() {
+    protected int inventoryCap;
+
+    private void Awake() {
+        gameObject.SetActive(false);
+    }
+
+    protected virtual void OnEnable() {
         popUp.SetActive(false);
         foods = FoodList.GetInstance().GetFoods();
+
+        InitializeInventory();
     }
 
     public virtual void Confirm()
@@ -24,7 +31,7 @@ public abstract class StoreManager : MonoBehaviour {
 
         Transaction();
 
-        GameManager.instance.AddFoodUse(FoodList.GetInstance().GetFoodIndex(selectedFood));
+        SetInventory(selectedFood);
 
         popUp.SetActive(false);
     }
@@ -41,6 +48,22 @@ public abstract class StoreManager : MonoBehaviour {
     public virtual void Return()
     {
         AudioManager.instance.PlayUIClip(3);
-        SceneManager.LoadScene(level);
+    }
+
+    private void InitializeInventory()
+    {
+        inventoryCap = GameManager.instance.GetMaxFoodUses();
+        inventoryAmount = GameManager.instance.GetFoodUses();
+
+        inventoryCapText.text = inventoryCap.ToString();
+        inventoryAmountText.text = inventoryAmount.ToString();
+    }
+
+    public virtual void SetInventory(Food food)
+    {
+        GameManager.instance.AddFoodUse(FoodList.GetInstance().GetFoodIndex(food));
+        inventoryAmount++;
+
+        inventoryAmountText.text = inventoryAmount.ToString("D2");
     }
 }

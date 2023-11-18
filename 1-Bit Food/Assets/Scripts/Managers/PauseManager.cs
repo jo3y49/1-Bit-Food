@@ -6,8 +6,6 @@ using System;
 
 public class PauseManager : MonoBehaviour {
     [SerializeField] private GameObject pauseUI;
-    [SerializeField] private Button pauseButton, quitButton;
-    [SerializeField] private Sprite pause, resume;
 
     public static event Action<bool> pauseEvent;
 
@@ -31,16 +29,13 @@ public class PauseManager : MonoBehaviour {
     public void Resume() {
         Time.timeScale = 1; 
         pauseUI.SetActive(false);
-        pauseEvent(false);
-        pauseButton.image.sprite = pause;
+        pauseEvent?.Invoke(false);
     }
 
     private void Pause() {
         Time.timeScale = 0; 
         pauseUI.SetActive(true);
-        pauseEvent(true);
-        Utility.SetActiveButton(pauseButton);
-        pauseButton.image.sprite = resume;
+        pauseEvent?.Invoke(true);
     }
 
     // public void Quit() {

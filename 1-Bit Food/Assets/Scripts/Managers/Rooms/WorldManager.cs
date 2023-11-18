@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class WorldManager : MonoBehaviour {
-    [SerializeField] protected GameObject battleUI;
+    [SerializeField] protected GameObject battleUI, shopUI;
     // [SerializeField] protected DialogManager dialogManager;
     protected GameObject player;
     protected PlayerBattle playerBattle;

@@ -8,22 +8,15 @@ public class ShopManager : StoreManager
 
     private int money;
 
-    protected override void Start() {
-        base.Start();
+    protected override void OnEnable() {
+        base.OnEnable();
 
         SetMoney(GameManager.instance.GetPlayerMoney());
 
-        foreach (Food food in foods)
-        {
-            GameObject button = Instantiate(buttonPrefab, foodContainer.transform);
-            button.GetComponentInChildren<Image>().sprite = food.sprite;
-            button.GetComponentInChildren<TextMeshProUGUI>().text = $"{food.name}: {food.price} coins";
 
-            button.GetComponent<Button>().onClick.AddListener(() => Buy(food));
-        }
     }
 
-    private void Buy(Food food)
+    public void Buy(Ingredient food)
     {
         if (money < food.price || popUp.activeSelf || !GameManager.instance.OpenInventory()) return;
         
@@ -48,6 +41,6 @@ public class ShopManager : StoreManager
     {
         this.money = money;
 
-        moneyText.text = "Coins: " + money;
+        moneyText.text = " : " + money;
     }
 }
