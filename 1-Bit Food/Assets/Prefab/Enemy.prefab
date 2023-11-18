@@ -104,11 +104,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterAnimation: {fileID: 7113688701200873565}
   spriteRenderer: {fileID: 4632155104684606569}
-  maxHealth: 10
+  maxHealth: 50
   health: 10
   hitTarget: 0
   attackClip: {fileID: 0}
-  favoriteFlavor: {fileID: 11400000, guid: e2988ba84d250d44ea0c04bcb3e240c4, type: 2}
   stolenFood: []
 --- !u!114 &7113688701200873565
 MonoBehaviour:

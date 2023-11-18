@@ -15,12 +15,23 @@ public abstract class CharacterAction {
 
         target.SetAnimationTrigger("Attacked");
 
+        if (flavor != null) damage += flavor.bonus;
+
         target.Attacked(damage, flavor);
     }
 
-    public static void DoHeal(CharacterBattle self, string attackName, int heal = 1)
+    public static void DoAttackRandom(CharacterBattle self, CharacterBattle target, string attackName, int low, int high, Flavor flavor = null)
+    {
+        int damage = Random.Range(low, high + 1);
+
+        DoAttack(self, target, attackName, damage, flavor);
+    }
+
+    public static void DoHeal(CharacterBattle self, string attackName, int heal = 1, Flavor flavor = null)
     {
         DoAction(self, attackName);
+
+        if (flavor != null) heal += flavor.bonus;
 
         self.Heal(heal);
     }

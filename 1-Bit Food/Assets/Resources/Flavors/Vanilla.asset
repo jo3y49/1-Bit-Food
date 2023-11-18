@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e13ad3a2bbcd964cbb90455fc6a5fa7, type: 3}
   m_Name: Vanilla
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
   bright: {r: 0.61859834, g: 0.9412253, b: 1, a: 1}
   dark: {r: 0, g: 0.22352941, b: 0.5411765, a: 1}
+  bonus: 1
+  sprite: {fileID: 773667791, guid: 2fd7956a2b8266f44b6fa6ca77889fc2, type: 3}

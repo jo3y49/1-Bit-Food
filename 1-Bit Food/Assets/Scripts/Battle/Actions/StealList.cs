@@ -18,12 +18,11 @@ public class StealList {
         return instance;
     }
 
-    public EnemyAction GetAction()
+    public EnemyAction GetRandomAction()
     {
         int r = Random.Range(0,10);
 
-        if (r < 2) 
-            return actionList["Steal"];
+        if (r < 2) return actionList["Steal"];
 
         else return actionList["Attack"];
     }
@@ -37,16 +36,18 @@ public class StealList {
     {
         actionList = new Dictionary<string, EnemyAction>()
         {
-            {"Attack" ,new EnemyAction("Attack", 
-            (self, target, food) => CharacterAction.DoAttack(self, target, "Attack", 3))},
-            {"Steal", new EnemyAction("Steal", Steal)}
-
+            {"Steal", new EnemyAction("Steal", Steal)},
+            {"Attack",new EnemyAction("Attack", 
+            (self, target, food) => CharacterAction.DoAttackRandom(self, target, "Attack", self.lowDamage, self.highDamage))},
         };
     }
 
-    private void Steal(CharacterBattle self, CharacterBattle target, Food food = null)
+    private void Steal(EnemyBattle self, PlayerBattle target, Food food = null)
     {
-        self.TakeItem(target.StealItem(food));
+        int s = Random.Range(0, self.steals);
+
+        for (int i = 0; i <= s; i++)
+            self.TakeItem(target.StealItem(food));
     }
 
     public void EmptyAction(CharacterBattle self, CharacterBattle target)

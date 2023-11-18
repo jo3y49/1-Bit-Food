@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class FoodList
     private static FoodList instance;
     private Food[] foods;
     private IDictionary<string, PlayerAction> foodList;
+    private List<Flavor> flavors;
 
     private FoodList()
     {
@@ -22,7 +24,20 @@ public class FoodList
 
     private void FillDictionary()
     {
-        foods = Resources.LoadAll<Food>("");
+        Ingredient[] ingredients = Resources.LoadAll<Ingredient>("Ingredients");
+        Dessert[] desserts = Resources.LoadAll<Dessert>("Desserts");
+        
+        Array.Sort(ingredients, (x, y) => {
+            return x.index.CompareTo(y.index);
+        });
+
+        Array.Sort(desserts, (x, y) => {
+            return x.index.CompareTo(y.index);
+        });
+
+        foods = new Food[ingredients.Length + desserts.Length];
+        Array.Copy(ingredients, foods, ingredients.Length);
+        Array.Copy(desserts, 0, foods, ingredients.Length, desserts.Length);
 
         foodList = new Dictionary<string, PlayerAction>();
 
@@ -30,7 +45,7 @@ public class FoodList
         {
             foodList.Add(food.name, new PlayerAction(food.name, 
                 (self, target, flavor) => CharacterAction.DoAttack(self, target, food.name, food.damage, flavor),
-                (self) => CharacterAction.DoHeal(self, food.name, food.heal)));
+                (self, flavor) => CharacterAction.DoHeal(self, food.name, food.heal, flavor), food));
         }
     }
 
@@ -38,14 +53,14 @@ public class FoodList
     {
         if (foodList.ContainsKey(key)) return foodList[key];
 
-        else return new PlayerAction("Null", EmptyAction, EmptyAction);
+        else return new PlayerAction("Null", EmptyAction, EmptyAction, null);
     }
 
     public PlayerAction GetAction(int index)
     {
         if (foodList.Count > index) return foodList.ElementAt(index).Value;
 
-        else return new PlayerAction("Null", EmptyAction, EmptyAction);
+        else return new PlayerAction("Null", EmptyAction, EmptyAction, null);
     }
 
     public List<PlayerAction> GetAllActions()
@@ -78,7 +93,7 @@ public class FoodList
         Debug.Log("This action is null");
     }
 
-    public void EmptyAction(CharacterBattle self = null)
+    public void EmptyAction(CharacterBattle self, Flavor flavor = null)
     {
         Debug.Log("This action is null");
     }

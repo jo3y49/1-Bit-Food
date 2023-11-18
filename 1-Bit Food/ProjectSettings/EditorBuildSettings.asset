@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Title.unity
     guid: c5e10f070b07ad544b1a47d7402cd045
   - enabled: 1
-    path: Assets/Scenes/Shop.unity
-    guid: 56c6c3d2f0d5a1347915e3e9cc9dbb38
-  - enabled: 1
     path: Assets/Scenes/Baking.unity
     guid: 1ab6a1b7f1cbd90499295992496b583c
   - enabled: 1

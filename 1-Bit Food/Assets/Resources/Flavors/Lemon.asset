@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e13ad3a2bbcd964cbb90455fc6a5fa7, type: 3}
   m_Name: Lemon
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
   bright: {r: 1, g: 0.96862745, b: 0.47843137, a: 1}
   dark: {r: 0.4, g: 0.30588236, b: 0, a: 1}
+  bonus: 4
+  sprite: {fileID: 1658957003, guid: 2fd7956a2b8266f44b6fa6ca77889fc2, type: 3}

@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DebugRoomManager : LevelManager {
+public class DebugRoomManager : WorldManager {
     public Vector2[] spawnLocations;
     private GameObject[] activeEnemies;
     public GameObject enemyPrefab;
@@ -18,6 +18,8 @@ public class DebugRoomManager : LevelManager {
         activeEnemies = new GameObject[spawnLocations.Length];
     }
     private void Update() {
+
+        if (battleUI.activeSelf) return;
         
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -35,17 +37,17 @@ public class DebugRoomManager : LevelManager {
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            SceneManager.LoadScene(shopScene);
+            shopUI.SetActive(!shopUI.activeSelf);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            SceneManager.LoadScene(craftScene);
+            bakeUI.SetActive(!bakeUI.activeSelf);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            GameManager.instance.SetFoodUses(Enumerable.Repeat(0, GameManager.instance.GetFoodIntUsesList().Count).ToList());
+            GameManager.instance.SetFoodUses(Enumerable.Repeat(0, GameManager.instance.GetFoodUsesList().Count).ToList());
             playerBattle.RegetUses();
         }
 

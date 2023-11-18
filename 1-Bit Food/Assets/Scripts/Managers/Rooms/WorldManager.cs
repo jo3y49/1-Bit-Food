@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public abstract class WorldManager : MonoBehaviour {
-    [SerializeField] protected GameObject battleUI;
+public class WorldManager : MonoBehaviour {
+    [SerializeField] protected GameObject battleUI, shopUI, bakeUI;
     // [SerializeField] protected DialogManager dialogManager;
     protected GameObject player;
     protected PlayerBattle playerBattle;
