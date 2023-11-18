@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleManager: {fileID: 6062632121966551404}
   worldManager: {fileID: 4595895428334873847}
+  feedbackManager: {fileID: 0}
   heartPrefab: {fileID: 5371357764282836196, guid: 6079b8aaffbb0374f920ff40be774f8c, type: 3}
   heartContainer: {fileID: 1381452644065679302}
   initialContainer: {fileID: 3872668519626500855}
@@ -156,7 +157,7 @@ MonoBehaviour:
   stealBackContainer: {fileID: 8234520739342598739}
   targetContainer: {fileID: 5364589012922509387}
   initialButton: {fileID: 1592214726803799444}
-  flavorButton: {fileID: 32852310488680597}
+  flavorButton: {fileID: 0}
   backButton: {fileID: 3689373787544603952}
   stealBackButton: {fileID: 618654428410656358}
   leftArrowItem: {fileID: 6805348362939812254}
@@ -164,7 +165,10 @@ MonoBehaviour:
   leftArrowSteal: {fileID: 2465021718695013847}
   rightArrowSteal: {fileID: 615633070824461069}
   itemButtonPrefab: {fileID: 7312905370119395786, guid: b310fd2199528f348a98064d71eb66be, type: 3}
+  stealButtonPrefab: {fileID: 5505843544723443520, guid: 074633b4e265897488c38ef1d772b12f, type: 3}
   enemyButtonPrefab: {fileID: 5662044592925659098, guid: e04f5c8983845474193c8d0854de7631, type: 3}
+  enemyHealthContainer: {fileID: 0}
+  enemyPrefabText: {fileID: 0}
   actionText: {fileID: 3233555572045396099}
 --- !u!114 &8276594286673094481
 MonoBehaviour:
@@ -1203,17 +1207,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6062632121966551404}
   m_SourcePrefab: {fileID: 100100000, guid: d9d09ddae46e7fd4487ce8452fddb121, type: 3}
---- !u!114 &32852310488680597 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5874571786821807204, guid: d9d09ddae46e7fd4487ce8452fddb121, type: 3}
-  m_PrefabInstance: {fileID: 5904813856167896305}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &423059536883130132 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6065537819239234533, guid: d9d09ddae46e7fd4487ce8452fddb121, type: 3}
@@ -1336,7 +1329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldManager: {fileID: 4595895428334873847}
   uiManager: {fileID: 1071864276696371400}
-  dialogueDisplayTime: 1.5
+  dialogueDisplayTime: 2
   enemies: []
   characterToAttack: {fileID: 0}
   moneyCount: 0

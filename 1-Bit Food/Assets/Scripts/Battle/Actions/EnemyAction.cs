@@ -1,5 +1,5 @@
 public class EnemyAction : CharacterAction {
-    public delegate void AttackDelegate(CharacterBattle self, CharacterBattle target, Food food = null);
+    public delegate void AttackDelegate(EnemyBattle self, PlayerBattle target, Food food = null);
 
     public AttackDelegate Attack { get; private set; }
 

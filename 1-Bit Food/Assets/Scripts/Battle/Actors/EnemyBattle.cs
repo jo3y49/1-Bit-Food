@@ -5,12 +5,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class EnemyBattle : CharacterBattle {
+
+    public int lowDamage, highDamage;
+
+    public int steals;
     protected GameObject player;
     protected bool isAttacking;
 
     protected WorldManager worldManager;
 
     public List<Food> stolenFood = new();
+    public List<Food> recentSteals = new();
 
     protected override void Start()
     {
@@ -19,7 +24,7 @@ public class EnemyBattle : CharacterBattle {
         player = GameObject.FindGameObjectWithTag("Player");
         worldManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WorldManager>();
 
-        CharacterName = "Food Thief";
+        CharacterName = "Thief";
     }
 
     public override void PrepareCombat()
@@ -53,21 +58,32 @@ public class EnemyBattle : CharacterBattle {
 
     public override string DoAttack(CharacterAction action, CharacterBattle target, Flavor flavor = null) 
     {
-        (action as EnemyAction).Attack(this, target);
+        (action as EnemyAction).Attack(this, target as PlayerBattle);
 
-        if (action.Name == "Steal") return $"{CharacterName} Stole {GetRecentlyStolenItem().name}!";
+        if (action.Name == "Steal") 
+        {
+            string text = $"{CharacterName} stole ";
+
+            foreach (Food food in recentSteals)
+            {
+                text += $"{food.name}, ";
+            }
+
+            return text;
+        }
 
         else return "";
     }
 
     public override void TakeItem(Food food)
     {
+        recentSteals.Add(food);
         stolenFood.Add(food);
     }
 
-    public Food GetRecentlyStolenItem()
+    public List<Food> GetRecentlyStolenItems()
     {
-        return stolenFood.Last();
+        return recentSteals;
     }
 
     public override Food StealItem(Food food)
@@ -75,6 +91,11 @@ public class EnemyBattle : CharacterBattle {
         stolenFood.Remove(food);
 
         return food;
+    }
+
+    public void ClearRecentItems()
+    {
+        recentSteals.Clear();
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other) 
@@ -85,5 +106,5 @@ public class EnemyBattle : CharacterBattle {
         }
     }
 
-    public virtual CharacterAction PickEnemyAttack() { return StealList.GetInstance().GetAction(); }
+    public virtual CharacterAction PickEnemyAttack() { return StealList.GetInstance().GetRandomAction(); }
 }

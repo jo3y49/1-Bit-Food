@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour {
 
     [Header("Button Prefabs")]
     [SerializeField] private Button itemButtonPrefab;
-    [SerializeField] private Button enemyButtonPrefab;
+    [SerializeField] private Button stealButtonPrefab, enemyButtonPrefab;
 
     // Lists to fill with instantiated button prefabs
     private List<Button> targetButtons = new();
@@ -49,6 +49,9 @@ public class UIManager : MonoBehaviour {
     private bool attack = true;
     private int currentMenu = 0;
     private int itemIndex, stealIndex = 0;
+    public GameObject enemyHealthContainer;
+    public TextMeshProUGUI enemyPrefabText;
+    private List<TextMeshProUGUI> enemyHealthTexts = new();
 
     private List<(EnemyBattle, Food)> stolen = new();
 
@@ -109,6 +112,8 @@ public class UIManager : MonoBehaviour {
 
     public void ActivateForPlayerTurn()
     {
+        initialContainer.SetActive(true);
+
         // Update UI
         SetText("");
 
@@ -120,7 +125,7 @@ public class UIManager : MonoBehaviour {
         attack = true;
         // feedbackManager.SwitchMenu(currentMenu);
         
-        initialContainer.SetActive(true);
+        
         Utility.SetActiveButton(initialButton);
     }
 
@@ -132,8 +137,10 @@ public class UIManager : MonoBehaviour {
             EnemyBattle enemy = enemies[i];
 
             // set health display
-            // TextMeshProUGUI enemyHealthText = Instantiate(eHealthPrefab, eHealthContainer.transform);
-            // enemyHealthText.rectTransform.anchoredPosition = new Vector3(0, -i * 100);
+            TextMeshProUGUI enemyHealthText = Instantiate(enemyPrefabText, enemyHealthContainer.transform);
+            enemyHealthText.rectTransform.anchoredPosition = new Vector3(0, -i * 50);
+            enemyHealthText.text = $"enemy {i}: {enemies[i].health}";
+            enemyHealthTexts.Add(enemyHealthText);
 
             // set button to select enemy
             Button selectEnemy = Instantiate(enemyButtonPrefab, targetContainer.transform);
@@ -171,9 +178,11 @@ public class UIManager : MonoBehaviour {
 
         Transform flavorButtons = flavorContainer.transform.GetChild(1);
 
+        flavorButton = flavorButtons.GetChild(0).GetComponent<Button>();
+
         for (int i = 0; i < flavorValues.Length; i++)
         {
-            flavorValues[i] = flavorButtons.GetChild(i).GetChild(2).GetComponent<TextMeshProUGUI>();
+            flavorValues[i] = flavorButtons.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>();
         }
     }
 
@@ -195,15 +204,17 @@ public class UIManager : MonoBehaviour {
     private void UpdateEnemyHealth()
     {
         // set all enemys' health ui elements
-        // for (int i = 0; i < enemies.Count; i++)
-        // {
-        //     EnemyBattle enemy = enemies[i];
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            EnemyBattle enemy = enemies[i];
 
-        //     if (enemy.health < 0 && targetButtons[i].interactable)
-        //     {
-        //         targetButtons[i].interactable = false;
-        //     }
-        // }
+            enemyHealthTexts[i].text = $"enemy {i}: {enemy.health}"; 
+
+            if (enemy.health < 0 && targetButtons[i].interactable)
+            {
+                targetButtons[i].interactable = false;
+            }
+        }
     }
 
     private void UpdateActions()
@@ -227,6 +238,7 @@ public class UIManager : MonoBehaviour {
                 Destroy(child.gameObject);
                 delete.Add(itemButtons[i]);
                 itemIndex = 0;
+                itemButtons[0].gameObject.SetActive(true);
                 leftArrowItem.SetActive(false);
 
                 if (itemButtons.Count <= 1) rightArrowItem.SetActive(false);
@@ -235,6 +247,7 @@ public class UIManager : MonoBehaviour {
 
         foreach (Button b in delete)
         {
+            b.gameObject.SetActive(false);
             itemButtons.Remove(b);
         }
 
@@ -256,15 +269,22 @@ public class UIManager : MonoBehaviour {
 
         if (stolen.Count == 1) rightArrowSteal.SetActive(false);
 
+        else rightArrowSteal.SetActive(true);
+
         for (int i = 0; i < stolen.Count; i++)
         {
             (EnemyBattle, Food) element = stolen[i];
 
-            Button button = Instantiate(itemButtonPrefab, stealBackContainer.transform);
-            button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = element.Item2.name;
+            Button button = Instantiate(stealButtonPrefab, container.transform);
             button.onClick.AddListener(() => PickSteal(element));
+            button.transform.GetChild(0).GetComponent<Image>().sprite = element.Item2.sprite;
             stealButtons.Add(button);
+            button.gameObject.SetActive(false);
         }
+
+        stealButtons.Reverse();
+
+        stealButtons[stealIndex].gameObject.SetActive(true);
     }
 
     public void SelectAttack()
@@ -286,6 +306,7 @@ public class UIManager : MonoBehaviour {
     public void SelectSteal()
     {
         currentMenu = 4;
+        backButton.SetActive(true);
         ToggleMenu(initialContainer, stealBackContainer, stealButtons[stealIndex], 1, "What do you want to take back?");
     }
 
@@ -302,12 +323,10 @@ public class UIManager : MonoBehaviour {
         if (itemIndex == 0) 
         {
             leftArrowItem.SetActive(false);
-            Utility.SetActiveButton(itemButtons[itemIndex]);
+            Utility.SetActiveButton(itemButtons[0]);
         }
 
-        else if (itemIndex == itemButtons.Count - 2) rightArrowItem.SetActive(true);
-
-        
+        if (itemIndex == itemButtons.Count - 2) rightArrowItem.SetActive(true);        
     }
 
     public void SelectLeftSteal()
@@ -323,10 +342,10 @@ public class UIManager : MonoBehaviour {
         if (stealIndex == 0) 
         {
             leftArrowSteal.SetActive(false);
-            Utility.SetActiveButton(stealButtons[stealIndex]);
+            Utility.SetActiveButton(stealButtons[0]);
         }
 
-        else if (stealIndex == stealButtons.Count - 2) rightArrowSteal.SetActive(true);
+        if (stealIndex == stealButtons.Count - 2) rightArrowSteal.SetActive(true);
     }
 
     public void SelectRightItem()
@@ -345,7 +364,7 @@ public class UIManager : MonoBehaviour {
             Utility.SetActiveButton(itemButtons[itemIndex]);
         }
 
-        else if (itemIndex == 1) leftArrowItem.SetActive(true);
+        if (itemIndex == 1) leftArrowItem.SetActive(true);
     }
 
     public void SelectRightSteal()
@@ -364,7 +383,7 @@ public class UIManager : MonoBehaviour {
             Utility.SetActiveButton(stealButtons[stealIndex]);
         }
 
-        else if (stealIndex == 1) leftArrowSteal.SetActive(true);
+        if (stealIndex == 1) leftArrowSteal.SetActive(true);
     }
 
     private void BackFromItem()
@@ -462,6 +481,8 @@ public class UIManager : MonoBehaviour {
         SendStealAction(element.Item2);
         SetText($"Stole back your {element.Item2.name} from {characterToAttack.CharacterName}!");
         RemoveFood(element);
+        stealIndex = 0;
+        stealButtons[0].gameObject.SetActive(true);
     }
 
     private void PickHeal(PlayerAction action)
@@ -475,16 +496,24 @@ public class UIManager : MonoBehaviour {
     private void SendAttackAction()
     {
         battleManager.SetAttackAction(characterToAttack, selectedAction, flavor);
+        EndTurn();
     }
 
     private void SendHealAction()
     {
         battleManager.SetHealAction(selectedAction, flavor);
+        EndTurn();
     }
 
     private void SendStealAction(Food food)
     {
         battleManager.SetStealAction(characterToAttack, food);
+        EndTurn();
+    }
+
+    private void EndTurn()
+    {
+        backButton.SetActive(false);
     }
 
     public void SetText(string s)
@@ -547,7 +576,10 @@ public class UIManager : MonoBehaviour {
 
     public void EnemyStolen(EnemyBattle enemy)
     {
-        stolen.Add((enemy, enemy.GetRecentlyStolenItem()));
+        foreach (Food food in enemy.GetRecentlyStolenItems())
+            stolen.Add((enemy, food));
+
+        enemy.ClearRecentItems();
 
         stealBackButton.SetActive(true);
     }
