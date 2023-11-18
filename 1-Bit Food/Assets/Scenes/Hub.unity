@@ -177,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8219949000098131320, guid: c8deb58090af4bf47a27b7a728e7e6ca, type: 3}
       propertyPath: scene
-      value: Hard
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -440,7 +440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8219949000098131320, guid: c8deb58090af4bf47a27b7a728e7e6ca, type: 3}
       propertyPath: scene
-      value: Medium
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1562,7 +1562,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8219949000098131320, guid: c8deb58090af4bf47a27b7a728e7e6ca, type: 3}
       propertyPath: scene
-      value: Easy
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2257,7 +2257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8219949000098131320, guid: c8deb58090af4bf47a27b7a728e7e6ca, type: 3}
       propertyPath: scene
-      value: Danger
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

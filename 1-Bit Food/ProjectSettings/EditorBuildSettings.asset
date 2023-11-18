@@ -10,16 +10,16 @@ EditorBuildSettings:
     guid: 98738b422770fdb4e868d7cc5ec6a6fc
   - enabled: 1
     path: Assets/Scenes/Easy.unity
-    guid: 995cd4293725e9449abd0746fe2f08b0
+    guid: 977df17aa8ff6ce498d11551dd556a76
   - enabled: 1
     path: Assets/Scenes/Medium.unity
-    guid: 7276cdf40b332b747b5e0023bace3b42
+    guid: 0c1c848d23312914bbc431091f61ed86
   - enabled: 1
     path: Assets/Scenes/Hard.unity
     guid: 2d5d3728348c27d4d9eb26a193df3804
   - enabled: 1
     path: Assets/Scenes/Danger.unity
-    guid: 47ac33014aa7e0045990e5046a985169
+    guid: a699ac9c4bfb9554cb7d1735404185e1
   - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 496c3a01e6b6a064e9fa8be78be21dd4

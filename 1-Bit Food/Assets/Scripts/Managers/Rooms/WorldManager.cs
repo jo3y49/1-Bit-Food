@@ -48,7 +48,7 @@ public class WorldManager : MonoBehaviour {
 
     public virtual void WinBattle()
     {
-        if (coinReward < 0) SceneManager.LoadScene("Credits");
+        if (coinReward < 0) SceneManager.LoadScene(5);
 
 
         GameManager.instance.AddPlayerMoney(coinReward);
