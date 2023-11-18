@@ -3,8 +3,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public abstract class StoreManager : MonoBehaviour {
-    [SerializeField] protected GameObject popUp;
-    [SerializeField] protected TextMeshProUGUI confirmationMessage;
     [SerializeField] protected TextMeshProUGUI inventoryAmountText, inventoryCapText;
 
     protected Food[] foods;
@@ -19,7 +17,6 @@ public abstract class StoreManager : MonoBehaviour {
     }
 
     protected virtual void OnEnable() {
-        popUp.SetActive(false);
         foods = FoodList.GetInstance().GetFoods();
 
         InitializeInventory();
@@ -32,18 +29,9 @@ public abstract class StoreManager : MonoBehaviour {
         Transaction();
 
         SetInventory(selectedFood);
-
-        popUp.SetActive(false);
     }
 
     protected abstract void Transaction();
-
-    public virtual void Cancel()
-    {
-        AudioManager.instance.PlayUIClip(2);
-
-        popUp.SetActive(false);
-    }
 
     public virtual void Return()
     {

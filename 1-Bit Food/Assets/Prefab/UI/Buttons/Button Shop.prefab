@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 112880582350590675, guid: 5b739280773658e438d44c8e2c55a413, type: 3}
       propertyPath: m_Name
-      value: Button Variant
+      value: Button Shop
       objectReference: {fileID: 0}
     - target: {fileID: 2321664924210820899, guid: 5b739280773658e438d44c8e2c55a413, type: 3}
       propertyPath: m_Transition
@@ -18,6 +18,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2321664924210820899, guid: 5b739280773658e438d44c8e2c55a413, type: 3}
       propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: -110751047, guid: 131b9073d687269448b72b6718c3bf99, type: 3}
+    - target: {fileID: 2321664924210820899, guid: 5b739280773658e438d44c8e2c55a413, type: 3}
+      propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
       objectReference: {fileID: -110751047, guid: 131b9073d687269448b72b6718c3bf99, type: 3}
     - target: {fileID: 3149606344895747486, guid: 5b739280773658e438d44c8e2c55a413, type: 3}

@@ -155,10 +155,6 @@ PrefabInstance:
       propertyPath: worldManager
       value: 
       objectReference: {fileID: 9079966939240943754}
-    - target: {fileID: 1071864276696371400, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: feedbackManager
-      value: 
-      objectReference: {fileID: 247649610862916010}
     - target: {fileID: 1385834621942126132, guid: dc87430de5adade499d9e103770bccd7, type: 3}
       propertyPath: m_RenderMode
       value: 0
@@ -187,30 +183,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1863281326603468363, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1863281326603468363, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5559814326132880665}
-    - target: {fileID: 1863281326603468363, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PickFlavor
-      objectReference: {fileID: 0}
-    - target: {fileID: 1863281326603468363, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1863281326603468363, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 11400000, guid: adaad54610b111b428df6126653a9e4e, type: 2}
-    - target: {fileID: 1863281326603468363, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Flavor, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 2624360991100144456, guid: dc87430de5adade499d9e103770bccd7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -235,57 +207,9 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3323971192185094776, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3323971192185094776, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5559814326132880665}
-    - target: {fileID: 3323971192185094776, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PickFlavor
-      objectReference: {fileID: 0}
-    - target: {fileID: 3323971192185094776, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3323971192185094776, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 11400000, guid: 05e1dc79af63c1a4081cdfa5bec26540, type: 2}
-    - target: {fileID: 3323971192185094776, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Flavor, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 4450216004867020579, guid: dc87430de5adade499d9e103770bccd7, type: 3}
       propertyPath: m_Name
       value: Canvas Debug
-      objectReference: {fileID: 0}
-    - target: {fileID: 4488147664166209750, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4488147664166209750, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5559814326132880665}
-    - target: {fileID: 4488147664166209750, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PickFlavor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4488147664166209750, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4488147664166209750, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 11400000, guid: 9b1fe91a87f439e46b449bbbbc087795, type: 2}
-    - target: {fileID: 4488147664166209750, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Flavor, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4658902685990474875, guid: dc87430de5adade499d9e103770bccd7, type: 3}
       propertyPath: feedbackContainer
@@ -343,6 +267,10 @@ PrefabInstance:
       propertyPath: worldManager
       value: 
       objectReference: {fileID: 9079966939240943754}
+    - target: {fileID: 6072289023816674999, guid: dc87430de5adade499d9e103770bccd7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6361196814538458133, guid: dc87430de5adade499d9e103770bccd7, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -439,53 +367,9 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7202658714782985345, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202658714782985345, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5559814326132880665}
-    - target: {fileID: 7202658714782985345, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PickFlavor
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202658714782985345, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202658714782985345, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 11400000, guid: 47ae45bd660b4504983cc0dfb507729c, type: 2}
-    - target: {fileID: 7202658714782985345, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Flavor, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8305633163381423490, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8305633163381423490, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5559814326132880665}
-    - target: {fileID: 8305633163381423490, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PickFlavor
-      objectReference: {fileID: 0}
-    - target: {fileID: 8305633163381423490, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8305633163381423490, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 11400000, guid: e2988ba84d250d44ea0c04bcb3e240c4, type: 2}
-    - target: {fileID: 8305633163381423490, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Flavor, Assembly-CSharp
+    - target: {fileID: 7316534806627300881, guid: dc87430de5adade499d9e103770bccd7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8491219527677560521, guid: dc87430de5adade499d9e103770bccd7, type: 3}
       propertyPath: m_AnchorMax.y
@@ -511,6 +395,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8779923808109444997, guid: dc87430de5adade499d9e103770bccd7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8882454237539152768, guid: dc87430de5adade499d9e103770bccd7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -533,6 +421,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8882454237539152768, guid: dc87430de5adade499d9e103770bccd7, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8892365099499661588, guid: dc87430de5adade499d9e103770bccd7, type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -547,17 +439,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 9079966939240943754}
   m_SourcePrefab: {fileID: 100100000, guid: dc87430de5adade499d9e103770bccd7, type: 3}
---- !u!114 &247649610862916010 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4658902685990474875, guid: dc87430de5adade499d9e103770bccd7, type: 3}
+--- !u!1 &2756738335369139136 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7316534806627300881, guid: dc87430de5adade499d9e103770bccd7, type: 3}
   m_PrefabInstance: {fileID: 4884271775777301969}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3799034424158664868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30938e3367e68cf4f9b73d5de86f5f0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2976723574137410205 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7676131701874095948, guid: dc87430de5adade499d9e103770bccd7, type: 3}
@@ -578,17 +464,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8779923808109444997, guid: dc87430de5adade499d9e103770bccd7, type: 3}
   m_PrefabInstance: {fileID: 4884271775777301969}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5559814326132880665 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1071864276696371400, guid: dc87430de5adade499d9e103770bccd7, type: 3}
-  m_PrefabInstance: {fileID: 4884271775777301969}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9082138314864554738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b83e3183fac8a2d4ebd29941013398ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9082138314864554738 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4450216004867020579, guid: dc87430de5adade499d9e103770bccd7, type: 3}
@@ -608,6 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleUI: {fileID: 3799034424158664868}
   shopUI: {fileID: 4184096263651170900}
+  bakeUI: {fileID: 2756738335369139136}
   nearbyEncounterRange: 10
   spawnLocations:
   - {x: -7.73, y: 0}

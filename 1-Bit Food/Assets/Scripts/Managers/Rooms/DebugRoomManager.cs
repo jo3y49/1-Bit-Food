@@ -18,6 +18,8 @@ public class DebugRoomManager : WorldManager {
         activeEnemies = new GameObject[spawnLocations.Length];
     }
     private void Update() {
+
+        if (battleUI.activeSelf) return;
         
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -40,7 +42,7 @@ public class DebugRoomManager : WorldManager {
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            SceneManager.LoadScene(craftScene);
+            bakeUI.SetActive(!bakeUI.activeSelf);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha4))

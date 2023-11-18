@@ -1,50 +1,111 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FeedbackUIManager : MonoBehaviour {
-    [SerializeField] private GameObject feedbackContainer;
-    private GameObject activeMenu;
-    private List<GameObject> menus = new();
+    [SerializeField] private GameObject feedbackContainer, itemMenu, totalMenu, plus, flavorOutline;
+    [SerializeField] private Image actionImage, itemImage1, itemImage2, flavorImage;
+    [SerializeField] private TextMeshProUGUI itemNameText, itemDamageText, itemHealText, totalText;
 
+    [Header("Sprites")]
+    [SerializeField] private Sprite attackSprite;
+    [SerializeField] private Sprite healSprite;
+
+    private bool attack;
     private Food activeFood;
     private Flavor activeFlavor;
 
+    private int itemNumber, totalNumber;
+
     private void Awake() {
-        for (int i = 0; i < feedbackContainer.transform.childCount; i++)
-        {
-            menus.Add(feedbackContainer.transform.GetChild(i).gameObject);
-        }
-
         activeFood = FoodList.GetInstance().GetFoods()[0];
-        // activeFlavor = 
+        activeFlavor = null;
 
-        // feedbackContainer.SetActive(false);
+        CloseMenus();
+    }
+
+    public void GoToItemMenu(bool attack, Food food)
+    {
+        this.attack = attack;
+
+        if (attack) actionImage.sprite = attackSprite;
+
+        else actionImage.sprite = healSprite;
+
+        UpdateItemMenu(food);
+
+        itemMenu.SetActive(true);
     }
 
     public void UpdateItemMenu(Food food)
     {
         activeFood = food;
+
+        itemNameText.text = food.name;
+        itemImage1.sprite = food.sprite;
+        itemDamageText.text = food.damage.ToString();
+        itemHealText.text = food.heal.ToString();
     }
 
-    public void UpdateFlavorMenu(Flavor flavor)
+    public void GoToTotalMenu()
+    {
+        if (attack) itemNumber = activeFood.damage;
+
+        else itemNumber = activeFood.heal;
+
+        totalNumber = itemNumber;
+        totalText.text = totalNumber.ToString();
+
+        itemImage2.sprite = activeFood.sprite;
+
+        itemMenu.SetActive(false);
+        totalMenu.SetActive(true);
+    }
+
+    public void UpdateTotalMenu(Flavor flavor)
     {
         activeFlavor = flavor;
+
+        if (activeFlavor == null)
+        {
+            flavorImage.gameObject.SetActive(false);
+            plus.SetActive(false);
+            flavorOutline.SetActive(false);
+
+            totalNumber = itemNumber;
+        }
+        else
+        {
+            flavorImage.gameObject.SetActive(true);
+            plus.SetActive(true);
+            flavorOutline.SetActive(true);
+
+            totalNumber = itemNumber + flavor.bonus;
+            flavorImage.sprite = flavor.sprite;
+        }
+
+        totalText.text = totalNumber.ToString();
     }
 
-    public void SetResultMenu()
+    public void BackFromTotalMenu()
     {
-        
+        totalMenu.SetActive(false);
+        itemMenu.SetActive(true);
     }
 
-    private void SetActiveMenu(GameObject menu)
-    {
-        activeMenu.SetActive(false);
-        menu.SetActive(true);
-        activeMenu = menu;
+    public void CloseAllMenus()
+    {   
+        feedbackContainer.SetActive(false);
+        CloseMenus();
     }
 
-    public void SwitchMenu(int index)
+    public void CloseMenus()
     {
-        SetActiveMenu(menus[index]);
+        itemMenu.SetActive(false);
+        totalMenu.SetActive(false);
+        plus.SetActive(false);
+        flavorOutline.SetActive(false);
+        flavorImage.gameObject.SetActive(false);
     }
 }

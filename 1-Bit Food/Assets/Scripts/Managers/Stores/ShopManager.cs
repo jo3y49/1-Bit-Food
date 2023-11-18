@@ -18,16 +18,13 @@ public class ShopManager : StoreManager
 
     public void Buy(Ingredient food)
     {
-        if (money < food.price || popUp.activeSelf || !GameManager.instance.OpenInventory()) return;
-        
         AudioManager.instance.PlayUIClip(0);
+
+        if (money < food.price || !GameManager.instance.OpenInventory()) return;
 
         selectedFood = food;
 
-        confirmationMessage.text = $"Buy {food.name} for {food.price} coins?";
-
-        popUp.SetActive(true);
-        
+        Confirm();
 
     }
 

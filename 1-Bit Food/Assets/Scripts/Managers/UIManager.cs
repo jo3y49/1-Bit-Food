@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem.Android;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
@@ -23,12 +22,14 @@ public class UIManager : MonoBehaviour {
     [Header("Middle Menu")]
     [Header("Containers")]
     [SerializeField] private GameObject initialContainer;
-    [SerializeField] private GameObject itemContainer, flavorContainer, stealBackContainer, targetContainer;
+    [SerializeField] private GameObject initialContainerSmall, initialContainerLarge, itemContainer, flavorContainer, stealBackContainer, targetContainer;
 
     [Header("Buttons")]
-    [SerializeField] private Button initialButton;
-    [SerializeField] private Button flavorButton;
-    [SerializeField] private GameObject backButton, stealBackButton, leftArrowItem, rightArrowItem, leftArrowSteal, rightArrowSteal;
+    [SerializeField] private Button initialButtonSmall;
+    [SerializeField] private Button initialButtonLarge, flavorButton;
+    [SerializeField] private GameObject backButton, leftArrowItem, rightArrowItem, leftArrowSteal, rightArrowSteal;
+
+    private Button initialButton;
 
     [Header("Button Prefabs")]
     [SerializeField] private Button itemButtonPrefab;
@@ -99,19 +100,36 @@ public class UIManager : MonoBehaviour {
         
         // Deactivate menus until they are needed
         initialContainer.SetActive(false);
+        initialContainerSmall.SetActive(false);
+        initialContainerLarge.SetActive(false);
         targetContainer.SetActive(false);
         itemContainer.SetActive(false);
         flavorContainer.SetActive(false);
         stealBackContainer.SetActive(false);
-        // feedbackManager.gameObject.SetActive(true);
-
-        stealBackButton.SetActive(false);
+        feedbackManager.gameObject.SetActive(true);
         backButton.SetActive(false);
     }
 
     public void ActivateForPlayerTurn()
     {
+        
+
         initialContainer.SetActive(true);
+        actionText.gameObject.SetActive(false);
+
+        if (stolen.Count > 0) 
+        {
+            initialContainerSmall.SetActive(true);
+            initialContainerLarge.SetActive(false);
+            initialButton = initialButtonSmall;
+        }
+
+        else 
+        {
+            initialContainerLarge.SetActive(true);
+            initialContainerSmall.SetActive(false);
+            initialButton = initialButtonLarge;
+        }
 
         // Update UI
         SetText("");
@@ -122,9 +140,7 @@ public class UIManager : MonoBehaviour {
         UpdateActions();
         currentMenu = 0;
         attack = true;
-        // feedbackManager.SwitchMenu(currentMenu);
-        
-        
+    
         Utility.SetActiveButton(initialButton);
     }
 
@@ -148,7 +164,7 @@ public class UIManager : MonoBehaviour {
 
             // set button text
             selectEnemy.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = enemy.CharacterName;
-            selectEnemy.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = i.ToString();
+            selectEnemy.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = (i+1).ToString();
         }
     }
 
@@ -296,7 +312,8 @@ public class UIManager : MonoBehaviour {
         attack = true;
         currentMenu++;
         backButton.SetActive(true);
-        ToggleMenu(initialContainer, itemContainer, itemButtons[itemIndex], 0, "What would you like to throw?");
+        ToggleMenu(initialContainer, itemContainer, itemButtons[itemIndex], 0);
+        feedbackManager.GoToItemMenu(attack, FoodList.GetInstance().GetAction(itemIndex).Food);
     }
 
     public void SelectHeal()
@@ -304,14 +321,16 @@ public class UIManager : MonoBehaviour {
         attack = false;
         currentMenu++;
         backButton.SetActive(true);
-        ToggleMenu(initialContainer, itemContainer, itemButtons[itemIndex], 1, "What would you like to eat?");
+        ToggleMenu(initialContainer, itemContainer, itemButtons[itemIndex], 1);
+        feedbackManager.GoToItemMenu(attack, FoodList.GetInstance().GetAction(itemIndex).Food);
     }
 
     public void SelectSteal()
     {
         currentMenu = 4;
         backButton.SetActive(true);
-        ToggleMenu(initialContainer, stealBackContainer, stealButtons[stealIndex], 1, "What do you want to take back?");
+        ToggleMenu(initialContainer, stealBackContainer, stealButtons[stealIndex], 1);
+        feedbackManager.GoToItemMenu(true, stolen[stealButtons.Count - (stealIndex + 1)].Item2);
     }
 
     public void SelectLeftItem()
@@ -330,7 +349,9 @@ public class UIManager : MonoBehaviour {
             Utility.SetActiveButton(itemButtons[0]);
         }
 
-        if (itemIndex == itemButtons.Count - 2) rightArrowItem.SetActive(true);        
+        if (itemIndex == itemButtons.Count - 2) rightArrowItem.SetActive(true);
+
+        feedbackManager.UpdateItemMenu(FoodList.GetInstance().GetAction(itemIndex).Food);      
     }
 
     public void SelectLeftSteal()
@@ -350,6 +371,8 @@ public class UIManager : MonoBehaviour {
         }
 
         if (stealIndex == stealButtons.Count - 2) rightArrowSteal.SetActive(true);
+
+        feedbackManager.UpdateItemMenu(stolen[stealButtons.Count - (stealIndex + 1)].Item2);
     }
 
     public void SelectRightItem()
@@ -369,6 +392,8 @@ public class UIManager : MonoBehaviour {
         }
 
         if (itemIndex == 1) leftArrowItem.SetActive(true);
+
+        feedbackManager.UpdateItemMenu(FoodList.GetInstance().GetAction(itemIndex).Food);
     }
 
     public void SelectRightSteal()
@@ -388,6 +413,8 @@ public class UIManager : MonoBehaviour {
         }
 
         if (stealIndex == 1) leftArrowSteal.SetActive(true);
+
+        feedbackManager.UpdateItemMenu(stolen[stealButtons.Count - (stealIndex + 1)].Item2);
     }
 
     private void BackFromItem()
@@ -395,12 +422,15 @@ public class UIManager : MonoBehaviour {
         currentMenu--;
         backButton.SetActive(false);
         ToggleMenu(itemContainer, initialContainer, initialButton, 2);
+        feedbackManager.CloseMenus();
+
     }
 
     public void BackFromFlavor()
     {
         currentMenu--;
         ToggleMenu(flavorContainer, itemContainer, itemButtons[itemIndex], 3);
+        feedbackManager.BackFromTotalMenu();
     }
 
     private void BackFromTarget()
@@ -408,13 +438,15 @@ public class UIManager : MonoBehaviour {
         ColorSwitcher.instance.ResetFlavor();
 
         currentMenu--;
-        ToggleMenu(targetContainer, flavorContainer, flavorButton, 4, "Which flavor would you like to use?");
+        ToggleMenu(targetContainer, flavorContainer, flavorButton, 4);
     }
 
     private void BackFromSteal()
     {
         currentMenu = 0;
+        backButton.SetActive(false);
         ToggleMenu(stealBackContainer, initialContainer, initialButton, 5);
+        feedbackManager.CloseMenus();
     }
 
     public void Back()
@@ -446,7 +478,9 @@ public class UIManager : MonoBehaviour {
         currentMenu++;
         selectedAction = action;
 
-        ToggleMenu(itemContainer, flavorContainer, flavorButton, 6, "Which flavor would you like to use?");
+        ToggleMenu(itemContainer, flavorContainer, flavorButton, 6);
+
+        feedbackManager.GoToTotalMenu();
     }
 
     public void PickFlavor(Flavor flavor)
@@ -462,7 +496,6 @@ public class UIManager : MonoBehaviour {
         {
             targetContainer.SetActive(true);
             Utility.SetActiveButton(targetButtons[0]);
-            SetText($"Who would you like to throw your {selectedAction.Name} at?");
         } else 
         {
             SendHealAction();
@@ -518,6 +551,8 @@ public class UIManager : MonoBehaviour {
     private void EndTurn()
     {
         backButton.SetActive(false);
+        feedbackManager.CloseMenus();
+        actionText.gameObject.SetActive(true);
     }
 
     public void SetText(string s)
@@ -584,8 +619,6 @@ public class UIManager : MonoBehaviour {
             stolen.Add((enemy, food));
 
         enemy.ClearRecentItems();
-
-        stealBackButton.SetActive(true);
     }
 
     private void RemoveFoods(EnemyBattle enemy)
@@ -609,8 +642,6 @@ public class UIManager : MonoBehaviour {
         stolen.Remove(food);
 
         stealIndex = 0;
-
-        if (stolen.Count <= 0) stealBackButton.SetActive(false);
     }
 
     private void ToggleMenu(GameObject close, GameObject open, Button activeButton, int audioIndex = 0, string text = "")

@@ -15,3 +15,4 @@ MonoBehaviour:
   bright: {r: 0.49056602, g: 0.23871037, b: 0, a: 1}
   dark: {r: 0, g: 0, b: 0, a: 1}
   bonus: 2
+  sprite: {fileID: 1486900966, guid: 2fd7956a2b8266f44b6fa6ca77889fc2, type: 3}

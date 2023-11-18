@@ -13,12 +13,10 @@ public class BakeManager : StoreManager {
         recipes = Resources.LoadAll<Recipe>("Recipes");
     }
 
-    private void Craft(Recipe recipe)
+    public void Craft(Recipe recipe)
     {
-        if (popUp.activeSelf || !GameManager.instance.OpenInventory()) return;
+        if (!GameManager.instance.OpenInventory()) return;
 
-        string ingredientList = "";
-        string playerIngredientList = "";
         FoodList foodList = FoodList.GetInstance();
 
         for (int i = 0; i < recipe.ingredientQuantities.Count; i++)
@@ -28,22 +26,15 @@ public class BakeManager : StoreManager {
             int need = recipe.ingredientQuantities[i];
 
             if (have < need) return;
-
-            ingredientList += ", " + need + " " + food.name;
-            playerIngredientList += ", " + have + " " + food.name;
         }
-
-        ingredientList = ingredientList.TrimStart(',');
-        playerIngredientList = playerIngredientList.TrimStart(',');
 
         AudioManager.instance.PlayUIClip(0);
 
         selectedFood = recipe.result;
         selectedRecipe = recipe;
 
-        confirmationMessage.text = $"Bake a {selectedFood.name} with{ingredientList}? You have{playerIngredientList}";
+        Confirm();
 
-        popUp.SetActive(true);
     }
 
     protected override void Transaction()

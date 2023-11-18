@@ -8,6 +8,7 @@ public class FoodList
     private static FoodList instance;
     private Food[] foods;
     private IDictionary<string, PlayerAction> foodList;
+    private List<Flavor> flavors;
 
     private FoodList()
     {
