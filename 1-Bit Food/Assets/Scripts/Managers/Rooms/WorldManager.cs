@@ -13,6 +13,8 @@ public class WorldManager : MonoBehaviour {
 
     public float nearbyEncounterRange = 3f;
 
+    public int coinReward;
+
     protected virtual void Start() {
 
         player = GameObject.FindGameObjectWithTag("Player");
@@ -26,17 +28,16 @@ public class WorldManager : MonoBehaviour {
         return enemies;
     }
 
-    public virtual void EncounterEnemy(GameObject enemy)
+    public virtual void EncounterEnemy()
     {
         if (battleUI.activeSelf) return;
 
         foreach (EnemyBattle e in FindObjectsOfType<EnemyBattle>())
         {
-            if (Vector2.Distance(e.transform.position, enemy.transform.position) < nearbyEncounterRange)
-            {
-                enemies.Add(e);
-                e.PrepareCombat();
-            }
+            
+            enemies.Add(e);
+            e.PrepareCombat();
+            
                 
         }
 
@@ -47,7 +48,10 @@ public class WorldManager : MonoBehaviour {
 
     public virtual void WinBattle()
     {
-        
+        if (coinReward < 0) SceneManager.LoadScene("Credits");
+
+
+        GameManager.instance.AddPlayerMoney(coinReward);
     }
 
     public virtual void LoseBattle()

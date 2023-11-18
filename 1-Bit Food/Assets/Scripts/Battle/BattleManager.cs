@@ -214,7 +214,7 @@ public class BattleManager : MonoBehaviour {
         turnOrder = newTurnOrder;
 
         // gain stats from kill
-        moneyCount += defeatedEnemy.GetLoot();
+        // moneyCount += defeatedEnemy.GetLoot();
 
         // remove enemy from ui
         uiManager.DefeatedEnemy(defeatedEnemy);

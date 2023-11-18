@@ -10,7 +10,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3998067529695172208, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
       propertyPath: m_Name
-      value: Enemy (2) Variant
+      value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 5256324326347649697, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5256324326347649697, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5256324326347649697, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5256324326347649697, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -53,12 +65,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6822786970716077783, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
+      propertyPath: health
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822786970716077783, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
       propertyPath: lowDamage
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6822786970716077783, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
       propertyPath: highDamage
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

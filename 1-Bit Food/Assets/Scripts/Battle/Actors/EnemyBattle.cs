@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class EnemyBattle : CharacterBattle {
 
+    [SerializeField] private EnemyHealthDisplay healthDisplay;
+
     public int lowDamage, highDamage;
 
     public int steals;
@@ -25,11 +27,20 @@ public class EnemyBattle : CharacterBattle {
         worldManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WorldManager>();
 
         CharacterName = "Thief";
+
+        healthDisplay.SetHealth(health);
     }
 
     public override void PrepareCombat()
     {
-        GetComponent<Collider2D>().enabled = false;
+        // GetComponent<Collider2D>().enabled = false;
+    }
+
+    public override void Attacked(int damage, Flavor flavor = null)
+    {
+        base.Attacked(damage, flavor);
+
+        healthDisplay.SetHealth(health);
     }
 
     public void ResetFromFight()
@@ -49,12 +60,12 @@ public class EnemyBattle : CharacterBattle {
         gameObject.SetActive(false);
     }
 
-    public int GetLoot()
-    {
-        int loot = Random.Range(20,40);
+    // public int GetLoot()
+    // {
+    //     int loot = Random.Range(20,40);
 
-        return loot;
-    }
+    //     return loot;
+    // }
 
     public override string DoAttack(CharacterAction action, CharacterBattle target, Flavor flavor = null) 
     {
@@ -98,13 +109,13 @@ public class EnemyBattle : CharacterBattle {
         recentSteals.Clear();
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D other) 
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            worldManager.EncounterEnemy(gameObject);
-        }
-    }
+    // protected virtual void OnTriggerEnter2D(Collider2D other) 
+    // {
+    //     if (other.gameObject.CompareTag("Player"))
+    //     {
+    //         worldManager.EncounterEnemy(gameObject);
+    //     }
+    // }
 
     public virtual CharacterAction PickEnemyAttack() { return StealList.GetInstance().GetRandomAction(); }
 }

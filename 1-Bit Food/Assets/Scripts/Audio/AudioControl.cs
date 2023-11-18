@@ -5,14 +5,18 @@ public class AudioControl : MonoBehaviour {
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip initial, loop;
 
-    private float initalLength;
-
     private void Awake() {
         audioSource.loop = false;
         audioSource.clip = initial;
         audioSource.Play();
 
         StartCoroutine(WaitForLoop());
+    }
+
+    private void Update() {
+        if (audioSource.isPlaying && Time.timeScale == 0) audioSource.Pause();
+
+        else if (!audioSource.isPlaying && Time.timeScale == 1) audioSource.Play();
     }
 
     private IEnumerator WaitForLoop()

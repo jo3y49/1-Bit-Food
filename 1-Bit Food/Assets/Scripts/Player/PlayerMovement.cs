@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour {
         // anim.SetBool("Moving", false);
     }
 
-    private void TogglePause(bool pause)
+    public void TogglePause(bool pause)
     {
         if (pause)
             actions.Gameplay.Disable();
