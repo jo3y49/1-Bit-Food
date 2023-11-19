@@ -57,17 +57,17 @@ public class DebugRoomManager : WorldManager {
         }
     }
 
-    public override void EncounterEnemy()
-    {
-        base.EncounterEnemy();
+    // public override void EncounterEnemy()
+    // {
+    //     base.EncounterEnemy();
 
-        tutText.SetActive(false);
-    }
+    //     tutText.SetActive(false);
+    // }
 
-    public override void WinBattle()
-    {
-        base.WinBattle();
+    // public override void WinBattle()
+    // {
+    //     base.WinBattle();
 
-        tutText.SetActive(true);
-    }
+    //     tutText.SetActive(true);
+    // }
 }

@@ -28,7 +28,6 @@ public class PlayerBattle : CharacterBattle {
             {"Lemon", flavorList[3]},
             {"Mint", flavorList[4]},
         };
-        
     }
 
     public override void Attacked(int damage, Flavor flavor = null)
@@ -119,6 +118,13 @@ public class PlayerBattle : CharacterBattle {
     public virtual int GetActionUses(PlayerAction action)
     {
         int i = actions.FindIndex(item => item == action);
+
+        return GetActionUses(i);
+    }
+
+    public virtual int GetActionUses(Food food)
+    {
+        int i = FoodList.GetInstance().GetFoodIndex(food);
 
         return GetActionUses(i);
     }

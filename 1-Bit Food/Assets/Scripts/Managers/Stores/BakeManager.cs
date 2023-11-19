@@ -15,8 +15,6 @@ public class BakeManager : StoreManager {
 
     public void Craft(Recipe recipe)
     {
-        if (!GameManager.instance.OpenInventory()) return;
-
         FoodList foodList = FoodList.GetInstance();
 
         for (int i = 0; i < recipe.ingredientQuantities.Count; i++)

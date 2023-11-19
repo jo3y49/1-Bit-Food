@@ -281,7 +281,7 @@ public class BattleManager : MonoBehaviour {
     {
         StopCoroutine(battleLoop);
 
-        uiManager.SetText($"You won! You got {moneyCount} coins");
+        uiManager.SetText($"You won! You got {worldManager.coinReward} coins");
 
         yield return new WaitForSeconds(dialogueDisplayTime);
 

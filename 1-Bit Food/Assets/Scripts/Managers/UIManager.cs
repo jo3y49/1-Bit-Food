@@ -51,11 +51,9 @@ public class UIManager : MonoBehaviour {
     private bool attack = true;
     private int currentMenu = 0;
     private int itemIndex, stealIndex = 0;
-    public GameObject enemyHealthContainer;
-    public TextMeshProUGUI enemyPrefabText;
-    private List<TextMeshProUGUI> enemyHealthTexts = new();
 
     private List<(EnemyBattle, Food)> stolen = new();
+    private List<Food> playerFood = new();
 
     [Header("Right Menu")]
 
@@ -152,10 +150,10 @@ public class UIManager : MonoBehaviour {
             EnemyBattle enemy = enemies[i];
 
             // set health display
-            TextMeshProUGUI enemyHealthText = Instantiate(enemyPrefabText, enemyHealthContainer.transform);
-            enemyHealthText.rectTransform.anchoredPosition = new Vector3(0, -i * 50);
-            enemyHealthText.text = $"enemy {i+1}: {enemies[i].health}";
-            enemyHealthTexts.Add(enemyHealthText);
+            // TextMeshProUGUI enemyHealthText = Instantiate(enemyPrefabText, enemyHealthContainer.transform);
+            // enemyHealthText.rectTransform.anchoredPosition = new Vector3(0, -i * 50);
+            // enemyHealthText.text = $"enemy {i+1}: {enemies[i].health}";
+            // enemyHealthTexts.Add(enemyHealthText);
 
             // set button to select enemy
             Button selectEnemy = Instantiate(enemyButtonPrefab, targetContainer.transform);
@@ -175,6 +173,8 @@ public class UIManager : MonoBehaviour {
         // set a button for each combo attack
         for (int i = 0; i < player.CountActions(); i++)
         {
+            if (player.GetActionUses(i) <= 0) continue;
+
             // get the player's next combo attack
             PlayerAction currentAction = player.GetAction(i);
 
@@ -185,6 +185,8 @@ public class UIManager : MonoBehaviour {
 
             selectAttack.transform.GetChild(1).GetComponent<Image>().sprite = player.GetAction(i).Food.sprite;
             selectAttack.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = player.GetActionUses(i).ToString("D2");
+
+            playerFood.Add(player.GetAction(i).Food);
 
             selectAttack.gameObject.SetActive(false);
         }
@@ -220,27 +222,27 @@ public class UIManager : MonoBehaviour {
     private void UpdateEnemyHealth()
     {
         // set all enemys' health ui elements
-        for (int i = 0; i < enemies.Count; i++)
-        {
-            EnemyBattle enemy = enemies[i];
+        // for (int i = 0; i < enemies.Count; i++)
+        // {
+        //     EnemyBattle enemy = enemies[i];
 
-            enemyHealthTexts[i].text = $"enemy {i+1}: {enemy.health}"; 
+        //     enemyHealthTexts[i].text = $"enemy {i+1}: {enemy.health}"; 
 
-            if (enemy.health < 0 && targetButtons[i].interactable)
-            {
-                targetButtons[i].interactable = false;
-            }
-        }
+        //     if (enemy.health < 0 && targetButtons[i].interactable)
+        //     {
+        //         targetButtons[i].interactable = false;
+        //     }
+        // }
     }
 
     private void UpdateActions()
     {
-        List<Button> delete = new();
+        int items = itemButtons.Count;
 
-        for (int i = 0; i < itemButtons.Count; i++)
+        for (int i = 0; i < items; i++)
         {
             // PlayerAction currentAction = player.GetAction(i);
-            int uses = player.GetActionUses(i);
+            int uses = player.GetActionUses(playerFood[i]);
             Transform child = itemButtons[i].transform.GetChild(0);
 
             if (uses > 0)
@@ -249,28 +251,39 @@ public class UIManager : MonoBehaviour {
             } 
             else
             {
-                if (player.OutOfDessert() && stolen.Count == 0) battleManager.LoseBattleFood();
-
-                Destroy(child.gameObject);
-                delete.Add(itemButtons[i]);
-                itemIndex = 0;
-
-                foreach (Button button in itemButtons)
+                if (player.OutOfDessert())
                 {
-                    if (button != null) button.gameObject.SetActive(true);
+                    if (stolen.Count == 0)
+                    {
+                        battleManager.LoseBattleFood();
+                        return;
+                    }
+                } 
+
+                GameObject oldButton = itemButtons[i].gameObject;
+
+                playerFood.RemoveAt(i);
+                itemButtons.RemoveAt(i);
+                Destroy(oldButton);
+
+                if (itemIndex >= i)
+                {
+                    if (itemIndex != 0)
+                    {
+                        itemButtons[itemIndex].gameObject.SetActive(false);
+                        itemIndex--;
+
+                        if (itemIndex == 0) leftArrowItem.SetActive(false);
+                    } 
+
+                    itemButtons[itemIndex].gameObject.SetActive(true);
                 }
-
-                itemButtons[0].gameObject.SetActive(true);
-                leftArrowItem.SetActive(false);
-
+                
                 if (itemButtons.Count <= 1) rightArrowItem.SetActive(false);
-            }
-        }
 
-        foreach (Button b in delete)
-        {
-            b.gameObject.SetActive(false);
-            itemButtons.Remove(b);
+                i--;
+                items--;
+            }
         }
 
         for (int i = 0; i < flavorButtons.Count; i++)
@@ -313,13 +326,23 @@ public class UIManager : MonoBehaviour {
         stealButtons[stealIndex].gameObject.SetActive(true);
     }
 
+    // private void RefreshArrows()
+    // {
+    //     leftArrowItem.SetActive(true);
+    //     leftArrowSteal.SetActive(true);
+    //     rightArrowItem.SetActive(true);
+    //     rightArrowSteal.SetActive(true);
+
+    //     if (stealIndex == 0) leftArrowSteal.SetActive(false);
+    // }
+
     public void SelectAttack()
     {
         attack = true;
         currentMenu++;
         backButton.SetActive(true);
         ToggleMenu(initialContainer, itemContainer, itemButtons[itemIndex], 0);
-        feedbackManager.GoToItemMenu(attack, FoodList.GetInstance().GetAction(itemIndex).Food);
+        feedbackManager.GoToItemMenu(attack, playerFood[itemIndex]);
     }
 
     public void SelectHeal()
@@ -328,7 +351,7 @@ public class UIManager : MonoBehaviour {
         currentMenu++;
         backButton.SetActive(true);
         ToggleMenu(initialContainer, itemContainer, itemButtons[itemIndex], 1);
-        feedbackManager.GoToItemMenu(attack, FoodList.GetInstance().GetAction(itemIndex).Food);
+        feedbackManager.GoToItemMenu(attack, playerFood[itemIndex]);
     }
 
     public void SelectSteal()
@@ -357,7 +380,7 @@ public class UIManager : MonoBehaviour {
 
         if (itemIndex == itemButtons.Count - 2) rightArrowItem.SetActive(true);
 
-        feedbackManager.UpdateItemMenu(FoodList.GetInstance().GetAction(itemIndex).Food);      
+        feedbackManager.UpdateItemMenu(playerFood[itemIndex]);      
     }
 
     public void SelectLeftSteal()
@@ -399,7 +422,7 @@ public class UIManager : MonoBehaviour {
 
         if (itemIndex == 1) leftArrowItem.SetActive(true);
 
-        feedbackManager.UpdateItemMenu(FoodList.GetInstance().GetAction(itemIndex).Food);
+        feedbackManager.UpdateItemMenu(playerFood[itemIndex]);
     }
 
     public void SelectRightSteal()
@@ -501,7 +524,17 @@ public class UIManager : MonoBehaviour {
         if (attack)
         {
             targetContainer.SetActive(true);
-            Utility.SetActiveButton(targetButtons[0]);
+
+            for (int i = 0; i < targetButtons.Count; i++)
+            {
+                if (targetButtons[i].gameObject.activeSelf)
+                {
+                    Utility.SetActiveButton(targetButtons[i]);
+                    break;
+                }
+
+            }
+
         } else 
         {
             SendHealAction();
@@ -571,15 +604,16 @@ public class UIManager : MonoBehaviour {
         // get the enemy's index in enemy list
         int enemyIndex = enemies.IndexOf(enemy);
 
+        RemoveFoods(enemy);
+
         // remove button associated with enemy
         Button targetButton = targetContainer.transform.GetChild(enemyIndex).GetComponent<Button>();
-        targetButtons.Remove(targetButton);
-        Destroy(targetButton.gameObject);
+        // targetButtons.Remove(targetButton);
+        // Destroy(targetButton.gameObject);
+        targetButton.gameObject.SetActive(false);
 
         // set enemy's health ui to defeated text
         // eHealthContainer.transform.GetChild(enemyIndex).GetComponent<TextMeshProUGUI>().text = enemy.CharacterName + " is defeated";
-
-        RemoveFoods(enemy);
     }
 
     public void ClearUI()

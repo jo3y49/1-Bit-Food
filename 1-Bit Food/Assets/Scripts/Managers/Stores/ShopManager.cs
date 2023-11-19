@@ -4,14 +4,10 @@ using TMPro;
 
 public class ShopManager : StoreManager 
 {
-    [SerializeField] private TextMeshProUGUI moneyText;
-
-    private int money;
-
     protected override void OnEnable() {
         base.OnEnable();
 
-        SetMoney(GameManager.instance.GetPlayerMoney());
+        
 
 
     }
@@ -32,12 +28,5 @@ public class ShopManager : StoreManager
     {
         GameManager.instance.AddPlayerMoney(-selectedFood.price);
         SetMoney(GameManager.instance.GetPlayerMoney());
-    }
-
-    private void SetMoney(int money)
-    {
-        this.money = money;
-
-        moneyText.text = " : " + money;
     }
 }

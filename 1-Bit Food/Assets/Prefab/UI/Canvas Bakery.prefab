@@ -3596,6 +3596,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2402082223479111083 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1740594593515438602, guid: 5637873e64c2f314480d9545d42998f0, type: 3}
+  m_PrefabInstance: {fileID: 4139437535471648673}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2498431416571097951 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2008054180791569662, guid: 5637873e64c2f314480d9545d42998f0, type: 3}
@@ -3626,6 +3637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryAmountText: {fileID: 2498431416571097951}
   inventoryCapText: {fileID: 2338894690114615812}
+  moneyText: {fileID: 2402082223479111083}
 --- !u!224 &6203108206169423824 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8027633960118730865, guid: 5637873e64c2f314480d9545d42998f0, type: 3}

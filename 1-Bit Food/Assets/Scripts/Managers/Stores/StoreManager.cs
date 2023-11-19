@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 public abstract class StoreManager : MonoBehaviour {
     [SerializeField] protected TextMeshProUGUI inventoryAmountText, inventoryCapText;
+    [SerializeField] protected TextMeshProUGUI moneyText;
+
+    protected int money;
 
     protected Food[] foods;
     protected Food selectedFood;
@@ -17,10 +20,14 @@ public abstract class StoreManager : MonoBehaviour {
     private void Awake() {
         actions = new InputActions();
 
+        
+
         gameObject.SetActive(false);
     }
 
     protected virtual void OnEnable() {
+        SetMoney(GameManager.instance.GetPlayerMoney());
+
         foods = FoodList.GetInstance().GetFoods();
 
         InitializeInventory();
@@ -69,5 +76,12 @@ public abstract class StoreManager : MonoBehaviour {
         inventoryAmount++;
 
         inventoryAmountText.text = inventoryAmount.ToString("D2");
+    }
+
+    protected virtual void SetMoney(int money)
+    {
+        this.money = money;
+
+        moneyText.text = " : " + money;
     }
 }
