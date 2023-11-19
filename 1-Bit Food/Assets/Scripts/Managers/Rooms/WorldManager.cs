@@ -41,7 +41,7 @@ public class WorldManager : MonoBehaviour {
                 
         }
 
-        enemies.Reverse();
+        // enemies.Reverse();
 
         StartBattle();
     }

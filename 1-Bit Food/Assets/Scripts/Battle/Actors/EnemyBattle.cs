@@ -28,7 +28,7 @@ public class EnemyBattle : CharacterBattle {
 
         CharacterName = "Thief";
 
-        healthDisplay.SetHealth(health);
+        // healthDisplay.SetHealth(health);
     }
 
     public override void PrepareCombat()

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6822786970716077783}
   - component: {fileID: 7113688701200873565}
   - component: {fileID: -3665102947770765480}
-  - component: {fileID: 6995116709745168930}
+  - component: {fileID: -571101583435191289}
   m_Layer: 2
   m_Name: Enemy
   m_TagString: Enemy
@@ -106,7 +106,7 @@ MonoBehaviour:
   health: 10
   hitTarget: 0
   attackClip: {fileID: 0}
-  healthDisplay: {fileID: 6995116709745168930}
+  healthDisplay: {fileID: -571101583435191289}
   lowDamage: 0
   highDamage: 0
   steals: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameColor: 0
---- !u!114 &6995116709745168930
+--- !u!114 &-571101583435191289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

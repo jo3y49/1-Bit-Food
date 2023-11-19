@@ -14,6 +14,8 @@ public class EnemyHealthDisplay : MonoBehaviour {
 
         healthText.transform.position = Camera.main.WorldToScreenPoint(transform.position);
         healthText.fontSize = enemy.transform.localScale.x * 8;
+        healthText.text = enemy.health.ToString();
+
     }
 
     public void SetHealth(int health)
