@@ -14,7 +14,6 @@ public abstract class CharacterBattle : MonoBehaviour {
     [SerializeField] protected AudioClip attackClip;
 
     protected virtual void Start() {
-        health = maxHealth;
         audioSource = GetComponent<AudioSource>();
         uiManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<UIManager>();
     }

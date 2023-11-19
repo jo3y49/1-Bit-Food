@@ -13,6 +13,18 @@ PrefabInstance:
       value: Easy
       objectReference: {fileID: 0}
     - target: {fileID: 5256324326347649697, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5256324326347649697, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5256324326347649697, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5256324326347649697, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.73
       objectReference: {fileID: 0}
@@ -53,8 +65,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6822786970716077783, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
+      propertyPath: health
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822786970716077783, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
       propertyPath: lowDamage
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6822786970716077783, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
       propertyPath: maxHealth
@@ -62,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6822786970716077783, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
       propertyPath: highDamage
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

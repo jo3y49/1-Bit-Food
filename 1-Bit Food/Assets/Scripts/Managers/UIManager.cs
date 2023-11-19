@@ -254,6 +254,12 @@ public class UIManager : MonoBehaviour {
                 Destroy(child.gameObject);
                 delete.Add(itemButtons[i]);
                 itemIndex = 0;
+
+                foreach (Button button in itemButtons)
+                {
+                    if (button != null) button.gameObject.SetActive(true);
+                }
+
                 itemButtons[0].gameObject.SetActive(true);
                 leftArrowItem.SetActive(false);
 

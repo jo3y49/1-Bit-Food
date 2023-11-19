@@ -12,7 +12,11 @@ public abstract class StoreManager : MonoBehaviour {
 
     protected int inventoryCap;
 
+    private InputActions actions;
+
     private void Awake() {
+        actions = new InputActions();
+
         gameObject.SetActive(false);
     }
 
@@ -20,6 +24,18 @@ public abstract class StoreManager : MonoBehaviour {
         foods = FoodList.GetInstance().GetFoods();
 
         InitializeInventory();
+
+        actions.Gameplay.Enable();
+
+        actions.Gameplay.Pause.performed += context => gameObject.SetActive(false);
+    }
+
+    protected virtual void OnDisable() {
+        actions.Gameplay.Pause.performed -= context => gameObject.SetActive(false);
+
+        actions.Gameplay.Disable();
+
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().TogglePause(false);
     }
 
     public virtual void Confirm()

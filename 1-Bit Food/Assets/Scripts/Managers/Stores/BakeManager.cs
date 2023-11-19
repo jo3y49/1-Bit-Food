@@ -44,6 +44,7 @@ public class BakeManager : StoreManager {
         for (int i = 0; i < selectedRecipe.ingredientQuantities.Count; i++)
         {
             GameManager.instance.AddFoodUse(foodList.GetFoodIndex(selectedRecipe.ingredients[i]), -selectedRecipe.ingredientQuantities[i]);
+            inventoryAmount -= selectedRecipe.ingredientQuantities[i];
         }
     }
 }

@@ -10,6 +10,11 @@ public class AudioManager : MonoBehaviour {
         {
             instance = this;
             audioSource = GetComponent<AudioSource>();
+            DontDestroyOnLoad(gameObject);
+        }
+        else 
+        {
+            Destroy(gameObject);
         }
     }
 

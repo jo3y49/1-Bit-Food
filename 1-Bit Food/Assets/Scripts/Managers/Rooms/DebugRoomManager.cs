@@ -57,9 +57,9 @@ public class DebugRoomManager : WorldManager {
         }
     }
 
-    public override void EncounterEnemy(GameObject enemy)
+    public override void EncounterEnemy()
     {
-        base.EncounterEnemy(enemy);
+        base.EncounterEnemy();
 
         tutText.SetActive(false);
     }
