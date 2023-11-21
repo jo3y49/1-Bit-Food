@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7758624001048959723}
   - component: {fileID: 1247609181933459189}
   - component: {fileID: 7360501903859678012}
-  - component: {fileID: 6768445249781700472}
+  - component: {fileID: 8307497236563039363}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -70,8 +70,8 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 640
-    height: 480
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -224,7 +224,7 @@ MonoBehaviour:
   audioSource: {fileID: 1247609181933459189}
   initial: {fileID: 8300000, guid: 0c2f1d480a6a7954f8c4e4c4cf692657, type: 3}
   loop: {fileID: 8300000, guid: c09a1fe5a84aee5418af0c97c7b7af1b, type: 3}
---- !u!114 &6768445249781700472
+--- !u!114 &8307497236563039363
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,14 +233,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3663897295560145550}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a9c3fe0024dbde46836d60b245af1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 16
-  m_RefResolutionX: 640
-  m_RefResolutionY: 480
-  m_UpscaleRT: 0
-  m_PixelSnapping: 0
-  m_CropFrameX: 0
-  m_CropFrameY: 0
-  m_StretchFill: 0
+  targetAspect: 1.3333334

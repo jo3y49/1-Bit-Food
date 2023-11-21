@@ -3423,10 +3423,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5581604066067319287, guid: 5637873e64c2f314480d9545d42998f0, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581604066067319287, guid: 5637873e64c2f314480d9545d42998f0, type: 3}
       propertyPath: m_MatchWidthOrHeight
       value: 1
       objectReference: {fileID: 0}

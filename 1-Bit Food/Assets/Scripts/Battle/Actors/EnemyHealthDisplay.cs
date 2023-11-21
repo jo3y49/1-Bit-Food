@@ -8,11 +8,11 @@ public class EnemyHealthDisplay : MonoBehaviour {
     private TextMeshProUGUI healthText;
 
     private void Start() {
-        Transform canvas = GameObject.FindGameObjectWithTag("Canvas").gameObject.transform;
+        Transform canvas = GameObject.FindGameObjectWithTag("Canvas").transform;
 
         healthText = Instantiate(textPrefab, canvas);
 
-        healthText.transform.position = Camera.main.WorldToScreenPoint(transform.position);
+        healthText.transform.position = transform.position;
         healthText.fontSize = enemy.transform.localScale.x * 8;
         healthText.text = enemy.health.ToString();
 

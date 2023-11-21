@@ -73,8 +73,16 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6822786970716077783, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
+      propertyPath: maxDamage
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822786970716077783, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
       propertyPath: maxHealth
       value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822786970716077783, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
+      propertyPath: minDamage
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6822786970716077783, guid: 0d42ddd20a5902f47a16f0213cdcb41c, type: 3}
       propertyPath: highDamage

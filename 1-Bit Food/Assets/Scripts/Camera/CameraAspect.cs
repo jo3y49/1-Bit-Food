@@ -4,7 +4,7 @@ using UnityEngine;
 public class CameraResolutionSetter : MonoBehaviour
 {
     private new Camera camera;
-    private float targetAspect = 4.0f / 3.0f; // Target aspect ratio
+    public float targetAspect = 4.0f / 3.0f; // Target aspect ratio
     private Vector2Int lastScreenSize;
 
     void Start()

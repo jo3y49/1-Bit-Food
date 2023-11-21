@@ -33,7 +33,7 @@ RectTransform:
   m_GameObject: {fileID: 4450216004867020579}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.06242394, y: 0.06242394, z: 0.06242394}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7951778035578754506}
@@ -56,10 +56,10 @@ Canvas:
   m_GameObject: {fileID: 4450216004867020579}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 1
+  m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -68,7 +68,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &7095955384787455077
 MonoBehaviour:
@@ -82,8 +82,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 16
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 640, y: 480}
   m_ScreenMatchMode: 0
@@ -91,8 +91,8 @@ MonoBehaviour:
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_DynamicPixelsPerUnit: 16
+  m_PresetInfoIsWorld: 1
 --- !u!114 &6664392121549958430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,10 +303,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6361196814538458133}
     m_Modifications:
-    - target: {fileID: 5581604066067319287, guid: 5637873e64c2f314480d9545d42998f0, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7788258248378424652, guid: 5637873e64c2f314480d9545d42998f0, type: 3}
       propertyPath: m_Name
       value: Shop
@@ -502,9 +498,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bakery
       objectReference: {fileID: 0}
-    - target: {fileID: 8360910524395107926, guid: 35771d0ffb3d8de47bef4647aa0b529c, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 0
+    - target: {fileID: 6153974403243614957, guid: 35771d0ffb3d8de47bef4647aa0b529c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -531,7 +527,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3228465253174313455, guid: 2025ef5326b4d7e40820ab9bb1853125, type: 3}
       propertyPath: m_Name
-      value: Backdrop
+      value: Bottom
       objectReference: {fileID: 0}
     - target: {fileID: 7471286922783155578, guid: 2025ef5326b4d7e40820ab9bb1853125, type: 3}
       propertyPath: m_Pivot.x

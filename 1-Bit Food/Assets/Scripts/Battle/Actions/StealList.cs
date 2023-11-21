@@ -38,7 +38,7 @@ public class StealList {
         {
             {"Steal", new EnemyAction("Steal", Steal)},
             {"Attack",new EnemyAction("Attack", 
-            (self, target, food) => CharacterAction.DoAttackRandom(self, target, "Attack", self.lowDamage, self.highDamage))},
+            (self, target, food) => CharacterAction.DoAttackRandom(self, target, "Attack", self.minDamage, self.maxDamage))},
         };
     }
 

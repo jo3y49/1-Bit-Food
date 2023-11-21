@@ -8,7 +8,7 @@ public class EnemyBattle : CharacterBattle {
 
     [SerializeField] private EnemyHealthDisplay healthDisplay;
 
-    public int lowDamage, highDamage;
+    public int minDamage, maxDamage;
 
     public int steals;
     protected GameObject player;

@@ -28,15 +28,15 @@ public class CanvasAspect : MonoBehaviour
         if (screenAspect < targetAspect) // If the screen is too tall
         {
             scaleFactor = screenAspect / targetAspect;
-            canvasScaler.matchWidthOrHeight = 1; // Match height
+            // canvasScaler.matchWidthOrHeight = 1; // Match height
         }
         else // If the screen is too wide
         {
             scaleFactor = targetAspect / screenAspect;
-            canvasScaler.matchWidthOrHeight = 0; // Match width
+            // canvasScaler.matchWidthOrHeight = 0; // Match width
         }
 
         // Adjust the size of the canvas to maintain the target aspect ratio within the screen
-        canvasScaler.referenceResolution = new Vector2(canvasScaler.referenceResolution.x, canvasScaler.referenceResolution.y * scaleFactor);
+        // canvasScaler.referenceResolution = new Vector2(canvasScaler.referenceResolution.x, canvasScaler.referenceResolution.y * scaleFactor);
     }
 }

@@ -9,7 +9,7 @@ public class WorldManager : MonoBehaviour {
     protected GameObject player;
     protected PlayerBattle playerBattle;
     protected PlayerMovement playerMovement;
-    protected List<EnemyBattle> enemies = new();
+    public List<EnemyBattle> enemies = new();
 
     public float nearbyEncounterRange = 3f;
 
@@ -32,10 +32,10 @@ public class WorldManager : MonoBehaviour {
     {
         if (battleUI.activeSelf) return;
 
-        foreach (EnemyBattle e in FindObjectsOfType<EnemyBattle>())
+        foreach (EnemyBattle e in enemies)
         {
             
-            enemies.Add(e);
+            // enemies.Add(e);
             e.PrepareCombat();
             
                 
