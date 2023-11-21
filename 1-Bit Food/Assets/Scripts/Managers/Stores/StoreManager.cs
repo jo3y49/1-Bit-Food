@@ -72,7 +72,7 @@ public abstract class StoreManager : MonoBehaviour {
 
     public virtual void SetInventory(Food food)
     {
-        GameManager.instance.AddFoodUse(FoodList.GetInstance().GetFoodIndex(food));
+        GameManager.instance.AddFoodUse(food.index);
         inventoryAmount++;
 
         inventoryAmountText.text = inventoryAmount.ToString("D2");

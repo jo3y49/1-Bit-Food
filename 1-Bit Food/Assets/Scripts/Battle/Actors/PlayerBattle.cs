@@ -12,6 +12,10 @@ public class PlayerBattle : CharacterBattle {
     protected override void Start() {
         base.Start();
 
+        health = GameManager.instance.GetHealth();
+
+        uiManager.SetHealth();
+
         CharacterName = "Player";
 
         actions = FoodList.GetInstance().GetAllActions();
@@ -35,6 +39,8 @@ public class PlayerBattle : CharacterBattle {
         base.Attacked(damage);
 
         uiManager.LoseHealth(damage);
+
+        // GameManager.instance.AddHealth(-damage);
     }
 
     public override void Heal(int heal)
@@ -42,6 +48,8 @@ public class PlayerBattle : CharacterBattle {
         base.Heal(heal);
 
         uiManager.AddHealth(heal);
+
+        // GameManager.instance.AddHealth(heal);
     }
 
     public override void PrepareCombat()
@@ -56,27 +64,30 @@ public class PlayerBattle : CharacterBattle {
         GameManager.instance.AddPlayerMoney(money);
         GameManager.instance.SetFoodUses(actionUses);
         GameManager.instance.SetFlavorUses(flavorUses.Values.ToList());
+
+        GameManager.instance.SetHealth(health);
     }
 
     public override Food StealItem(Food food)
     {
         if (food != null)
         {
-            actionUses[FoodList.GetInstance().GetFoodIndex(food)]--;
+            actionUses[food.index]--;
             return food;
         }
 
-        int r = Random.Range(0, actions.Count);
+        int r = Random.Range(0, actionUses.Count);
 
-        for (int i = 0; i < actions.Count; i++)
+        foreach (int i in actionUses)
         {
             if (actionUses[r] > 0)
             {
                 actionUses[r]--;
                 return FoodList.GetInstance().GetFoods()[r];
                 
-            } else {
-                if (r < actions.Count)
+            } else 
+            {
+                if (r < actionUses.Count - 1)
                     r++;
                 else
                     r = 0;
@@ -88,10 +99,10 @@ public class PlayerBattle : CharacterBattle {
 
     public override void TakeItem(Food food)
     {
-        actionUses[FoodList.GetInstance().GetFoodIndex(food)]++;
+        actionUses[food.index]++;
     }
 
-    public bool OutOfDessert()
+    public bool OutOfFood()
     {
         return actionUses.Max() <= 0;
     }
@@ -99,6 +110,8 @@ public class PlayerBattle : CharacterBattle {
     public void ResetHealth()
     {
         health = maxHealth;
+
+        GameManager.instance.SetHealth(maxHealth);
     }
 
     public virtual PlayerAction GetAction(int i)
@@ -124,9 +137,7 @@ public class PlayerBattle : CharacterBattle {
 
     public virtual int GetActionUses(Food food)
     {
-        int i = FoodList.GetInstance().GetFoodIndex(food);
-
-        return GetActionUses(i);
+        return GetActionUses(food.index);
     }
 
     public virtual int GetFlavorUses(int i)
@@ -145,7 +156,8 @@ public class PlayerBattle : CharacterBattle {
     {
         UseAction(action, flavor);
 
-        if (action.GetType() == typeof(PlayerAction)) (action as PlayerAction).Attack(this, target, flavor);
+        if (action.GetType() == typeof(PlayerAction))
+            (action as PlayerAction).Attack(this, target, flavor);
 
         return "";
     }

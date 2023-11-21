@@ -138,6 +138,7 @@ MonoBehaviour:
   shopUI: {fileID: 8779923808109444997}
   bakeUI: {fileID: 7316534806627300881}
   nearbyEncounterRange: 3
+  coinReward: 0
 --- !u!114 &1071864276696371400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,8 +163,10 @@ MonoBehaviour:
   flavorContainer: {fileID: 423059536883130132}
   stealBackContainer: {fileID: 8234520739342598739}
   targetContainer: {fileID: 5364589012922509387}
-  initialButtonSmall: {fileID: 1580971950999094899}
-  initialButtonLarge: {fileID: 1592214726803799444}
+  attackButtonSmall: {fileID: 1580971950999094899}
+  attackButtonLarge: {fileID: 1592214726803799444}
+  healButtonSmall: {fileID: 6531583119371320589}
+  stealButton: {fileID: 2971491011307082646}
   flavorButton: {fileID: 1376770304496853591}
   backButton: {fileID: 3689373787544603952}
   leftArrowItem: {fileID: 6805348362939812254}
@@ -173,8 +176,6 @@ MonoBehaviour:
   itemButtonPrefab: {fileID: 7312905370119395786, guid: b310fd2199528f348a98064d71eb66be, type: 3}
   stealButtonPrefab: {fileID: 5505843544723443520, guid: 074633b4e265897488c38ef1d772b12f, type: 3}
   enemyButtonPrefab: {fileID: 5662044592925659098, guid: e04f5c8983845474193c8d0854de7631, type: 3}
-  enemyHealthContainer: {fileID: 0}
-  enemyPrefabText: {fileID: 0}
   actionText: {fileID: 3233555572045396099}
 --- !u!114 &8276594286673094481
 MonoBehaviour:
@@ -1646,6 +1647,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8342804903973964070, guid: d9d09ddae46e7fd4487ce8452fddb121, type: 3}
   m_PrefabInstance: {fileID: 5904813856167896305}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2971491011307082646 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8705114748872079207, guid: d9d09ddae46e7fd4487ce8452fddb121, type: 3}
+  m_PrefabInstance: {fileID: 5904813856167896305}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3233555572045396099 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9020139698759212146, guid: d9d09ddae46e7fd4487ce8452fddb121, type: 3}
@@ -1746,6 +1758,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 593823067558087417, guid: d9d09ddae46e7fd4487ce8452fddb121, type: 3}
   m_PrefabInstance: {fileID: 5904813856167896305}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6531583119371320589 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 817056810289699324, guid: d9d09ddae46e7fd4487ce8452fddb121, type: 3}
+  m_PrefabInstance: {fileID: 5904813856167896305}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6576490500053700002 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 771944775029860691, guid: d9d09ddae46e7fd4487ce8452fddb121, type: 3}

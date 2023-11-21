@@ -73,14 +73,24 @@ public class EnemyBattle : CharacterBattle {
 
         if (action.Name == "Steal") 
         {
-            string text = $"{CharacterName} stole ";
-
-            foreach (Food food in recentSteals)
+            if (recentSteals.Count > 0)
             {
-                text += $"{food.name}, ";
+                string text = $"{CharacterName} stole ";
+
+                foreach (Food food in recentSteals)
+                {
+                    text += $"{food.name}, ";
+                }
+
+                text = text.TrimEnd();
+                text = text.TrimEnd(',');
+
+                return text;
+            } else 
+            {
+                return CharacterName + " tried to steal, but you've got nothing!";
             }
 
-            return text;
         }
 
         else return "";
@@ -88,6 +98,8 @@ public class EnemyBattle : CharacterBattle {
 
     public override void TakeItem(Food food)
     {
+        if (food == null) return;
+
         recentSteals.Add(food);
         stolenFood.Add(food);
     }

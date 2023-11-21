@@ -56,6 +56,7 @@ public class WorldManager : MonoBehaviour {
 
     public virtual void LoseBattle()
     {
+        playerBattle.ResetHealth();
         SceneManager.LoadScene(0);
     }
 

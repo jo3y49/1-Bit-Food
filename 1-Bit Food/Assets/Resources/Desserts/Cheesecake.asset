@@ -16,4 +16,4 @@ MonoBehaviour:
   price: 100
   heal: 16
   damage: 15
-  index: 4
+  index: 10

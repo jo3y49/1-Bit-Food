@@ -25,8 +25,8 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private GameObject initialContainerSmall, initialContainerLarge, itemContainer, flavorContainer, stealBackContainer, targetContainer;
 
     [Header("Buttons")]
-    [SerializeField] private Button initialButtonSmall;
-    [SerializeField] private Button initialButtonLarge, flavorButton;
+    [SerializeField] private Button attackButtonSmall;
+    [SerializeField] private Button attackButtonLarge, healButtonSmall, stealButton, flavorButton;
     [SerializeField] private GameObject backButton, leftArrowItem, rightArrowItem, leftArrowSteal, rightArrowSteal;
 
     private Button initialButton;
@@ -51,6 +51,7 @@ public class UIManager : MonoBehaviour {
     private bool attack = true;
     private int currentMenu = 0;
     private int itemIndex, stealIndex = 0;
+    private bool stole = false;
 
     private List<(EnemyBattle, Food)> stolen = new();
     private List<Food> playerFood = new();
@@ -60,23 +61,17 @@ public class UIManager : MonoBehaviour {
     [Header("Text Display")]
     [SerializeField] private TextMeshProUGUI actionText;
 
-    private void Awake() {
-        if (instance == null)
-            instance = this;
-    }
+    // private void Awake() {
+    //     if (instance == null)
+    //         instance = this;
+    // }
 
     private void Start() {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBattle>();
 
-        hearts = new GameObject[player.maxHealth];
-
-        currentHealthIndex = player.health - 1;
-
         backButton.SetActive(false);
 
         SetText("");
-        
-        SetHealth();
     }
 
     public void SetForBattle(List<EnemyBattle> enemies)
@@ -91,8 +86,8 @@ public class UIManager : MonoBehaviour {
         SetEnemies();
         UpdateHealth();
         SetActions();
+        SetFlavors();
 
-        itemIndex = stealIndex = 0;
         leftArrowItem.SetActive(false);
         leftArrowSteal.SetActive(false);
         
@@ -110,24 +105,8 @@ public class UIManager : MonoBehaviour {
 
     public void ActivateForPlayerTurn()
     {
-        
-
         initialContainer.SetActive(true);
         actionText.gameObject.SetActive(false);
-
-        if (stolen.Count > 0) 
-        {
-            initialContainerSmall.SetActive(true);
-            initialContainerLarge.SetActive(false);
-            initialButton = initialButtonSmall;
-        }
-
-        else 
-        {
-            initialContainerLarge.SetActive(true);
-            initialContainerSmall.SetActive(false);
-            initialButton = initialButtonLarge;
-        }
 
         // Update UI
         SetText("");
@@ -138,7 +117,14 @@ public class UIManager : MonoBehaviour {
         UpdateActions();
         currentMenu = 0;
         attack = true;
-    
+
+        if (playerFood.Count == 0)
+        {
+            initialButton = stealButton;
+            attackButtonSmall.gameObject.SetActive(false);
+            healButtonSmall.gameObject.SetActive(false);
+        } 
+
         Utility.SetActiveButton(initialButton);
     }
 
@@ -168,31 +154,37 @@ public class UIManager : MonoBehaviour {
 
     private void SetActions()
     {
-        Food[] foodList = FoodList.GetInstance().GetFoods();
-
         // set a button for each combo attack
         for (int i = 0; i < player.CountActions(); i++)
         {
-            if (player.GetActionUses(i) <= 0) continue;
-
-            // get the player's next combo attack
-            PlayerAction currentAction = player.GetAction(i);
-
-            // make the button to select attack
-            Button selectAttack = Instantiate(itemButtonPrefab, itemContainer.transform.GetChild(0));
-            selectAttack.onClick.AddListener(() => PickItem(currentAction));
-            itemButtons.Add(selectAttack);
-
-            selectAttack.transform.GetChild(1).GetComponent<Image>().sprite = player.GetAction(i).Food.sprite;
-            selectAttack.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = player.GetActionUses(i).ToString("D2");
-
-            playerFood.Add(player.GetAction(i).Food);
-
-            selectAttack.gameObject.SetActive(false);
+            SetUpAction(i);
         }
 
-        itemButtons[0].gameObject.SetActive(true);
+        itemButtons[itemIndex].gameObject.SetActive(true);
+    }
 
+    private void SetUpAction(int foodIndex)
+    {
+        if (player.GetActionUses(foodIndex) <= 0) return;
+
+        // get the player's next combo attack
+        PlayerAction currentAction = player.GetAction(foodIndex);
+
+        // make the button to select attack
+        Button selectAttack = Instantiate(itemButtonPrefab, itemContainer.transform.GetChild(0));
+        selectAttack.onClick.AddListener(() => PickItem(currentAction));
+        itemButtons.Add(selectAttack);
+
+        selectAttack.transform.GetChild(1).GetComponent<Image>().sprite = player.GetAction(foodIndex).Food.sprite;
+        selectAttack.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = player.GetActionUses(foodIndex).ToString("D2");
+
+        playerFood.Add(player.GetAction(foodIndex).Food);
+
+        selectAttack.gameObject.SetActive(false);
+    }
+
+    private void SetFlavors()
+    {
         Transform flavorItems = flavorContainer.transform.GetChild(1);
 
         for (int i = 0; i < flavorItems.childCount; i++)
@@ -251,7 +243,7 @@ public class UIManager : MonoBehaviour {
             } 
             else
             {
-                if (player.OutOfDessert())
+                if (playerFood.Count == 0)
                 {
                     if (stolen.Count == 0)
                     {
@@ -270,13 +262,13 @@ public class UIManager : MonoBehaviour {
                 {
                     if (itemIndex != 0)
                     {
-                        itemButtons[itemIndex].gameObject.SetActive(false);
+                        // itemButtons[itemIndex].gameObject.SetActive(false);
                         itemIndex--;
 
                         if (itemIndex == 0) leftArrowItem.SetActive(false);
                     } 
 
-                    itemButtons[itemIndex].gameObject.SetActive(true);
+                    if (playerFood.Count != 0) itemButtons[itemIndex].gameObject.SetActive(true);
                 }
                 
                 if (itemButtons.Count <= 1) rightArrowItem.SetActive(false);
@@ -295,6 +287,23 @@ public class UIManager : MonoBehaviour {
             flavorButtons[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = uses.ToString("D2");
         }
 
+        UpdateSteal();
+    }
+
+    private void UpdateSteal()
+    {
+        if (stolen.Count <= 0) 
+        {
+            initialContainerLarge.SetActive(true);
+            initialContainerSmall.SetActive(false);
+            initialButton = attackButtonLarge;
+            return;
+        }
+
+        initialContainerSmall.SetActive(true);
+        initialContainerLarge.SetActive(false);
+        initialButton = attackButtonSmall;
+
         stealButtons.Clear();
 
         Transform container = stealBackContainer.transform.GetChild(0);
@@ -304,7 +313,7 @@ public class UIManager : MonoBehaviour {
             Destroy(container.GetChild(i).gameObject);
         }
 
-        if (stolen.Count <= 0) return;
+        leftArrowSteal.SetActive(false);
 
         if (stolen.Count == 1) rightArrowSteal.SetActive(false);
 
@@ -323,7 +332,8 @@ public class UIManager : MonoBehaviour {
 
         stealButtons.Reverse();
 
-        stealButtons[stealIndex].gameObject.SetActive(true);
+        stealIndex = 0;
+        stealButtons[0].gameObject.SetActive(true);
     }
 
     // private void RefreshArrows()
@@ -338,20 +348,27 @@ public class UIManager : MonoBehaviour {
 
     public void SelectAttack()
     {
-        attack = true;
-        currentMenu++;
-        backButton.SetActive(true);
-        ToggleMenu(initialContainer, itemContainer, itemButtons[itemIndex], 0);
-        feedbackManager.GoToItemMenu(attack, playerFood[itemIndex]);
+        SelectAttackOrHeal(true);
     }
 
     public void SelectHeal()
     {
-        attack = false;
+        SelectAttackOrHeal(false);
+    }
+
+    private void SelectAttackOrHeal(bool attack)
+    {
+        this.attack = attack;
         currentMenu++;
         backButton.SetActive(true);
-        ToggleMenu(initialContainer, itemContainer, itemButtons[itemIndex], 1);
-        feedbackManager.GoToItemMenu(attack, playerFood[itemIndex]);
+
+        if (playerFood.Count != 0)
+        {
+            ToggleMenu(initialContainer, itemContainer, itemButtons[itemIndex], 0);
+            feedbackManager.GoToItemMenu(attack, playerFood[itemIndex]);
+            return;
+        } 
+        ToggleMenu(initialContainer, itemContainer, backButton.GetComponent<Button>(),0);
     }
 
     public void SelectSteal()
@@ -556,9 +573,7 @@ public class UIManager : MonoBehaviour {
         stealBackContainer.SetActive(false);
         SendStealAction(element.Item2);
         SetText($"Stole back your {element.Item2.name} from {characterToAttack.CharacterName}!");
-        RemoveFood(element);
-        stealIndex = 0;
-        stealButtons[0].gameObject.SetActive(true);
+        StealFood(element);
     }
 
     private void PickHeal(PlayerAction action)
@@ -621,6 +636,7 @@ public class UIManager : MonoBehaviour {
         // clear all lists and ui elements from any previous battles
         targetButtons.Clear();
         itemButtons.Clear();
+        playerFood.Clear();
         stolen.Clear();
 
         // foreach (TextMeshProUGUI t in eHealthContainer.GetComponentsInChildren<TextMeshProUGUI>())
@@ -649,6 +665,7 @@ public class UIManager : MonoBehaviour {
 
         // reset used variables
         characterToAttack = null;
+        itemIndex = stealIndex = 0;
 
         // feedbackManager.gameObject.SetActive(false);
     }
@@ -674,14 +691,40 @@ public class UIManager : MonoBehaviour {
         }
 
         foreach ((EnemyBattle, Food) s in temp)
-            RemoveFood(s);
+            RemoveStolenFood(s);
     }
 
-    private void RemoveFood((EnemyBattle, Food) food)
+    private void RemoveStolenFood((EnemyBattle, Food) food)
     {
         stolen.Remove(food);
 
         stealIndex = 0;
+    }
+
+    private void StealFood((EnemyBattle, Food) foodElement)
+    {
+        RemoveStolenFood(foodElement);
+
+        if (playerFood.Contains(foodElement.Item2)) return;
+        
+        playerFood.Clear();
+        itemButtons.Clear();
+        Transform container = itemContainer.transform.GetChild(0);
+
+        for (int j = 0; j < container.childCount; j++)
+        {
+            Destroy(container.GetChild(j).gameObject);
+        }
+
+        SetActions();
+
+        if (playerFood.Count == 0) 
+        {
+            attackButtonSmall.gameObject.SetActive(true);
+            healButtonSmall.gameObject.SetActive(true);
+        }
+
+        if (playerFood.Count == 1) rightArrowItem.SetActive(true);
     }
 
     private void ToggleMenu(GameObject close, GameObject open, Button activeButton, int audioIndex = 0, string text = "")
@@ -699,25 +742,31 @@ public class UIManager : MonoBehaviour {
         AudioManager.instance.PlayUIClip(i);
     }
 
-    private void SetHealth()
+    public void SetHealth()
     {
+        int maxHealth = GameManager.instance.GetMaxHealth();
+        int health = GameManager.instance.GetHealth();
+
+        hearts = new GameObject[maxHealth];
+
+        currentHealthIndex = maxHealth - 1;
+
         int children = heartContainer.transform.childCount;
 
-        if (children > 0)
+        
+        for (int i = 0; i < children; i++)
         {
-            for (int i = 0; i < children; i++)
-            {
-                Destroy(heartContainer.transform.GetChild(i).gameObject);
-            }
+            Destroy(heartContainer.transform.GetChild(i).gameObject);
         }
+        
 
-        for (int i = 0; i < hearts.Length; i++)
+        for (int i = 0; i < maxHealth; i++)
         {
             GameObject image = Instantiate(heartPrefab, heartContainer.transform);
             hearts[i] = image;
         }
 
-        LoseHealth(player.maxHealth - player.health);      
+        LoseHealth(maxHealth - health);      
     }
 
     // public void UpdateHealth()

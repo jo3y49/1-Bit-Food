@@ -21,6 +21,26 @@ public class GameManager : MonoBehaviour {
         this.player = player;
     }
 
+    public void AddHealth(int i)
+    {
+        gameData.playerData.health += i;
+    }
+
+    public void SetHealth(int health)
+    {
+        gameData.playerData.health = health;
+    }
+
+    public int GetHealth()
+    {
+        return gameData.playerData.health;
+    }
+
+    public int GetMaxHealth()
+    {
+        return gameData.playerData.maxHealth;
+    }
+
     public void AddPlayerMoney(int money)
     {
         gameData.playerData.money += money;

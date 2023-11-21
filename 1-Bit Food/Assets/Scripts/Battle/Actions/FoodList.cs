@@ -83,11 +83,6 @@ public class FoodList
         return foods;
     }
 
-    public int GetFoodIndex(Food food)
-    {
-        return foods.ToList().FindIndex(item => item == food);
-    }
-
     public void EmptyAction(CharacterBattle self, CharacterBattle target, Flavor flavor = null)
     {
         Debug.Log("This action is null");

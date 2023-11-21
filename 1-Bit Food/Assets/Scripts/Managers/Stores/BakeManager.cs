@@ -20,7 +20,7 @@ public class BakeManager : StoreManager {
         for (int i = 0; i < recipe.ingredientQuantities.Count; i++)
         {
             Food food = recipe.ingredients[i];
-            int have = GameManager.instance.GetFoodUses(foodList.GetFoodIndex(food));
+            int have = GameManager.instance.GetFoodUses(food.index);
             int need = recipe.ingredientQuantities[i];
 
             if (have < need) return;
@@ -41,7 +41,7 @@ public class BakeManager : StoreManager {
 
         for (int i = 0; i < selectedRecipe.ingredientQuantities.Count; i++)
         {
-            GameManager.instance.AddFoodUse(foodList.GetFoodIndex(selectedRecipe.ingredients[i]), -selectedRecipe.ingredientQuantities[i]);
+            GameManager.instance.AddFoodUse(selectedRecipe.ingredients[i].index, -selectedRecipe.ingredientQuantities[i]);
             inventoryAmount -= selectedRecipe.ingredientQuantities[i];
         }
     }

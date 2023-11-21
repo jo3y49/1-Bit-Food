@@ -35,6 +35,12 @@ public class BattleManager : MonoBehaviour {
         // Setup Characters
         InitializeCharacters();
 
+        if (player.OutOfFood())
+        {
+            StartCoroutine(LoseBattle());
+            return;
+        }
+
         // Setup UI
         SetUpUI();
 
@@ -169,7 +175,7 @@ public class BattleManager : MonoBehaviour {
 
     private void PlayerAttack(CharacterBattle activeCharacter, CharacterAction action, Flavor flavor)
     {
-        string text = $"{activeCharacter.CharacterName} threw a {action.Name} at {characterToAttack.CharacterName}";
+        string text = $"{activeCharacter.CharacterName} threw {action.Name} at {characterToAttack.CharacterName}";
 
         Attack(activeCharacter, action, text, flavor);
     }
@@ -300,6 +306,8 @@ public class BattleManager : MonoBehaviour {
         StopCoroutine(battleLoop);
 
         uiManager.SetText("You were defeated!");
+
+        player.EndCombat(0);
 
         yield return new WaitForSeconds(dialogueDisplayTime);
 
