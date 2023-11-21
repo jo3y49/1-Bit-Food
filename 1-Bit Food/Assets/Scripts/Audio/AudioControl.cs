@@ -29,28 +29,49 @@ public class AudioControl : MonoBehaviour {
         if (audioSource.isPlaying && Time.timeScale == 0) PauseAudio(true);
         
 
-        else if (!audioSource.isPlaying && Time.timeScale == 1) PauseAudio(false);
-    }
-
-    private IEnumerator WaitForLoop()
-    {
-        while(audioSource.isPlaying && !pause)
-        {
-            yield return null;
-        }
-
-        audioSource.loop = true;
-        audioSource.clip = loop;
-        audioSource.Play();
+        else if (!audioSource.isPlaying && Time.timeScale == 1 && !pause) PauseAudio(false);
     }
 
     public void PauseAudio(bool b)
     {
-        pause = b;
-
-        if (b)  audioSource.Pause();
+        if (b) audioSource.Pause();
         
-
         else audioSource.Play();
+    }
+
+    public void PauseAudio()
+    {
+        pause = !pause;
+        PauseAudio(pause);
+    }
+
+    private IEnumerator WaitForLoop()
+    {
+        while(audioSource.isPlaying && !pause && Time.timeScale == 1)
+        {
+            yield return null;
+        }
+
+        if (pause || Time.timeScale == 0)
+        {
+            audioSource.Pause();
+            StartCoroutine(WaitToResume());
+            
+        } else
+        {
+            audioSource.loop = true;
+            audioSource.clip = loop;
+            audioSource.Play();
+        }
+    }
+
+    private IEnumerator WaitToResume()
+    {
+        while (!audioSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        StartCoroutine(WaitForLoop());
     }
 }
