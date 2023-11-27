@@ -5,37 +5,37 @@ using UnityEngine.InputSystem;
 using System;
 
 public class PauseManager : MonoBehaviour {
-    [SerializeField] private GameObject pauseUI;
+    private static PauseManager instance;
 
-    public static event Action<bool> pauseEvent;
-
-    private InputActions actions;
-    
-    private int mainMenuSceneIndex = 0;
+    public static event Action<bool> PauseEvent;
 
     private void Awake() {
-        actions = new InputActions();
+        if (instance == null)
+        {
+            instance = this;
 
-        pauseUI.SetActive(false);
+            DontDestroyOnLoad(gameObject);
+        } else
+        {
+            Destroy(gameObject);
+        }
+
+       
     }
 
-    public void TogglePause() {
-        if (pauseUI.activeSelf)
-            Resume();
+    public static void TogglePause() {
+        bool resume = Time.timeScale == 0;
+
+        if (resume)
+        {
+            Time.timeScale = 1;
+            PauseEvent?.Invoke(false);
+        }
         else
-            Pause();
-    }
-
-    public void Resume() {
-        Time.timeScale = 1; 
-        pauseUI.SetActive(false);
-        pauseEvent?.Invoke(false);
-    }
-
-    private void Pause() {
-        Time.timeScale = 0; 
-        pauseUI.SetActive(true);
-        pauseEvent?.Invoke(true);
+        {
+            Time.timeScale = 0;
+            PauseEvent?.Invoke(true);
+        }
     }
 
     // public void Quit() {

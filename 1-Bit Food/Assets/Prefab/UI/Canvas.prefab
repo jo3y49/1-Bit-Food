@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 1024417301198256030}
   - component: {fileID: 4595895428334873847}
   - component: {fileID: 1071864276696371400}
-  - component: {fileID: 8276594286673094481}
   - component: {fileID: 4949442628389684518}
+  - component: {fileID: 1350728211658269387}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Canvas
@@ -68,7 +68,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &7095955384787455077
 MonoBehaviour:
@@ -137,6 +137,7 @@ MonoBehaviour:
   battleUI: {fileID: 8606531597226286453}
   shopUI: {fileID: 8779923808109444997}
   bakeUI: {fileID: 7316534806627300881}
+  enemies: []
   nearbyEncounterRange: 3
   coinReward: 0
 --- !u!114 &1071864276696371400
@@ -177,19 +178,6 @@ MonoBehaviour:
   stealButtonPrefab: {fileID: 5505843544723443520, guid: 074633b4e265897488c38ef1d772b12f, type: 3}
   enemyButtonPrefab: {fileID: 5662044592925659098, guid: e04f5c8983845474193c8d0854de7631, type: 3}
   actionText: {fileID: 3233555572045396099}
---- !u!114 &8276594286673094481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4450216004867020579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8dad7c262e6f1d48be2ee2d56206c99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseUI: {fileID: 3251425200529152539}
 --- !u!114 &4949442628389684518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,6 +205,19 @@ MonoBehaviour:
   totalText: {fileID: 1457563734708560689}
   attackSprite: {fileID: 1755088465, guid: 7a7876a27a0704845a379afecb2881e5, type: 3}
   healSprite: {fileID: 2000798210, guid: 7a7876a27a0704845a379afecb2881e5, type: 3}
+--- !u!114 &1350728211658269387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450216004867020579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c03c3e6f934e30545b78cdc8332c49b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseUI: {fileID: 3251425200529152539}
 --- !u!1 &8447998632254034488
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,10 +664,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 396051097809813594, guid: d9d09ddae46e7fd4487ce8452fddb121, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8276594286673094481}
     - target: {fileID: 396051097809813594, guid: d9d09ddae46e7fd4487ce8452fddb121, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: TogglePause
@@ -1538,6 +1535,10 @@ PrefabInstance:
     - target: {fileID: 8761509383956775700, guid: d9d09ddae46e7fd4487ce8452fddb121, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001988759112793834, guid: d9d09ddae46e7fd4487ce8452fddb121, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9210708801993451145, guid: d9d09ddae46e7fd4487ce8452fddb121, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode

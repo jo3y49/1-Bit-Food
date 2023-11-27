@@ -1,22 +1,26 @@
 using UnityEngine;
 
-public class ToggleAudio : MonoBehaviour {
+public class ToggleAudioButtons : MonoBehaviour {
 
     public GameObject audioPlayer;
-    private AudioControl audioControl;
     private AudioSource audioSource;
+    private AudioControl audioControl;
 
     private void Start() {
         audioPlayer = GameObject.FindGameObjectWithTag("MainCamera");
-        audioControl = audioPlayer.GetComponent<AudioControl>();
         audioSource = audioPlayer.GetComponent<AudioSource>();
+        audioControl = audioPlayer.GetComponent<AudioControl>();
+        
     }
 
     public void TogglePause()
     {
-        if (Time.timeScale == 0) return;
+        PauseManager.TogglePause();
+    }
 
-        audioControl.PauseAudio();
+    public void ToggleAudio()
+    {
+        audioControl.PauseAudioButton();
     }
 
     public void ToggleVolume()

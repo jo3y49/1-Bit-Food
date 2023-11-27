@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour {
         actions.Gameplay.Sprint.performed += context => isSprinting = true;
         actions.Gameplay.Sprint.canceled += context => isSprinting = false;
 
-        PauseManager.pauseEvent += TogglePause;
+        PauseManager.PauseEvent += TogglePause;
     }
 
     private void OnDisable() {
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour {
         actions.Gameplay.Sprint.performed -= context => isSprinting = true;
         actions.Gameplay.Sprint.canceled -= context => isSprinting = false;
 
-        PauseManager.pauseEvent -= TogglePause;
+        PauseManager.PauseEvent -= TogglePause;
 
         StopMovement();
         isSprinting = false;

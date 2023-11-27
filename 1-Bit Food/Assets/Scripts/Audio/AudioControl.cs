@@ -6,7 +6,13 @@ public class AudioControl : MonoBehaviour {
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip initial, loop;
 
+    private float audioTime = 0;
+
+    private bool looped = false;
+
     private bool pause = false;
+
+    private bool initialPause = false;
 
     private void Awake() {
         if (instance == null)
@@ -17,6 +23,8 @@ public class AudioControl : MonoBehaviour {
             audioSource.clip = initial;
             audioSource.Play();
 
+            PauseManager.PauseEvent += PauseAudio;
+
             StartCoroutine(WaitForLoop());
         }
         else 
@@ -25,34 +33,48 @@ public class AudioControl : MonoBehaviour {
         }
     }
 
-    private void Update() {
-        if (audioSource.isPlaying && Time.timeScale == 0) PauseAudio(true);
+    // private void Update() {
+    //     if (audioSource.isPlaying && Time.timeScale == 0) PauseAudio(true);
         
 
-        else if (!audioSource.isPlaying && Time.timeScale == 1 && !pause) PauseAudio(false);
-    }
+    //     else if (!audioSource.isPlaying && Time.timeScale == 1 && !pause) PauseAudio(false);
+    // }
 
     public void PauseAudio(bool b)
     {
-        if (b) audioSource.Pause();
-        
-        else audioSource.Play();
+        pause = b;
+
+        ToggleAudio(b);
     }
 
-    public void PauseAudio()
+    private void ToggleAudio(bool b)
     {
-        pause = !pause;
-        PauseAudio(pause);
+        if (b)
+        {
+            audioTime = audioSource.time;
+            audioSource.Pause();
+        } 
+        
+        else 
+        {
+            audioSource.time = audioTime;
+            audioSource.Play();
+        }
+    }
+
+    public void PauseAudioButton()
+    {
+        audioSource.mute = !audioSource.mute;
     }
 
     private IEnumerator WaitForLoop()
     {
-        while(audioSource.isPlaying && !pause && Time.timeScale == 1)
+        while(audioSource.isPlaying && !pause)
         {
             yield return null;
         }
 
-        if (pause || Time.timeScale == 0)
+        if (pause)
         {
             audioSource.Pause();
             StartCoroutine(WaitToResume());
@@ -61,17 +83,33 @@ public class AudioControl : MonoBehaviour {
         {
             audioSource.loop = true;
             audioSource.clip = loop;
+            audioTime = 0;
+            audioSource.time = 0;
             audioSource.Play();
         }
     }
 
     private IEnumerator WaitToResume()
     {
-        while (!audioSource.isPlaying)
+        while (pause)
         {
             yield return null;
         }
 
         StartCoroutine(WaitForLoop());
+    }
+
+    private void OnApplicationFocus(bool focus) {
+        if (!focus)
+        {
+            if (pause) initialPause = true;
+
+            else PauseAudio(true);
+        } else
+        {
+            if (initialPause) initialPause = false;
+
+            else PauseAudio(false);
+        }
     }
 }
