@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour {
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private BoxCollider2D cd;
     [SerializeField] private Animator anim;
     private InputActions actions;
 

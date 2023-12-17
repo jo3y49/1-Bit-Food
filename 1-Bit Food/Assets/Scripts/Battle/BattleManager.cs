@@ -243,7 +243,7 @@ public class BattleManager : MonoBehaviour {
         EnemyAttack(enemy, activeCharacterAttack);
     }
 
-    public void SetAttackAction(CharacterBattle characterToAttack, CharacterAction action, Flavor flavor)
+    public void SetAttackAction(CharacterBattle characterToAttack, CharacterAction action, Flavor flavor = null)
     {
         this.characterToAttack = characterToAttack;
         activeCharacterAttack = action;

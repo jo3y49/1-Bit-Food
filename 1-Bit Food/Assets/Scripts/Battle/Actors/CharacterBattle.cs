@@ -4,7 +4,6 @@ using System;
 
 public abstract class CharacterBattle : MonoBehaviour {
     [SerializeField] protected CharacterAnimation characterAnimation;
-    [SerializeField] protected SpriteRenderer spriteRenderer; 
     public string CharacterName { get; protected set; }
     public int maxHealth;
     public int health;

@@ -87,9 +87,6 @@ public class UIManager : MonoBehaviour {
         UpdateHealth();
         SetActions();
         SetFlavors();
-
-        leftArrowItem.SetActive(false);
-        leftArrowSteal.SetActive(false);
         
         // Deactivate menus until they are needed
         initialContainer.SetActive(false);
@@ -264,14 +261,10 @@ public class UIManager : MonoBehaviour {
                     {
                         // itemButtons[itemIndex].gameObject.SetActive(false);
                         itemIndex--;
-
-                        if (itemIndex == 0) leftArrowItem.SetActive(false);
                     } 
 
                     if (playerFood.Count != 0) itemButtons[itemIndex].gameObject.SetActive(true);
                 }
-                
-                if (itemButtons.Count <= 1) rightArrowItem.SetActive(false);
 
                 i--;
                 items--;
@@ -312,12 +305,6 @@ public class UIManager : MonoBehaviour {
         {
             Destroy(container.GetChild(i).gameObject);
         }
-
-        leftArrowSteal.SetActive(false);
-
-        if (stolen.Count == 1) rightArrowSteal.SetActive(false);
-
-        else rightArrowSteal.SetActive(true);
 
         for (int i = 0; i < stolen.Count; i++)
         {
@@ -389,14 +376,6 @@ public class UIManager : MonoBehaviour {
 
         itemButtons[itemIndex].gameObject.SetActive(true);
 
-        if (itemIndex == 0) 
-        {
-            leftArrowItem.SetActive(false);
-            Utility.SetActiveButton(itemButtons[0]);
-        }
-
-        if (itemIndex == itemButtons.Count - 2) rightArrowItem.SetActive(true);
-
         feedbackManager.UpdateItemMenu(playerFood[itemIndex]);      
     }
 
@@ -409,14 +388,6 @@ public class UIManager : MonoBehaviour {
         stealIndex--;
 
         stealButtons[stealIndex].gameObject.SetActive(true);
-
-        if (stealIndex == 0) 
-        {
-            leftArrowSteal.SetActive(false);
-            Utility.SetActiveButton(stealButtons[0]);
-        }
-
-        if (stealIndex == stealButtons.Count - 2) rightArrowSteal.SetActive(true);
 
         feedbackManager.UpdateItemMenu(stolen[stealButtons.Count - (stealIndex + 1)].Item2);
     }
@@ -431,14 +402,6 @@ public class UIManager : MonoBehaviour {
 
         itemButtons[itemIndex].gameObject.SetActive(true);
 
-        if (itemIndex == itemButtons.Count - 1) 
-        {
-            rightArrowItem.SetActive(false);
-            Utility.SetActiveButton(itemButtons[itemIndex]);
-        }
-
-        if (itemIndex == 1) leftArrowItem.SetActive(true);
-
         feedbackManager.UpdateItemMenu(playerFood[itemIndex]);
     }
 
@@ -451,14 +414,6 @@ public class UIManager : MonoBehaviour {
         stealIndex++;
 
         stealButtons[stealIndex].gameObject.SetActive(true);
-
-        if (stealIndex == stealButtons.Count - 1) 
-        {
-            rightArrowSteal.SetActive(false);
-            Utility.SetActiveButton(stealButtons[stealIndex]);
-        }
-
-        if (stealIndex == 1) leftArrowSteal.SetActive(true);
 
         feedbackManager.UpdateItemMenu(stolen[stealButtons.Count - (stealIndex + 1)].Item2);
     }
@@ -723,8 +678,6 @@ public class UIManager : MonoBehaviour {
             attackButtonSmall.gameObject.SetActive(true);
             healButtonSmall.gameObject.SetActive(true);
         }
-
-        if (playerFood.Count == 1) rightArrowItem.SetActive(true);
     }
 
     private void ToggleMenu(GameObject close, GameObject open, Button activeButton, int audioIndex = 0, string text = "")
