@@ -7,10 +7,14 @@ using UnityEngine.SceneManagement;
 public class EnemyBattle : CharacterBattle {
 
     [SerializeField] private EnemyHealthDisplay healthDisplay;
+    [SerializeField] private EnemyItemDisplay itemDisplay;
 
     public int minDamage, maxDamage;
+    public int maxSteals;
 
-    public int steals;
+    [Range(0,1)]
+    public float stealChance = .2f;
+    
     protected GameObject player;
     protected bool isAttacking;
 
@@ -57,6 +61,7 @@ public class EnemyBattle : CharacterBattle {
 
     public override void Defeated()
     {
+        itemDisplay.ClearItems();
         gameObject.SetActive(false);
     }
 
@@ -96,12 +101,14 @@ public class EnemyBattle : CharacterBattle {
         else return "";
     }
 
-    public override void TakeItem(Food food)
+    public override void StealItem(Food food)
     {
         if (food == null) return;
 
         recentSteals.Add(food);
         stolenFood.Add(food);
+
+        itemDisplay.SetItem(food);
     }
 
     public List<Food> GetRecentlyStolenItems()
@@ -109,9 +116,11 @@ public class EnemyBattle : CharacterBattle {
         return recentSteals;
     }
 
-    public override Food StealItem(Food food)
+    public override Food StolenItem(Food food)
     {
         stolenFood.Remove(food);
+
+        itemDisplay.RemoveItem(food);
 
         return food;
     }
@@ -129,5 +138,10 @@ public class EnemyBattle : CharacterBattle {
     //     }
     // }
 
-    public virtual CharacterAction PickEnemyAttack() { return StealList.GetInstance().GetRandomAction(); }
+    public virtual CharacterAction PickEnemyAttack() 
+    { 
+        if (stolenFood.Count < maxSteals) return StealList.GetInstance().GetRandomAction(stealChance);
+
+        else return StealList.GetInstance().GetAction("Attack");
+    }
 }

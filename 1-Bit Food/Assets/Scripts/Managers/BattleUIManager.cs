@@ -4,8 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour {
-    public static UIManager instance;
+public class BattleUIManager : MonoBehaviour {
+    public static BattleUIManager instance;
 
     [Header("Managers")]
     [SerializeField] private BattleManager battleManager;

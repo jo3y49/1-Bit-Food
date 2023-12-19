@@ -68,7 +68,7 @@ public class PlayerBattle : CharacterBattle {
         GameManager.instance.SetHealth(health);
     }
 
-    public override Food StealItem(Food food)
+    public override Food StolenItem(Food food)
     {
         if (food != null)
         {
@@ -97,7 +97,7 @@ public class PlayerBattle : CharacterBattle {
         return null;
     }
 
-    public override void TakeItem(Food food)
+    public override void StealItem(Food food)
     {
         actionUses[food.index]++;
     }

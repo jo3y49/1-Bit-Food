@@ -33,7 +33,8 @@ Transform:
   m_LocalPosition: {x: -7.73, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7448501854375520572}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4632155104684606569
@@ -101,15 +102,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterAnimation: {fileID: 7113688701200873565}
-  spriteRenderer: {fileID: 4632155104684606569}
   maxHealth: 50
   health: 10
   hitTarget: 0
   attackClip: {fileID: 0}
   healthDisplay: {fileID: -571101583435191289}
-  lowDamage: 0
-  highDamage: 0
-  steals: 0
+  itemDisplay: {fileID: 6898804098652444901}
+  minDamage: 0
+  maxDamage: 0
+  maxSteals: 0
+  stealChance: 0.2
   stolenFood: []
   recentSteals: []
 --- !u!114 &7113688701200873565
@@ -154,3 +156,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 6822786970716077783}
   textPrefab: {fileID: 6488212552660973955, guid: 12ee78be68ed87742930fa06845bd6d5, type: 3}
+--- !u!1 &4918707545295815485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7448501854375520572}
+  - component: {fileID: 6898804098652444901}
+  m_Layer: 2
+  m_Name: Item Display
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7448501854375520572
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4918707545295815485}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5256324326347649697}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6898804098652444901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4918707545295815485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1765399394d664a81b19d843b5ce60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDisplayPrefab: {fileID: 5356923545620498869, guid: 75871d4caf386a74eac9c32865c00459, type: 3}
+  itemGap: 0.5

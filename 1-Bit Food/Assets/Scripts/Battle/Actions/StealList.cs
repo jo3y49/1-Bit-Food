@@ -18,11 +18,11 @@ public class StealList {
         return instance;
     }
 
-    public EnemyAction GetRandomAction()
+    public EnemyAction GetRandomAction(float stealChance)
     {
-        int r = Random.Range(0,10);
+        float r = Random.Range(0f,1f);
 
-        if (r < 2) return actionList["Steal"];
+        if (r < stealChance) return actionList["Steal"];
 
         else return actionList["Attack"];
     }
@@ -44,10 +44,10 @@ public class StealList {
 
     private void Steal(EnemyBattle self, PlayerBattle target, Food food = null)
     {
-        int s = Random.Range(0, self.steals);
+        // int s = Random.Range(0, self.maxStealPerTurn);
 
-        for (int i = 0; i <= s; i++)
-            self.TakeItem(target.StealItem(food));
+        // for (int i = 0; i <= s; i++)
+            self.StealItem(target.StolenItem(food));
     }
 
     public void EmptyAction(CharacterBattle self, CharacterBattle target)

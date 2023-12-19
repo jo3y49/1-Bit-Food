@@ -7,14 +7,14 @@ public abstract class CharacterBattle : MonoBehaviour {
     public string CharacterName { get; protected set; }
     public int maxHealth;
     public int health;
-    protected UIManager uiManager;
+    protected BattleUIManager uiManager;
     public bool hitTarget = false;
     protected AudioSource audioSource;
     [SerializeField] protected AudioClip attackClip;
 
     protected virtual void Start() {
         audioSource = GetComponent<AudioSource>();
-        uiManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<UIManager>();
+        uiManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<BattleUIManager>();
     }
 
     public virtual void Kill(){}
@@ -39,9 +39,9 @@ public abstract class CharacterBattle : MonoBehaviour {
         if (health < 0) health = 0;
     }
 
-    public virtual void TakeItem(Food food) {}
+    public virtual void StealItem(Food food) {}
 
-    public virtual Food StealItem(Food food) { return null;}
+    public virtual Food StolenItem(Food food) { return null;}
 
     public virtual void Heal(int heal)
     {

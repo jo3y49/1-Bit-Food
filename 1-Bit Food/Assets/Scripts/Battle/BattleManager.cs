@@ -6,7 +6,7 @@ using System.Collections;
 public class BattleManager : MonoBehaviour {
     [Header("Managers")]
     [SerializeField] private WorldManager worldManager;
-    [SerializeField] private UIManager uiManager;
+    [SerializeField] private BattleUIManager uiManager;
 
     [Header("Other Variables")]
     public float dialogueDisplayTime = 1.5f;
@@ -261,7 +261,7 @@ public class BattleManager : MonoBehaviour {
 
     public void SetStealAction(CharacterBattle characterToAttack, Food food)
     {
-        player.TakeItem(characterToAttack.StealItem(food));
+        player.StealItem(characterToAttack.StolenItem(food));
         steal = true;
         awaitCommand = false;
     }
