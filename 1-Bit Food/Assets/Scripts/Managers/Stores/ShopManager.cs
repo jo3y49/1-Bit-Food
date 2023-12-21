@@ -6,10 +6,6 @@ public class ShopManager : StoreManager
 {
     protected override void OnEnable() {
         base.OnEnable();
-
-        
-
-
     }
 
     public void Buy(Ingredient food)

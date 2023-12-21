@@ -12,6 +12,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button Shop
       objectReference: {fileID: 0}
+    - target: {fileID: 1561546699015150035, guid: 5b739280773658e438d44c8e2c55a413, type: 3}
+      propertyPath: m_Delegates.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561546699015150035, guid: 5b739280773658e438d44c8e2c55a413, type: 3}
+      propertyPath: m_Delegates.Array.data[1].eventID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561546699015150035, guid: 5b739280773658e438d44c8e2c55a413, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561546699015150035, guid: 5b739280773658e438d44c8e2c55a413, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561546699015150035, guid: 5b739280773658e438d44c8e2c55a413, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561546699015150035, guid: 5b739280773658e438d44c8e2c55a413, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561546699015150035, guid: 5b739280773658e438d44c8e2c55a413, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561546699015150035, guid: 5b739280773658e438d44c8e2c55a413, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2321664924210820899, guid: 5b739280773658e438d44c8e2c55a413, type: 3}
       propertyPath: m_Transition
       value: 2

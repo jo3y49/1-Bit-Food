@@ -71,9 +71,12 @@ public class PlayerMovement : MonoBehaviour {
 
     public void TogglePause(bool pause)
     {
-        if (pause)
-            actions.Gameplay.Disable();
-        else 
-            actions.Gameplay.Enable();
+        if (actions != null)
+        {
+            if (pause)
+                actions.Gameplay.Disable();
+            else 
+                actions.Gameplay.Enable();
+        }
     }
 }

@@ -192,11 +192,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8deb58090af4bf47a27b7a728e7e6ca, type: 3}
---- !u!1 &293669828 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2756738335369139136, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
-  m_PrefabInstance: {fileID: 7041187407079282169}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &345151376
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +331,22 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
   m_PrefabInstance: {fileID: 7041187407079282169}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &460571400 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1639497978776488390, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+  m_PrefabInstance: {fileID: 7041187407079282169}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &460571402 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2073121024883218290, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+  m_PrefabInstance: {fileID: 7041187407079282169}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460571400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b7ebc707a4aeda4794458553819a026, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &652803994 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5652344289166780827, guid: c8deb58090af4bf47a27b7a728e7e6ca, type: 3}
@@ -1463,6 +1474,11 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!1 &920647937 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2217293552425957682, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+  m_PrefabInstance: {fileID: 7041187407079282169}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &964632812
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2585,11 +2601,6 @@ Transform:
   - {fileID: 1672970380}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1875438209 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4184096263651170900, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
-  m_PrefabInstance: {fileID: 7041187407079282169}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1900742765
 GameObject:
   m_ObjectHideFlags: 0
@@ -2858,7 +2869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095ee83ef6d49eb4797790b86f7998b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storeManager: {fileID: 1875438209}
+  storeManager: {fileID: 920647937}
   player: {fileID: 1238813543}
 --- !u!1 &2145884342
 GameObject:
@@ -2873,7 +2884,7 @@ GameObject:
   - component: {fileID: 2145884344}
   - component: {fileID: 2145884343}
   m_Layer: 0
-  m_Name: Shop Trigger (1)
+  m_Name: Bakery Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2891,7 +2902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095ee83ef6d49eb4797790b86f7998b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storeManager: {fileID: 293669828}
+  storeManager: {fileID: 460571400}
   player: {fileID: 1238813543}
 --- !u!61 &2145884344
 BoxCollider2D:
@@ -3151,6 +3162,78 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 615299155165689411, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 615299155165689411, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 460571402}
+    - target: {fileID: 615299155165689411, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FoodHighlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 615299155165689411, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StoreManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 615299155165689411, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 21930844a049a1b4aa6f31d0c4eab06a, type: 2}
+    - target: {fileID: 615299155165689411, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Food, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 640331908564036817, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 640331908564036817, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 460571402}
+    - target: {fileID: 640331908564036817, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FoodHighlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 640331908564036817, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StoreManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 640331908564036817, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: ccd01bf9476a72b4786561cb2c81fe9e, type: 2}
+    - target: {fileID: 640331908564036817, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Food, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 696305557355279671, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 696305557355279671, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 460571402}
+    - target: {fileID: 696305557355279671, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FoodHighlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 696305557355279671, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StoreManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 696305557355279671, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e993bcdb69ab634cb9683ce66695585, type: 2}
+    - target: {fileID: 696305557355279671, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Food, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 718259787527636133, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3207,9 +3290,37 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1639497978776488390, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1697137964078107494, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844390868199974537, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844390868199974537, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 460571402}
+    - target: {fileID: 1844390868199974537, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FoodHighlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844390868199974537, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StoreManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844390868199974537, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 9470f6d3cce05ed47b59da82fabe92b4, type: 2}
+    - target: {fileID: 1844390868199974537, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Food, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_Pivot.x
@@ -3291,6 +3402,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2286967300641070214, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2286967300641070214, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 460571402}
+    - target: {fileID: 2286967300641070214, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FoodHighlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 2286967300641070214, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StoreManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2286967300641070214, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 784916f8632996644b0aba1a392f3817, type: 2}
+    - target: {fileID: 2286967300641070214, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Food, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2332537102808212720, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3319,6 +3454,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3373602200777264399, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3373602200777264399, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 460571402}
+    - target: {fileID: 3373602200777264399, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FoodHighlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 3373602200777264399, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StoreManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3373602200777264399, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: ccd01bf9476a72b4786561cb2c81fe9e, type: 2}
+    - target: {fileID: 3373602200777264399, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Food, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3899752657609876248, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3342,6 +3501,10 @@ PrefabInstance:
     - target: {fileID: 3899752657609876248, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4008219568626081149, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4074836667423462993, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3402,6 +3565,58 @@ PrefabInstance:
     - target: {fileID: 4466388684981521024, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_fontSizeBase
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586296590919495049, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150025432757737064, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150025432757737064, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 460571402}
+    - target: {fileID: 5150025432757737064, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FoodHighlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150025432757737064, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StoreManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150025432757737064, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: dfbafe6340f0ac4409ceb5e1260b2411, type: 2}
+    - target: {fileID: 5150025432757737064, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Food, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5164272797117224920, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5164272797117224920, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 460571402}
+    - target: {fileID: 5164272797117224920, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FoodHighlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 5164272797117224920, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StoreManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5164272797117224920, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 4203242c07026a742ae4646da19054a8, type: 2}
+    - target: {fileID: 5164272797117224920, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Food, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5559814326132880665, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: enemyPrefabText
@@ -3552,13 +3767,7 @@ PrefabInstance:
       value: Canvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       insertIndex: 0

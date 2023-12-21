@@ -7,14 +7,14 @@ public abstract class CharacterBattle : MonoBehaviour {
     public string CharacterName { get; protected set; }
     public int maxHealth;
     public int health;
-    protected BattleUIManager uiManager;
+    protected HealthUIManager uiManager;
     public bool hitTarget = false;
     protected AudioSource audioSource;
     [SerializeField] protected AudioClip attackClip;
 
     protected virtual void Start() {
         audioSource = GetComponent<AudioSource>();
-        uiManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<BattleUIManager>();
+        uiManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HealthUIManager>();
     }
 
     public virtual void Kill(){}

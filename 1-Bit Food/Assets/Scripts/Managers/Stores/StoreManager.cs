@@ -1,10 +1,10 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public abstract class StoreManager : MonoBehaviour {
     [SerializeField] protected TextMeshProUGUI inventoryAmountText, inventoryCapText;
     [SerializeField] protected TextMeshProUGUI moneyText;
+    [SerializeField] protected FeedbackUIManager feedbackUIManager;
 
     protected int money;
 
@@ -20,12 +20,13 @@ public abstract class StoreManager : MonoBehaviour {
     private void Awake() {
         actions = new InputActions();
 
-        
-
         gameObject.SetActive(false);
     }
 
     protected virtual void OnEnable() {
+
+        if (GameManager.instance == null) return;
+
         SetMoney(GameManager.instance.GetPlayerMoney());
 
         foods = FoodList.GetInstance().GetFoods();
@@ -42,7 +43,11 @@ public abstract class StoreManager : MonoBehaviour {
 
         actions.Gameplay.Disable();
 
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().TogglePause(false);
+        feedbackUIManager.CloseMenus();
+
+        PlayerMovement playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+
+        playerMovement.TogglePause(false);
     }
 
     public virtual void Confirm()
@@ -83,5 +88,17 @@ public abstract class StoreManager : MonoBehaviour {
         this.money = money;
 
         moneyText.text = " : " + money;
+    }
+
+    public virtual void FoodHighlight(Food food)
+    {
+        selectedFood = food;
+
+        feedbackUIManager.UpdateItemMenu(food);
+    }
+
+    public virtual void FoodDeHighlight()
+    {
+        feedbackUIManager.CloseMenus();
     }
 }

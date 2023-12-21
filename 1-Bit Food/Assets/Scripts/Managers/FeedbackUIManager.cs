@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,12 +33,12 @@ public class FeedbackUIManager : MonoBehaviour {
         else actionImage.sprite = healSprite;
 
         UpdateItemMenu(food);
-
-        itemMenu.SetActive(true);
     }
 
     public void UpdateItemMenu(Food food)
     {
+        itemMenu.SetActive(true);
+        
         activeFood = food;
 
         itemNameText.text = food.name;
