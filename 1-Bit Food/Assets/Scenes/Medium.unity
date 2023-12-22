@@ -1936,6 +1936,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d368400030bb5b146b5336f8eb849423, type: 3}
+--- !u!20 &1582001162 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3112147799053711885, guid: d368400030bb5b146b5336f8eb849423, type: 3}
+  m_PrefabInstance: {fileID: 1582001161}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1672970377
 GameObject:
   m_ObjectHideFlags: 0
@@ -2417,11 +2422,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 640
+      value: 640.00006
       objectReference: {fileID: 0}
     - target: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_SizeDelta.y
       value: 480
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.06242394
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.06242394
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.06242394
       objectReference: {fileID: 0}
     - target: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2433,7 +2450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2624,6 +2641,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5833026224617714661, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1582001162}
+    - target: {fileID: 5833026224617714661, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_RenderMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833026224617714661, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_VertexColorAlwaysGammaSpace
       value: 0
       objectReference: {fileID: 0}
@@ -2714,6 +2739,10 @@ PrefabInstance:
     - target: {fileID: 7468077760830156441, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7784118828911450192, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7986864229940936650, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_IsActive

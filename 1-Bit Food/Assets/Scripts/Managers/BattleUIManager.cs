@@ -21,6 +21,7 @@ public class BattleUIManager : MonoBehaviour {
     [SerializeField] private Button attackButtonSmall;
     [SerializeField] private Button attackButtonLarge, healButtonSmall, stealButton, flavorButton;
     [SerializeField] private GameObject backButton, leftArrowItem, rightArrowItem, leftArrowSteal, rightArrowSteal;
+    [SerializeField] private Image leftItemPreview, rightItemPreview, leftStealPreview, rightStealPreview;
 
     private Button initialButton;
 
@@ -263,6 +264,31 @@ public class BattleUIManager : MonoBehaviour {
             }
         }
 
+        if (itemIndex > 0) 
+        {
+            leftItemPreview.gameObject.SetActive(true);
+            leftItemPreview.sprite = playerFood[itemIndex - 1].sprite;
+            // leftArrowItem.SetActive(true);
+        } 
+        else 
+        {
+            leftItemPreview.gameObject.SetActive(false);
+            // leftArrowItem.SetActive(false);
+        }
+
+        if (itemIndex < playerFood.Count - 1) 
+        {
+            rightItemPreview.gameObject.SetActive(true);
+            rightItemPreview.sprite = playerFood[itemIndex + 1].sprite;
+            // rightArrowItem.SetActive(true);
+        } 
+        else 
+        {
+            // rightArrowItem.SetActive(false);
+            rightItemPreview.gameObject.SetActive(false);
+        
+        }
+
         for (int i = 0; i < flavorButtons.Count; i++)
         {
             int uses = player.GetFlavorUses(i);
@@ -313,6 +339,20 @@ public class BattleUIManager : MonoBehaviour {
 
         stealIndex = 0;
         stealButtons[0].gameObject.SetActive(true);
+        leftStealPreview.gameObject.SetActive(false);
+        // leftArrowSteal.SetActive(false);
+
+        if (stolen.Count < 1) 
+        {
+            rightStealPreview.gameObject.SetActive(true);
+            rightStealPreview.sprite = stolen[1].Item2.sprite;
+            // rightArrowSteal.SetActive(true);
+        } 
+        else
+        {
+            // rightArrowSteal.SetActive(false);
+            rightStealPreview.gameObject.SetActive(false);
+        }
     }
 
     // private void RefreshArrows()
@@ -366,9 +406,9 @@ public class BattleUIManager : MonoBehaviour {
 
         itemIndex--;
 
-        itemButtons[itemIndex].gameObject.SetActive(true);
+        itemButtons[itemIndex].gameObject.SetActive(true);     
 
-        feedbackManager.UpdateItemMenu(playerFood[itemIndex]);      
+        ItemSelectUpdate(); 
     }
 
     public void SelectLeftSteal()
@@ -381,7 +421,7 @@ public class BattleUIManager : MonoBehaviour {
 
         stealButtons[stealIndex].gameObject.SetActive(true);
 
-        feedbackManager.UpdateItemMenu(stolen[stealButtons.Count - (stealIndex + 1)].Item2);
+        StealSelectUpdate();
     }
 
     public void SelectRightItem()
@@ -394,7 +434,7 @@ public class BattleUIManager : MonoBehaviour {
 
         itemButtons[itemIndex].gameObject.SetActive(true);
 
-        feedbackManager.UpdateItemMenu(playerFood[itemIndex]);
+        ItemSelectUpdate();
     }
 
     public void SelectRightSteal()
@@ -407,7 +447,68 @@ public class BattleUIManager : MonoBehaviour {
 
         stealButtons[stealIndex].gameObject.SetActive(true);
 
-        feedbackManager.UpdateItemMenu(stolen[stealButtons.Count - (stealIndex + 1)].Item2);
+        StealSelectUpdate();
+    }
+
+    private void ItemSelectUpdate()
+    {
+        if (itemIndex > 0) 
+        {
+            leftItemPreview.gameObject.SetActive(true);
+            leftItemPreview.sprite = playerFood[itemIndex - 1].sprite;
+            // leftArrowItem.SetActive(true);
+        } 
+        else 
+        {
+            leftItemPreview.gameObject.SetActive(false);
+            // leftArrowItem.SetActive(false);
+        }
+
+        if (itemIndex < playerFood.Count - 1) 
+        {
+            rightItemPreview.gameObject.SetActive(true);
+            rightItemPreview.sprite = playerFood[itemIndex + 1].sprite;
+            // rightArrowItem.SetActive(true);
+        } 
+        else 
+        {
+            // rightArrowItem.SetActive(false);
+            rightItemPreview.gameObject.SetActive(false);
+        }
+
+        feedbackManager.UpdateItemMenu(playerFood[itemIndex]);
+    }
+
+    private void StealSelectUpdate()
+    {
+        int buttonIndex = stealButtons.Count - (stealIndex + 1);
+
+        if (stealIndex > 0) 
+        {
+            leftStealPreview.gameObject.SetActive(true);
+            leftStealPreview.sprite = stolen[buttonIndex - 1].Item2.sprite;
+            // leftArrowSteal.SetActive(true);
+        } 
+        else 
+        {
+            leftStealPreview.gameObject.SetActive(false);
+            // leftArrowSteal.SetActive(false);
+        }
+
+        if (stealIndex < stolen.Count - 1) 
+        {
+            rightStealPreview.gameObject.SetActive(true);
+            rightStealPreview.sprite = stolen[buttonIndex + 1].Item2.sprite;
+            // rightArrowSteal.SetActive(true);
+        } 
+        else 
+        {
+            rightStealPreview.gameObject.SetActive(false);
+            // rightArrowSteal.SetActive(false);
+        
+        }
+
+        feedbackManager.UpdateItemMenu(stolen[buttonIndex].Item2);
     }
 
     private void BackFromItem()

@@ -7,12 +7,10 @@ public abstract class StoreManager : MonoBehaviour {
     [SerializeField] protected FeedbackUIManager feedbackUIManager;
 
     protected int money;
-
-    protected Food[] foods;
+    
     protected Food selectedFood;
 
     protected int inventoryAmount;
-
     protected int inventoryCap;
 
     private InputActions actions;
@@ -28,8 +26,6 @@ public abstract class StoreManager : MonoBehaviour {
         if (GameManager.instance == null) return;
 
         SetMoney(GameManager.instance.GetPlayerMoney());
-
-        foods = FoodList.GetInstance().GetFoods();
 
         InitializeInventory();
 

@@ -1,13 +1,5 @@
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-
 public class ShopManager : StoreManager 
 {
-    protected override void OnEnable() {
-        base.OnEnable();
-    }
-
     public void Buy(Ingredient food)
     {
         AudioManager.instance.PlayUIClip(0);

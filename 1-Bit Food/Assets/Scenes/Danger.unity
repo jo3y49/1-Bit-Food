@@ -1691,6 +1691,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d368400030bb5b146b5336f8eb849423, type: 3}
+--- !u!20 &1582001162 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3112147799053711885, guid: d368400030bb5b146b5336f8eb849423, type: 3}
+  m_PrefabInstance: {fileID: 1582001161}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1672970377
 GameObject:
   m_ObjectHideFlags: 0
@@ -2114,6 +2119,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 629041592539500227, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -16.233925
+      objectReference: {fileID: 0}
     - target: {fileID: 718259787527636133, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2208,7 +2217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 640
+      value: 640.00006
       objectReference: {fileID: 0}
     - target: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_SizeDelta.y
@@ -2224,7 +2233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2318,6 +2327,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4007553894982118146, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -52.063354
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073301240053473032, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -16.233925
+      objectReference: {fileID: 0}
     - target: {fileID: 4074836667423462993, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2382,6 +2399,10 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 5465471632665759563, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -52.063354
+      objectReference: {fileID: 0}
     - target: {fileID: 5559814326132880665, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: enemyPrefabText
       value: 
@@ -2415,13 +2436,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5833026224617714661, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
-      propertyPath: m_VertexColorAlwaysGammaSpace
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5833026224617714661, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1582001162}
     - target: {fileID: 5881222318708980007, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2506,6 +2523,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7784118828911450192, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7986864229940936650, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2541,6 +2562,10 @@ PrefabInstance:
     - target: {fileID: 8536028617463877414, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698230528916339043, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -41.81566
       objectReference: {fileID: 0}
     - target: {fileID: 8939519675135543590, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: coinReward

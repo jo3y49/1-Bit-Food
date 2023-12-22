@@ -2360,6 +2360,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5652344289166780827, guid: c8deb58090af4bf47a27b7a728e7e6ca, type: 3}
   m_PrefabInstance: {fileID: 1150298842}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &1519842998 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3112147799053711885, guid: d368400030bb5b146b5336f8eb849423, type: 3}
+  m_PrefabInstance: {fileID: 6625663647903918776}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1526396380 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5652344289166780827, guid: c8deb58090af4bf47a27b7a728e7e6ca, type: 3}
@@ -3141,6 +3146,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8307497236563039363, guid: d368400030bb5b146b5336f8eb849423, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3185,6 +3194,10 @@ PrefabInstance:
     - target: {fileID: 615299155165689411, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: Food, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 629041592539500227, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -16.233925
       objectReference: {fileID: 0}
     - target: {fileID: 640331908564036817, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -3355,6 +3368,18 @@ PrefabInstance:
       value: 480
       objectReference: {fileID: 0}
     - target: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.06242394
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.06242394
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.06242394
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986062704867369412, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -3478,6 +3503,10 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: Food, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 3879042851582855221, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -207.99997
+      objectReference: {fileID: 0}
     - target: {fileID: 3899752657609876248, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3502,9 +3531,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4007553894982118146, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -52.063354
+      objectReference: {fileID: 0}
     - target: {fileID: 4008219568626081149, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073301240053473032, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -16.233925
       objectReference: {fileID: 0}
     - target: {fileID: 4074836667423462993, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3618,6 +3655,10 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: Food, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 5465471632665759563, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -52.063354
+      objectReference: {fileID: 0}
     - target: {fileID: 5559814326132880665, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: enemyPrefabText
       value: 
@@ -3649,6 +3690,14 @@ PrefabInstance:
     - target: {fileID: 5777419293498697544, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833026224617714661, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1519842998}
+    - target: {fileID: 5833026224617714661, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_RenderMode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5881222318708980007, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3730,6 +3779,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7784118828911450192, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8176869760871522934, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3761,6 +3814,10 @@ PrefabInstance:
     - target: {fileID: 8536028617463877414, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698230528916339043, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -41.81566
       objectReference: {fileID: 0}
     - target: {fileID: 9082138314864554738, guid: a14f0ee1f2bc2a14895d176e5dfe3b69, type: 3}
       propertyPath: m_Name
