@@ -1687,6 +1687,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7645620750041051347, guid: 3f0ed5856b502474faf381ea66659676, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645620750041051347, guid: 3f0ed5856b502474faf381ea66659676, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645620750041051347, guid: 3f0ed5856b502474faf381ea66659676, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645620750041051347, guid: 3f0ed5856b502474faf381ea66659676, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1734,6 +1746,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7646589293859966289, guid: 3f0ed5856b502474faf381ea66659676, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d1890ae161c415c409344fd9d9ad8739, type: 3}
     - target: {fileID: 9050087084797860508, guid: 3f0ed5856b502474faf381ea66659676, type: 3}
       propertyPath: m_Name
       value: Shop
